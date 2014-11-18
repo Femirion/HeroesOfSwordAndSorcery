@@ -1,12 +1,15 @@
-package model;
+package model.entities;
 
+import engine.Engine;
 import org.newdawn.slick.opengl.Texture;
+
+import java.util.Comparator;
 
 /**
  * Класс, представляющий собой сущность игрового мира
  * author Vostryakov Alexander
  */
-public class GameEntity {
+public class GameEntity implements Comparable {
 
     private long id;
 
@@ -37,7 +40,9 @@ public class GameEntity {
     // флагЮ, показывающий, является ли объект интерактивным
     private boolean isInteractive = false;
 
-    public GameEntity(long id, float x, float y, float wx, float wy, float width, float height, byte level, Texture texture) {
+    public GameEntity(long id, float x, float y, float wx, float wy,
+                      float width, float height, byte level,
+                      Texture texture, boolean isInteractive) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -47,6 +52,7 @@ public class GameEntity {
         this.height = height;
         this.level = level;
         this.texture = texture;
+        this.isInteractive = isInteractive;
     }
 
     public long getId() {
@@ -127,5 +133,16 @@ public class GameEntity {
 
     public void setInteractive(boolean isInteractive) {
         this.isInteractive = isInteractive;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        GameEntity entry = (GameEntity) obj;
+        if (level == entry.level) {
+            // та. у которой координата y больше, та должна быть ближе к нам
+            return Float.compare(y, entry.y);
+        } else {
+            return level > entry.level ? 1 : -1;
+        }
     }
 }

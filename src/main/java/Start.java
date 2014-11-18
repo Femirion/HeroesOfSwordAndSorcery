@@ -1,31 +1,40 @@
-import model.GameEntity;
+import model.entities.GameEntity;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.opengl.Texture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import stub.GeneratorStub;
 
+import java.util.Collections;
 import java.util.List;
 
 import static engine.Engine.*;
+
 /**
  * author Vostryakov Alexander
  */
 public class Start {
 
     private static Logger logger = LoggerFactory.getLogger(Start.class);
-    private static List<GameEntity> visibleObjects;
+    private List<GameEntity> visibleObjects;
 
     public Start() {
         try {
             beginSession();
-            visibleObjects = GeneratorStub.getVisibleObjects();
+            visibleObjects = GeneratorStub.getRandomVisibleObjects();
+            Collections.sort(visibleObjects);
             while (!Display.isCloseRequested()) {
 
+                mouseListener();
+
                 for (GameEntity entity : visibleObjects) {
-                    draw(entity.getTexture(), entity.getX(), entity.getY(),
-                            32, 32);
+                    draw(entity.getTexture(),
+                            entity.getX(),
+                            entity.getY(),
+                            entity.getWidth(),
+                            entity.getHeight()
+                    );
                 }
 
                 Display.update();
@@ -37,9 +46,24 @@ public class Start {
         }
     }
 
-
     public static void main(String[] args) {
         new Start();
+    }
+
+    public void mouseListener() {
+        if (Mouse.isButtonDown(0)) {
+            for (GameEntity entity : visibleObjects) {
+                if (entity.isInteractive()) {
+                    if (Mouse.getX() > entity.getX() &&
+                            Mouse.getX() < entity.getX() + entity.getWidth() &&
+                            HEIGTH - Mouse.getY() > entity.getY() &&
+                            HEIGTH -Mouse.getY() < entity.getY() + entity.getHeight()) {
+                        System.out.println(entity.getId());
+                    }
+                }
+            }
+
+        }
     }
 
 }
