@@ -17,6 +17,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
 /**
+ * Основная класс игрового "движка"
  * author Vostryakov Alexander
  */
 public class Engine {
@@ -24,24 +25,32 @@ public class Engine {
     private static Logger logger = LoggerFactory.getLogger(Engine.class);
 
     public static final int WIDTH = 600;
-    public static final int HEIGTH = 400;
+    public static final int HEIGHT = 400;
 
     private Engine(){}
 
+    /**
+     * Подготовка к рисованию
+     * @throws LWJGLException
+     */
     public static void beginSession() throws LWJGLException {
-        Display.setTitle("Fisteria");
-        Display.setDisplayMode(new DisplayMode(WIDTH, HEIGTH));
+        Display.setTitle("Heroes of Sword and Sorcery");
+        Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
         Display.create();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, WIDTH, HEIGTH, 0, 1, -1);
+        glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_TEXTURE_2D);
     }
 
+    /**
+     * Рисование игрового объекта
+     * @param entity игровой объект
+     */
     public static void draw(GameEntity entity) {
-        entity.getImage().getTexture().bind();
+        entity.getDefaultImage().getTexture().bind();
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
 
@@ -62,6 +71,14 @@ public class Engine {
 
     }
 
+    /**
+     * Рисование произольного изображения
+     * @param texture текстура
+     * @param x координата X левого верхнего угла
+     * @param y координата Y правого вернехго угла
+     * @param width ширина
+     * @param height высота
+     */
     public static void draw(Texture texture, float x, float y, float width, float height) {
         texture.bind();
         glTranslatef(x, y, 0);
@@ -84,6 +101,11 @@ public class Engine {
 
     }
 
+    /**
+     * Загрузка текструры
+     * @param name имя файла в каталоге src/resource/image
+     * @return загруженная текстура
+     */
     public static Texture loadTexture(String name) {
         Texture texture = null;
         InputStream in = ResourceLoader.getResourceAsStream(

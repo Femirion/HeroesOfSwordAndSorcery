@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static engine.Engine.*;
-
 /**
  * Класс, генерирующий различные объекты игрового мира.
  * Заглушка на время разработки.
@@ -25,7 +23,7 @@ public class GeneratorStub {
      */
     public static List<GameEntity> getRandomVisibleObjects() {
         Random random = new Random();
-        int count = random.nextInt(80) + 1;
+        int count = random.nextInt(150) + 1;
 
         List<GameEntity> visibleObjectsList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -36,7 +34,8 @@ public class GeneratorStub {
                     random.nextInt(800),
                     random.nextInt(800),
                     ImageStorage.BRICK,
-                    (byte) random.nextInt(120),
+                    ImageStorage.ACTIVE_BRICK,
+                    (byte) 1,
                     random.nextBoolean()
             );
             visibleObjectsList.add(gameEntity);
@@ -59,6 +58,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
+                ImageStorage.ACTIVE_BRICK,
                 (byte) 0,
                 true
 
@@ -73,9 +73,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                (byte) 0,
-                false
-
+                (byte) 0
         );
         visibleObjectsList.add(gameEntity2);
 
@@ -88,9 +86,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                (byte) 0,
-                true
-
+                (byte) 0
         );
         visibleObjectsList.add(gameEntity3);
 
@@ -103,6 +99,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
+                ImageStorage.ACTIVE_BRICK,
                 (byte) 0,
                 true
 
@@ -117,9 +114,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                (byte) 0,
-                false
-
+                (byte) 0
         );
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;

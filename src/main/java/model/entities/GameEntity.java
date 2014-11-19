@@ -25,7 +25,16 @@ public class GameEntity implements Comparable {
     // координата Y внутри мира
     private float wy;
 
-    private ImageStorage image;
+    // простое изображение
+    private ImageStorage defaultImage;
+
+    // изображение, которое будет отображаться, когда
+    // с объектом не ведется работа
+    private ImageStorage unactiveImage;
+
+    // изображение, которое отображается во время
+    // действитя с объектом
+    private ImageStorage activeImage;
 
     // уромень для определения порядка отрисовки объектов
     private byte level;
@@ -34,14 +43,29 @@ public class GameEntity implements Comparable {
     private boolean isInteractive = false;
 
     public GameEntity(long id, float x, float y, float wx, float wy,
-                      ImageStorage image, byte level,
+                      ImageStorage image, byte level) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.wx = wx;
+        this.wy = wy;
+        this.defaultImage = image;
+        this.unactiveImage = image;
+        this.level = level;
+        this.isInteractive = false;
+    }
+
+    public GameEntity(long id, float x, float y, float wx, float wy,
+                      ImageStorage image, ImageStorage activeImage, byte level,
                       boolean isInteractive) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.wx = wx;
         this.wy = wy;
-        this.image = image;
+        this.defaultImage = image;
+        this.unactiveImage = image;
+        this.activeImage = activeImage;
         this.level = level;
         this.isInteractive = isInteractive;
     }
@@ -87,19 +111,35 @@ public class GameEntity implements Comparable {
     }
 
     public float getWidth() {
-        return image.getWidht();
+        return defaultImage.getWidht();
     }
 
     public float getHeight() {
-        return image.getHeight();
+        return defaultImage.getHeight();
     }
 
-    public ImageStorage getImage() {
-        return image;
+    public ImageStorage getDefaultImage() {
+        return defaultImage;
     }
 
-    public void setImage(ImageStorage image) {
-        this.image = image;
+    public void setDefaultImage(ImageStorage defaultImage) {
+        this.defaultImage = defaultImage;
+    }
+
+    public ImageStorage getUnactiveImage() {
+        return unactiveImage;
+    }
+
+    public void setUnactiveImage(ImageStorage unactiveImage) {
+        this.unactiveImage = unactiveImage;
+    }
+
+    public ImageStorage getActiveImage() {
+        return activeImage;
+    }
+
+    public void setActiveImage(ImageStorage activeImage) {
+        this.activeImage = activeImage;
     }
 
     public byte getLevel() {
@@ -133,11 +173,11 @@ public class GameEntity implements Comparable {
         Engine.draw(this);
     }
 
-    public boolean constraint(float x, float y) {
+    public boolean contains(float x, float y) {
         return  x > this.getX() &&
-                x < (this.getX() + this.getWidth()) &&
-                (HEIGTH - y) > this.getY() &&
-                (HEIGTH - y) < this.getY() + this.getHeight();
+                x < this.getX() + this.getWidth() &&
+                HEIGHT - y > this.getY() &&
+                HEIGHT - y < this.getY() + this.getHeight();
 
     }
 
