@@ -135,9 +135,9 @@ public class GameEntity implements Comparable {
 
     public boolean constraint(float x, float y) {
         return  x > this.getX() &&
-                x < this.getX() + this.getWidth() &&
-                HEIGTH - y > this.getY() &&
-                WIDTH - y < this.getY() + this.getHeight();
+                x < (this.getX() + this.getWidth()) &&
+                (HEIGTH - y) > this.getY() &&
+                (HEIGTH - y) < this.getY() + this.getHeight();
 
     }
 

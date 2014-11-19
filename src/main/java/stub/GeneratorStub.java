@@ -25,7 +25,7 @@ public class GeneratorStub {
      */
     public static List<GameEntity> getRandomVisibleObjects() {
         Random random = new Random();
-        int count = random.nextInt(800000) + 1;
+        int count = random.nextInt(80) + 1;
 
         List<GameEntity> visibleObjectsList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
