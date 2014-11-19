@@ -29,12 +29,7 @@ public class Start {
                 mouseListener();
 
                 for (GameEntity entity : visibleObjects) {
-                    draw(entity.getTexture(),
-                            entity.getX(),
-                            entity.getY(),
-                            entity.getWidth(),
-                            entity.getHeight()
-                    );
+                    entity.draw();
                 }
 
                 Display.update();
@@ -54,11 +49,8 @@ public class Start {
         if (Mouse.isButtonDown(0)) {
             for (GameEntity entity : visibleObjects) {
                 if (entity.isInteractive()) {
-                    if (Mouse.getX() > entity.getX() &&
-                            Mouse.getX() < entity.getX() + entity.getWidth() &&
-                            HEIGTH - Mouse.getY() > entity.getY() &&
-                            HEIGTH -Mouse.getY() < entity.getY() + entity.getHeight()) {
-                        System.out.println(entity.getId());
+                    if (entity.constraint(Mouse.getX(), Mouse.getY())) {
+                        System.out.println("Кирпич " + entity.getId());
                     }
                 }
             }

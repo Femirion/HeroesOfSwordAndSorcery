@@ -1,5 +1,6 @@
 package engine;
 
+import model.entities.GameEntity;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -37,6 +38,28 @@ public class Engine {
         glOrtho(0, WIDTH, HEIGTH, 0, 1, -1);
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_TEXTURE_2D);
+    }
+
+    public static void draw(GameEntity entity) {
+        entity.getImage().getTexture().bind();
+        glTranslatef(entity.getX(), entity.getY(), 0);
+        glBegin(GL_QUADS);
+
+        glTexCoord2f(0, 0);
+        glVertex2f(0, 0);
+
+        glTexCoord2f(1, 0);
+        glVertex2f(entity.getWidth(), 0);
+
+        glTexCoord2f(1, 1);
+        glVertex2f(entity.getWidth(), entity.getHeight());
+
+        glTexCoord2f(0, 1);
+        glVertex2f(0, entity.getHeight());
+
+        glEnd();
+        glLoadIdentity();
+
     }
 
     public static void draw(Texture texture, float x, float y, float width, float height) {

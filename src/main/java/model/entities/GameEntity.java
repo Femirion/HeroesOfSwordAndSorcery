@@ -1,9 +1,9 @@
 package model.entities;
 
 import engine.Engine;
-import org.newdawn.slick.opengl.Texture;
+import engine.ImageStorage;
 
-import java.util.Comparator;
+import static engine.Engine.*;
 
 /**
  * Класс, представляющий собой сущность игрового мира
@@ -25,33 +25,24 @@ public class GameEntity implements Comparable {
     // координата Y внутри мира
     private float wy;
 
-    // ширина
-    private float width;
-
-    // высота
-    private float height;
+    private ImageStorage image;
 
     // уромень для определения порядка отрисовки объектов
     private byte level;
 
-    // текстура
-    private Texture texture;
-
-    // флагЮ, показывающий, является ли объект интерактивным
+    // флаг, показывающий, является ли объект интерактивным
     private boolean isInteractive = false;
 
     public GameEntity(long id, float x, float y, float wx, float wy,
-                      float width, float height, byte level,
-                      Texture texture, boolean isInteractive) {
+                      ImageStorage image, byte level,
+                      boolean isInteractive) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.wx = wx;
         this.wy = wy;
-        this.width = width;
-        this.height = height;
+        this.image = image;
         this.level = level;
-        this.texture = texture;
         this.isInteractive = isInteractive;
     }
 
@@ -79,36 +70,36 @@ public class GameEntity implements Comparable {
         this.y = y;
     }
 
-    public float getWx() {
+    public float getWX() {
         return wx;
     }
 
-    public void setWx(float wx) {
+    public void setWX(float wx) {
         this.wx = wx;
     }
 
-    public float getWy() {
+    public float getWY() {
         return wy;
     }
 
-    public void setWy(float wy) {
+    public void setWY(float wy) {
         this.wy = wy;
     }
 
     public float getWidth() {
-        return width;
-    }
-
-    public void setWidth(float width) {
-        this.width = width;
+        return image.getWidht();
     }
 
     public float getHeight() {
-        return height;
+        return image.getHeight();
     }
 
-    public void setHeight(float height) {
-        this.height = height;
+    public ImageStorage getImage() {
+        return image;
+    }
+
+    public void setImage(ImageStorage image) {
+        this.image = image;
     }
 
     public byte getLevel() {
@@ -117,14 +108,6 @@ public class GameEntity implements Comparable {
 
     public void setLevel(byte level) {
         this.level = level;
-    }
-
-    public Texture getTexture() {
-        return texture;
-    }
-
-    public void setTexture(Texture texture) {
-        this.texture = texture;
     }
 
     public boolean isInteractive() {
@@ -145,4 +128,17 @@ public class GameEntity implements Comparable {
             return level > entry.level ? 1 : -1;
         }
     }
+
+    public void draw() {
+        Engine.draw(this);
+    }
+
+    public boolean constraint(float x, float y) {
+        return  x > this.getX() &&
+                x < this.getX() + this.getWidth() &&
+                HEIGTH - y > this.getY() &&
+                WIDTH - y < this.getY() + this.getHeight();
+
+    }
+
 }

@@ -1,5 +1,6 @@
 package stub;
 
+import engine.ImageStorage;
 import model.entities.GameEntity;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import static engine.Engine.*;
 /**
  * Класс, генерирующий различные объекты игрового мира.
  * Заглушка на время разработки.
- * <p/>
+ *
  * author Vostryakov Alexander
  */
 public class GeneratorStub {
@@ -24,7 +25,7 @@ public class GeneratorStub {
      */
     public static List<GameEntity> getRandomVisibleObjects() {
         Random random = new Random();
-        int count = random.nextInt(80) + 1;
+        int count = random.nextInt(800000) + 1;
 
         List<GameEntity> visibleObjectsList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -34,10 +35,8 @@ public class GeneratorStub {
                     random.nextInt(600),
                     random.nextInt(800),
                     random.nextInt(800),
-                    32F,
-                    32F,
+                    ImageStorage.BRICK,
                     (byte) random.nextInt(120),
-                    loadTexture("brick.png"),
                     random.nextBoolean()
             );
             visibleObjectsList.add(gameEntity);
@@ -59,10 +58,8 @@ public class GeneratorStub {
                 15F,
                 10F,
                 10F,
-                32F,
-                32F,
+                ImageStorage.BRICK,
                 (byte) 0,
-                loadTexture("brick.png"),
                 true
 
         );
@@ -75,10 +72,8 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                32F,
-                32F,
+                ImageStorage.BRICK,
                 (byte) 0,
-                loadTexture("brick.png"),
                 false
 
         );
@@ -92,10 +87,8 @@ public class GeneratorStub {
                 20F,
                 10F,
                 10F,
-                32F,
-                32F,
+                ImageStorage.BRICK,
                 (byte) 0,
-                loadTexture("brick.png"),
                 true
 
         );
@@ -109,10 +102,8 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                32F,
-                32F,
+                ImageStorage.BRICK,
                 (byte) 0,
-                loadTexture("brick.png"),
                 true
 
         );
@@ -125,10 +116,8 @@ public class GeneratorStub {
                 200F,
                 10F,
                 10F,
-                32F,
-                32F,
+                ImageStorage.BRICK,
                 (byte) 0,
-                loadTexture("brick.png"),
                 false
 
         );
