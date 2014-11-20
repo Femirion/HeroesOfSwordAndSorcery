@@ -60,7 +60,7 @@ public enum ImageStorage {
                 return imageStorage;
             }
         }
-        throw new RuntimeException("Не найдено изображение с именем " + value);
+        throw new IllegalArgumentException("Не найдено изображение с именем " + value);
     }
 
 

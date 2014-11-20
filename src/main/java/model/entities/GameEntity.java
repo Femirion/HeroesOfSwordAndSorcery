@@ -3,6 +3,8 @@ package model.entities;
 import engine.Engine;
 import engine.ImageStorage;
 
+import java.util.Map;
+
 import static engine.Engine.*;
 
 /**
@@ -28,20 +30,29 @@ public class GameEntity implements Comparable {
     // простое изображение
     private ImageStorage defaultImage;
 
-    // изображение, которое будет отображаться, когда
-    // с объектом не ведется работа
+    // неактивное изображение
     private ImageStorage unactiveImage;
 
-    // изображение, которое отображается во время
-    // действитя с объектом
-    private ImageStorage activeImage;
+    // справочник, хранящий соответствие между
+    // название действия - имя активного изоображения
+    private Map<String, ImageStorage> activeImages;
 
-    // уромень для определения порядка отрисовки объектов
+    // слой для определения порядка отрисовки объектов
     private byte level;
 
     // флаг, показывающий, является ли объект интерактивным
     private boolean isInteractive = false;
 
+    /**
+     * Конструктор игрового объекта
+     * @param id идентификатор
+     * @param x координата X
+     * @param y координата Y
+     * @param wx координата X в игровом мире
+     * @param wy координата Y в игровом мире
+     * @param image изображение
+     * @param level слой
+     */
     public GameEntity(long id, float x, float y, float wx, float wy,
                       ImageStorage image, byte level) {
         this.id = id;
@@ -50,23 +61,30 @@ public class GameEntity implements Comparable {
         this.wx = wx;
         this.wy = wy;
         this.defaultImage = image;
-        this.unactiveImage = image;
+        this.activeImages = null;
         this.level = level;
+        // такой объект считается неинтерактивным поумолчанию
         this.isInteractive = false;
     }
 
+    /**
+     * Более продвинуты конструктор
+     * @param id идентификатор объекта
+     * @param x координата X
+     * @param y координата Y
+     * @param wx координата X в игровом мире
+     * @param wy координата Y в игровом мире
+     * @param image изображение
+     * @param activeImages справочник активных изображений
+     * @param level слой
+     * @param isInteractive флаг, показывающий, является ли данный объект интерактивным
+     */
     public GameEntity(long id, float x, float y, float wx, float wy,
-                      ImageStorage image, ImageStorage activeImage, byte level,
+                      ImageStorage image, Map<String, ImageStorage> activeImages, byte level,
                       boolean isInteractive) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.wx = wx;
-        this.wy = wy;
-        this.defaultImage = image;
+        this(id, x, y, wx, wy, image, level);
         this.unactiveImage = image;
-        this.activeImage = activeImage;
-        this.level = level;
+        this.activeImages = activeImages;
         this.isInteractive = isInteractive;
     }
 
@@ -134,12 +152,12 @@ public class GameEntity implements Comparable {
         this.unactiveImage = unactiveImage;
     }
 
-    public ImageStorage getActiveImage() {
-        return activeImage;
+    public Map<String, ImageStorage> getActiveImage() {
+        return activeImages;
     }
 
-    public void setActiveImage(ImageStorage activeImage) {
-        this.activeImage = activeImage;
+    public void setActiveImage(Map<String, ImageStorage> activeImages) {
+        this.activeImages = activeImages;
     }
 
     public byte getLevel() {

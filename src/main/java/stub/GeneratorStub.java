@@ -3,9 +3,7 @@ package stub;
 import engine.ImageStorage;
 import model.entities.GameEntity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Класс, генерирующий различные объекты игрового мира.
@@ -15,7 +13,11 @@ import java.util.Random;
  */
 public class GeneratorStub {
 
-    private GeneratorStub() {
+    private static Map<String, ImageStorage> map = new HashMap<>();
+
+    static {
+        // pointing - наведение курсора мыши
+        map.put("pointing", ImageStorage.ACTIVE_BRICK);
     }
 
     /**
@@ -34,7 +36,7 @@ public class GeneratorStub {
                     random.nextInt(800),
                     random.nextInt(800),
                     ImageStorage.BRICK,
-                    ImageStorage.ACTIVE_BRICK,
+                    map,
                     (byte) 1,
                     random.nextBoolean()
             );
@@ -58,7 +60,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                ImageStorage.ACTIVE_BRICK,
+                map,
                 (byte) 0,
                 true
 
@@ -99,7 +101,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                ImageStorage.ACTIVE_BRICK,
+                map,
                 (byte) 0,
                 true
 
@@ -118,6 +120,9 @@ public class GeneratorStub {
         );
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;
+    }
+
+    private GeneratorStub() {
     }
 
 }
