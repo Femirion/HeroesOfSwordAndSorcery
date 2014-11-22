@@ -12,21 +12,21 @@ import org.newdawn.slick.opengl.Texture;
 public enum ImageStorage {
 
     // кирпич №1
-    BRICK("brick", 32f, 32f, Engine.loadTexture("brick.png")),
+    BRICK("brick", 32, 32, Engine.loadTexture("brick.png")),
     // активный кирпич
-    ACTIVE_BRICK("active_brick", 32f, 32f, Engine.loadTexture("active_brick.png"));
+    ACTIVE_BRICK("active_brick", 32, 32, Engine.loadTexture("active_brick.png"));
 
     // имя. может быть произвольным
     private String name;
     // ширина текстуры
-    private float widht;
+    private int widht;
     // высота текстуры
-    private float height;
+    private int height;
     // сама текстура
     private Texture texture;
 
 
-    ImageStorage (String name, float widht, float height, Texture texture) {
+    ImageStorage (String name, int widht, int height, Texture texture) {
         this.name = name;
         this.widht = widht;
         this.height = height;
@@ -37,11 +37,11 @@ public enum ImageStorage {
         return name;
     }
 
-    public float getWidht() {
+    public int getWidht() {
         return widht;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 

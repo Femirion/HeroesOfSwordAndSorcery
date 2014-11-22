@@ -2,7 +2,9 @@ package model.entities;
 
 import engine.Engine;
 import engine.ImageStorage;
+import engine.Point;
 
+import java.util.List;
 import java.util.Map;
 
 import static engine.Engine.*;
@@ -34,8 +36,14 @@ public class GameEntity implements Comparable {
     private ImageStorage unactiveImage;
 
     // справочник, хранящий соответствие между
-    // название действия - имя активного изоображения
+    // название действия - активное изоображение
     private Map<String, ImageStorage> activeImages;
+
+    // справочник, хранящий соответствия между
+    // навзанием действия - список точек.
+    // Используется для проверки попадает ли точка в сложную область,
+    // созданную списком вершин области
+    private Map<String, List<Point>> points;
 
     // слой для определения порядка отрисовки объектов
     private byte level;
@@ -62,6 +70,7 @@ public class GameEntity implements Comparable {
         this.wy = wy;
         this.defaultImage = image;
         this.activeImages = null;
+        points = null;
         this.level = level;
         // такой объект считается неинтерактивным поумолчанию
         this.isInteractive = false;
@@ -76,15 +85,18 @@ public class GameEntity implements Comparable {
      * @param wy координата Y в игровом мире
      * @param image изображение
      * @param activeImages справочник активных изображений
+     * @param points справочник вершин изображений
      * @param level слой
      * @param isInteractive флаг, показывающий, является ли данный объект интерактивным
      */
     public GameEntity(long id, float x, float y, float wx, float wy,
-                      ImageStorage image, Map<String, ImageStorage> activeImages, byte level,
+                      ImageStorage image, Map<String, ImageStorage> activeImages,
+                      Map<String, List<Point>> points, byte level,
                       boolean isInteractive) {
         this(id, x, y, wx, wy, image, level);
         this.unactiveImage = image;
         this.activeImages = activeImages;
+        this.points = points;
         this.isInteractive = isInteractive;
     }
 
@@ -158,6 +170,14 @@ public class GameEntity implements Comparable {
 
     public void setActiveImage(Map<String, ImageStorage> activeImages) {
         this.activeImages = activeImages;
+    }
+
+    public Map<String, List<Point>> getPoints() {
+        return points;
+    }
+
+    public void setPoints(Map<String, List<Point>> points) {
+        this.points = points;
     }
 
     public byte getLevel() {

@@ -1,6 +1,7 @@
 package stub;
 
 import engine.ImageStorage;
+import engine.Point;
 import model.entities.GameEntity;
 
 import java.util.*;
@@ -13,11 +14,22 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, ImageStorage> map = new HashMap<>();
+    private static Map<String, ImageStorage> imageMap = new HashMap<>();
+    private static Map<String, List<Point>> pointMap = new HashMap<>();
 
     static {
+        List<Point> points = new ArrayList<>();
+        Random random = new Random();
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+        points.add(new Point(random.nextFloat(), random.nextFloat()));
+
         // pointing - наведение курсора мыши
-        map.put("pointing", ImageStorage.ACTIVE_BRICK);
+        imageMap.put("pointing", ImageStorage.ACTIVE_BRICK);
+        pointMap.put("pointing", points);
     }
 
     /**
@@ -36,7 +48,8 @@ public class GeneratorStub {
                     random.nextInt(800),
                     random.nextInt(800),
                     ImageStorage.BRICK,
-                    map,
+                    imageMap,
+                    pointMap,
                     (byte) 1,
                     random.nextBoolean()
             );
@@ -44,6 +57,32 @@ public class GeneratorStub {
         }
 
         return visibleObjectsList;
+    }
+
+    /**
+     * Метод для генерации активных точек для квадратного имейджа.
+     * В качестве активных точек устанавливает вершины прямоугольнинка,
+     * в котороый заключен имейдж
+     *
+     * @param name имя для списка активных точек
+     * @param x координата X имейджа
+     * @param y координата Y имейджа
+     * @param width ширина имейджа
+     * @param height высота имейджа
+     * @return справочник активных точек
+     */
+    private static Map<String, List<Point>> getQuardMap(
+            String name, float x, float y, float width, float height) {
+
+        Map<String, List<Point>> quardMap = new HashMap<>();
+        List<Point> points = new ArrayList<>();
+        points.add(new Point(x, y));
+        points.add(new Point(x, y + height));
+        points.add(new Point(x + width, y));
+        points.add(new Point(x +width, y + height));
+        quardMap.put(name, points);
+
+        return quardMap;
     }
 
     /**
@@ -60,7 +99,8 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                map,
+                imageMap,
+                getQuardMap("pointing", 15F,15F,10F,10F),
                 (byte) 0,
                 true
 
@@ -101,7 +141,8 @@ public class GeneratorStub {
                 10F,
                 10F,
                 ImageStorage.BRICK,
-                map,
+                imageMap,
+                getQuardMap("pointing", 200F,10F,10F,10F),
                 (byte) 0,
                 true
 
@@ -121,6 +162,17 @@ public class GeneratorStub {
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;
     }
+
+    public static List<Point> generatePoints(int count) {
+        Random random = new Random();
+        List<Point> pointList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            Point point = new Point(random.nextFloat(), random.nextFloat());
+            pointList.add(point);
+        }
+        return pointList;
+    }
+
 
     private GeneratorStub() {
     }

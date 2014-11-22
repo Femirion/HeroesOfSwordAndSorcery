@@ -6,9 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import stub.GeneratorStub;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
 
-import static engine.Engine.*;
+import static engine.Engine.beginSession;
 
 /**
  * author Vostryakov Alexander
