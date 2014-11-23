@@ -1,6 +1,6 @@
 package engine.unils;
 
-import engine.Point;
+import engine.point.Point;
 
 import java.util.List;
 import java.util.Random;

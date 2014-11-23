@@ -1,11 +1,8 @@
 package model.entities;
 
 import engine.Engine;
-import engine.ImageStorage;
-import engine.Point;
-
-import java.util.List;
-import java.util.Map;
+import engine.image.GameImg;
+import engine.image.TextureStorage;
 
 import static engine.Engine.*;
 
@@ -29,75 +26,79 @@ public class GameEntity implements Comparable {
     // координата Y внутри мира
     private float wy;
 
-    // простое изображение
-    private ImageStorage defaultImage;
-
-    // неактивное изображение
-    private ImageStorage unactiveImage;
-
-    // справочник, хранящий соответствие между
-    // название действия - активное изоображение
-    private Map<String, ImageStorage> activeImages;
-
-    // справочник, хранящий соответствия между
-    // навзанием действия - список точек.
-    // Используется для проверки попадает ли точка в сложную область,
-    // созданную списком вершин области
-    private Map<String, List<Point>> points;
+    // игровое изображение, привязанное к сущности
+    private GameImg img;
 
     // слой для определения порядка отрисовки объектов
     private byte level;
 
     // флаг, показывающий, является ли объект интерактивным
-    private boolean isInteractive = false;
+    private boolean isInteractive;
+
+    private boolean isPassable;
 
     /**
-     * Конструктор игрового объекта
-     * @param id идентификатор
-     * @param x координата X
-     * @param y координата Y
-     * @param wx координата X в игровом мире
-     * @param wy координата Y в игровом мире
-     * @param image изображение
-     * @param level слой
-     */
-    public GameEntity(long id, float x, float y, float wx, float wy,
-                      ImageStorage image, byte level) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
-        this.wx = wx;
-        this.wy = wy;
-        this.defaultImage = image;
-        this.activeImages = null;
-        points = null;
-        this.level = level;
-        // такой объект считается неинтерактивным поумолчанию
-        this.isInteractive = false;
-    }
-
-    /**
-     * Более продвинуты конструктор
+     * позволяет создвать интерктивные и проходимые объекты.
      * @param id идентификатор объекта
      * @param x координата X
      * @param y координата Y
      * @param wx координата X в игровом мире
      * @param wy координата Y в игровом мире
-     * @param image изображение
-     * @param activeImages справочник активных изображений
-     * @param points справочник вершин изображений
+     * @param img изображение
      * @param level слой
      * @param isInteractive флаг, показывающий, является ли данный объект интерактивным
+     * @param isInteractive флаг, показывающий, является ли данный объект проходимым
      */
     public GameEntity(long id, float x, float y, float wx, float wy,
-                      ImageStorage image, Map<String, ImageStorage> activeImages,
-                      Map<String, List<Point>> points, byte level,
-                      boolean isInteractive) {
-        this(id, x, y, wx, wy, image, level);
-        this.unactiveImage = image;
-        this.activeImages = activeImages;
-        this.points = points;
+                      GameImg img,byte level,boolean isInteractive, boolean isPassable) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.wx = wx;
+        this.wy = wy;
+        this.img = img;
+        this.level = level;
         this.isInteractive = isInteractive;
+        this.isPassable = isPassable;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        GameEntity entry = (GameEntity) obj;
+        if (level == entry.level) {
+            // та. у которой координата y больше, та должна быть ближе к нам
+            return Float.compare(y, entry.y);
+        } else {
+            return level > entry.level ? 1 : -1;
+        }
+    }
+
+    public void draw() {
+        Engine.draw(this);
+    }
+
+    public boolean contains(float x, float y) {
+        return  x > this.getX() &&
+                x < this.getX() + this.getWidth() &&
+                HEIGHT - y > this.getY() &&
+                HEIGHT - y < this.getY() + this.getHeight();
+
+    }
+
+    public TextureStorage getDrawImage() {
+        return img.getDrawImage();
+    }
+
+    public void setDrawImage(TextureStorage storage) {
+        img.setDrawImage(storage);
+    }
+
+    public int getWidth() {
+        return img.getWidth();
+    }
+
+    public int getHeight() {
+        return img.getHeight();
     }
 
     public long getId() {
@@ -140,44 +141,12 @@ public class GameEntity implements Comparable {
         this.wy = wy;
     }
 
-    public float getWidth() {
-        return defaultImage.getWidht();
+    public GameImg getImg() {
+        return img;
     }
 
-    public float getHeight() {
-        return defaultImage.getHeight();
-    }
-
-    public ImageStorage getDefaultImage() {
-        return defaultImage;
-    }
-
-    public void setDefaultImage(ImageStorage defaultImage) {
-        this.defaultImage = defaultImage;
-    }
-
-    public ImageStorage getUnactiveImage() {
-        return unactiveImage;
-    }
-
-    public void setUnactiveImage(ImageStorage unactiveImage) {
-        this.unactiveImage = unactiveImage;
-    }
-
-    public Map<String, ImageStorage> getActiveImage() {
-        return activeImages;
-    }
-
-    public void setActiveImage(Map<String, ImageStorage> activeImages) {
-        this.activeImages = activeImages;
-    }
-
-    public Map<String, List<Point>> getPoints() {
-        return points;
-    }
-
-    public void setPoints(Map<String, List<Point>> points) {
-        this.points = points;
+    public void setImg(GameImg img) {
+        this.img = img;
     }
 
     public byte getLevel() {
@@ -196,27 +165,11 @@ public class GameEntity implements Comparable {
         this.isInteractive = isInteractive;
     }
 
-    @Override
-    public int compareTo(Object obj) {
-        GameEntity entry = (GameEntity) obj;
-        if (level == entry.level) {
-            // та. у которой координата y больше, та должна быть ближе к нам
-            return Float.compare(y, entry.y);
-        } else {
-            return level > entry.level ? 1 : -1;
-        }
+    public boolean isPassable() {
+        return isPassable;
     }
 
-    public void draw() {
-        Engine.draw(this);
+    public void setPassable(boolean isPassable) {
+        this.isPassable = isPassable;
     }
-
-    public boolean contains(float x, float y) {
-        return  x > this.getX() &&
-                x < this.getX() + this.getWidth() &&
-                HEIGHT - y > this.getY() &&
-                HEIGHT - y < this.getY() + this.getHeight();
-
-    }
-
 }

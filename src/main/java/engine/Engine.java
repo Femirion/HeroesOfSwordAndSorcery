@@ -50,7 +50,7 @@ public class Engine {
      * @param entity игровой объект
      */
     public static void draw(GameEntity entity) {
-        entity.getDefaultImage().getTexture().bind();
+        entity.getImg().getDrawImage().getTexture().bind();
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
 

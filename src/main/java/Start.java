@@ -92,10 +92,10 @@ public class Start {
                     // но так как объекты отсортированы по удаленности от игрока, то выбираем ближайший объект
                     // а остальные гасим
                     if (entity.contains(Mouse.getX(), Mouse.getY()) && !isFindContainsObject) {
-                        entity.setDefaultImage(entity.getActiveImage().get("pointing"));
+                        entity.setDrawImage (entity.getImg().getActiveImages().get("pointing"));
                         isFindContainsObject = true;
                     } else {
-                        entity.setDefaultImage(entity.getUnactiveImage());
+                        entity.setDrawImage(entity.getImg().getBaseImage());
                     }
                 }
             }

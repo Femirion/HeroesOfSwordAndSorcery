@@ -1,7 +1,8 @@
 package stub;
 
-import engine.ImageStorage;
-import engine.Point;
+import engine.image.GameImg;
+import engine.image.TextureStorage;
+import engine.point.Point;
 import model.entities.GameEntity;
 
 import java.util.*;
@@ -14,8 +15,9 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, ImageStorage> imageMap = new HashMap<>();
+    private static Map<String, TextureStorage> imageMap = new HashMap<>();
     private static Map<String, List<Point>> pointMap = new HashMap<>();
+    private static List<Point> brickPointList;
 
     static {
         List<Point> points = new ArrayList<>();
@@ -28,7 +30,7 @@ public class GeneratorStub {
         points.add(new Point(random.nextFloat(), random.nextFloat()));
 
         // pointing - наведение курсора мыши
-        imageMap.put("pointing", ImageStorage.ACTIVE_BRICK);
+        imageMap.put("pointing", TextureStorage.ACTIVE_BRICK);
         pointMap.put("pointing", points);
     }
 
@@ -47,10 +49,9 @@ public class GeneratorStub {
                     random.nextInt(600),
                     random.nextInt(800),
                     random.nextInt(800),
-                    ImageStorage.BRICK,
-                    imageMap,
-                    pointMap,
+                    new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
                     (byte) 1,
+                    random.nextBoolean(),
                     random.nextBoolean()
             );
             visibleObjectsList.add(gameEntity);
@@ -98,10 +99,9 @@ public class GeneratorStub {
                 15F,
                 10F,
                 10F,
-                ImageStorage.BRICK,
-                imageMap,
-                getQuardMap("pointing", 15F,15F,10F,10F),
+                new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
                 (byte) 0,
+                true,
                 true
 
         );
@@ -114,8 +114,10 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                ImageStorage.BRICK,
-                (byte) 0
+                new GameImg(TextureStorage.BRICK),
+                (byte) 0,
+                false,
+                false
         );
         visibleObjectsList.add(gameEntity2);
 
@@ -127,8 +129,10 @@ public class GeneratorStub {
                 20F,
                 10F,
                 10F,
-                ImageStorage.BRICK,
-                (byte) 0
+                new GameImg(TextureStorage.BRICK),
+                (byte) 0,
+                false,
+                false
         );
         visibleObjectsList.add(gameEntity3);
 
@@ -140,11 +144,10 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                ImageStorage.BRICK,
-                imageMap,
-                getQuardMap("pointing", 200F,10F,10F,10F),
+                new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
                 (byte) 0,
-                true
+                true,
+                false
 
         );
         visibleObjectsList.add(gameEntity4);
@@ -156,8 +159,10 @@ public class GeneratorStub {
                 200F,
                 10F,
                 10F,
-                ImageStorage.BRICK,
-                (byte) 0
+                new GameImg(TextureStorage.BRICK),
+                (byte) 0,
+                false,
+                false
         );
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;
@@ -171,6 +176,16 @@ public class GeneratorStub {
             pointList.add(point);
         }
         return pointList;
+    }
+
+    public static List<Point> generateBrickPoints() {
+        brickPointList = new ArrayList<>();
+        brickPointList.add(new Point(0F, 0F));
+        brickPointList.add(new Point(32F, 0F));
+        brickPointList.add(new Point(32F, 32F));
+        brickPointList.add(new Point(0F, 32F));
+
+        return brickPointList;
     }
 
 
