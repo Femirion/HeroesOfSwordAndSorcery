@@ -15,23 +15,13 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, TextureStorage> imageMap = new HashMap<>();
-    private static Map<String, List<Point>> pointMap = new HashMap<>();
-    private static List<Point> brickPointList;
+    private static Map<String, TextureStorage> brickMap = new HashMap<>();
+    private static Map<String, TextureStorage> starMap = new HashMap<>();
 
     static {
-        List<Point> points = new ArrayList<>();
-        Random random = new Random();
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-        points.add(new Point(random.nextFloat(), random.nextFloat()));
-
         // pointing - наведение курсора мыши
-        imageMap.put("pointing", TextureStorage.ACTIVE_BRICK);
-        pointMap.put("pointing", points);
+        brickMap.put("pointing", TextureStorage.ACTIVE_BRICK);
+        starMap.put("pointing", TextureStorage.ACTIVE_STAR);
     }
 
     /**
@@ -49,7 +39,9 @@ public class GeneratorStub {
                     random.nextInt(600),
                     random.nextInt(800),
                     random.nextInt(800),
-                    new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
+                    random.nextBoolean() ?
+                    new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)) :
+                    new GameImg(TextureStorage.STAR, starMap, new Point(25F,25F)),
                     (byte) 1,
                     random.nextBoolean(),
                     random.nextBoolean()
@@ -99,7 +91,7 @@ public class GeneratorStub {
                 15F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
+                new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)),
                 (byte) 0,
                 true,
                 true
@@ -144,7 +136,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK, imageMap, new Point(16F,16F)),
+                new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)),
                 (byte) 0,
                 true,
                 false
@@ -179,6 +171,7 @@ public class GeneratorStub {
     }
 
     public static List<Point> generateBrickPoints() {
+        List<Point> brickPointList = new ArrayList<>();
         brickPointList = new ArrayList<>();
         brickPointList.add(new Point(0F, 0F));
         brickPointList.add(new Point(32F, 0F));
@@ -186,6 +179,21 @@ public class GeneratorStub {
         brickPointList.add(new Point(0F, 32F));
 
         return brickPointList;
+    }
+
+    public static List<Point> getStarPointList() {
+        List<Point> starPoints = new ArrayList<>();
+        starPoints.add(new Point(24F, 4F));
+        starPoints.add(new Point(31F, 17F));
+        starPoints.add(new Point(45F, 17F));
+        starPoints.add(new Point(33F, 28F));
+        starPoints.add(new Point(37F, 43F));
+        starPoints.add(new Point(24F, 35F));
+        starPoints.add(new Point(11F, 43F));
+        starPoints.add(new Point(16F, 28F));
+        starPoints.add(new Point(3F, 17F));
+        starPoints.add(new Point(19F, 17F));
+        return starPoints;
     }
 
 

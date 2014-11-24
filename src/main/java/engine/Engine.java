@@ -50,9 +50,13 @@ public class Engine {
      * @param entity игровой объект
      */
     public static void draw(GameEntity entity) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         entity.getImg().getDrawImage().getTexture().bind();
+
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
+
 
         glTexCoord2f(0, 0);
         glVertex2f(0, 0);
@@ -66,6 +70,7 @@ public class Engine {
         glTexCoord2f(0, 1);
         glVertex2f(0, entity.getHeight());
 
+        glDisable(GL_BLEND);
         glEnd();
         glLoadIdentity();
 

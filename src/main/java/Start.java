@@ -1,3 +1,5 @@
+import engine.point.Point;
+import engine.unils.VectorUntils;
 import model.entities.GameEntity;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Mouse;
@@ -92,8 +94,42 @@ public class Start {
                     // но так как объекты отсортированы по удаленности от игрока, то выбираем ближайший объект
                     // а остальные гасим
                     if (entity.contains(Mouse.getX(), Mouse.getY()) && !isFindContainsObject) {
-                        entity.setDrawImage (entity.getImg().getActiveImages().get("pointing"));
-                        isFindContainsObject = true;
+                        // мышь попала в праямоугольник, заданный координатами,
+                        // проверим, попали ли мы в саму фигуру
+                        List<Point> pointList = entity.getDrawImage().getPoints();
+                        // флаг, показывающий что прямая от указателя мыши до точки,
+                        // пересекает каждое из ребер
+                        boolean isNoCrossed = true;
+                        for (int i = 0; i < pointList.size(); i++) {
+                            if (i == pointList.size() - 1) {
+                                // нужно взять последнюю и первую точку в качестве вершин
+                                isNoCrossed = isNoCrossed && !VectorUntils.isCrossed(entity.getDrawImage().getInternalPoint().getX()  + entity.getWidth(),
+                                        entity.getDrawImage().getInternalPoint().getY()  + entity.getHeight(),
+                                        Mouse.getX(),
+                                        Mouse.getY(),
+                                        pointList.get(i).getX() + entity.getWidth(),
+                                        pointList.get(i).getY() + entity.getHeight(),
+                                        pointList.get(0).getX() + entity.getWidth(),
+                                        pointList.get(0).getY() + entity.getHeight());
+
+                            } else {
+                                isNoCrossed = isNoCrossed && !VectorUntils.isCrossed(entity.getDrawImage().getInternalPoint().getX()  + entity.getWidth(),
+                                        entity.getDrawImage().getInternalPoint().getY()  + entity.getHeight(),
+                                        Mouse.getX(),
+                                        Mouse.getY(),
+                                        pointList.get(i).getX() + entity.getWidth(),
+                                        pointList.get(i).getY() + entity.getHeight(),
+                                        pointList.get(i + 1).getX() + entity.getWidth(),
+                                        pointList.get(i + 1).getY() + entity.getHeight());
+                            }
+                        }
+                        if (!isNoCrossed) {
+                            entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                            isFindContainsObject = true;
+                        } else {
+                            entity.setDrawImage(entity.getImg().getBaseImage());
+                        }
+
                     } else {
                         entity.setDrawImage(entity.getImg().getBaseImage());
                     }

@@ -15,10 +15,22 @@ import java.util.List;
  */
 public enum TextureStorage {
 
-    // кирпич №1 неактивный
+    // звезда активная
+    STAR("star", 80, 80,
+            Engine.loadTexture("star.png"),
+            GeneratorStub.getStarPointList(),
+            new Point(25F, 25F)),
+    // звезда №1 неактивный
+    ACTIVE_STAR("active_star", 80, 80,
+            Engine.loadTexture("active_star.png"),
+            GeneratorStub.getStarPointList(),
+            new Point(25F, 25F)),
+    // кирпич неактивный
     BRICK("brick", 32, 32,
-            Engine.loadTexture("brick.png")),
-    // кирпич №2 активный
+            Engine.loadTexture("brick.png"),
+            GeneratorStub.generateBrickPoints(),
+            new Point(16F, 16F)),
+    // кирпич активный
     ACTIVE_BRICK("active_brick", 32, 32,
             Engine.loadTexture("active_brick.png"),
             GeneratorStub.generateBrickPoints(),
@@ -81,7 +93,7 @@ public enum TextureStorage {
         return name;
     }
 
-    public int getWidht() {
+    public int getWidth() {
         return widht;
     }
 

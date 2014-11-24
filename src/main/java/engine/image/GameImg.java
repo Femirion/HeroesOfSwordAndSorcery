@@ -53,7 +53,7 @@ public class GameImg {
     }
 
     public int getWidth() {
-        return drawImage.getWidht();
+        return drawImage.getWidth();
     }
 
     public int getHeight() {
