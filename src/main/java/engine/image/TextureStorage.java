@@ -19,12 +19,12 @@ public enum TextureStorage {
     STAR("star", 80, 80,
             Engine.loadTexture("star.png"),
             GeneratorStub.getStarPointList(),
-            new Point(25F, 25F)),
+            new Point(25F, 20F)),
     // звезда №1 неактивный
     ACTIVE_STAR("active_star", 80, 80,
             Engine.loadTexture("active_star.png"),
             GeneratorStub.getStarPointList(),
-            new Point(25F, 25F)),
+            new Point(25F, 20F)),
     // кирпич неактивный
     BRICK("brick", 32, 32,
             Engine.loadTexture("brick.png"),

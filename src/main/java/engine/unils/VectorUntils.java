@@ -31,7 +31,7 @@ public class VectorUntils {
                                     float b1x, float b1y,
                                     float b2x, float b2y) {
         return (isLeftRotate(a1x, a1y, a2x, a2y, b1x, b1y) *
-                isLeftRotate(a1x, a1y, a2x, a2y, b2x, b2y)) < 0 &&
+                isLeftRotate(a1x, a1y, a2x, a2y, b2x, b2y)) <= 0 &&
                 (isLeftRotate(b1x, b1y, b2x, b2y, a1x, a1y) *
                 isLeftRotate(b1x, b1y, b2x, b2y, a2x, a2y)) < 0;
     }

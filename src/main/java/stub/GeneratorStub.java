@@ -87,11 +87,11 @@ public class GeneratorStub {
         // 1
         GameEntity gameEntity1 = new GameEntity(
                 1,
-                15F,
-                15F,
+                16F,
+                200F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)),
+                new GameImg(TextureStorage.STAR, starMap, new Point(16F,16F)),
                 (byte) 0,
                 true,
                 true
@@ -136,10 +136,10 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)),
+                new GameImg(TextureStorage.STAR, starMap, new Point(25F,25F)),
                 (byte) 0,
-                true,
-                false
+                false,
+                true
 
         );
         visibleObjectsList.add(gameEntity4);

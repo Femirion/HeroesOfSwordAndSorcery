@@ -172,4 +172,23 @@ public class GameEntity implements Comparable {
     public void setPassable(boolean isPassable) {
         this.isPassable = isPassable;
     }
+
+    /**
+     * Врозвращает координату X внутренней точки.
+     * с учетом расположения изображения на экране
+     * @return координата X внутреней точки
+     */
+    public float getInteralPointX() {
+        return img.getDrawImage().getInternalPoint().getX() + x;
+    }
+
+    /**
+     * Врозвращает координату Y внутренней точки.
+     * с учетом расположения изображения на экране
+     * @return координата Y внутреней точки
+     */
+    public float getInteralPointY() {
+        return img.getDrawImage().getInternalPoint().getY() + y;
+    }
+
 }

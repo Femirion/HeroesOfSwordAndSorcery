@@ -1,5 +1,7 @@
 package engine.point;
 
+import model.entities.GameEntity;
+
 /**
  * author Vostryakov Alexander
  */
@@ -20,6 +22,16 @@ public class Point {
         return x;
     }
 
+    /**
+     * Возвращает координату X точки,
+     * с учетом расположения на экране
+     * @param entity игровой объект
+     * @return координата X точки с учетом расположения объекта
+     */
+    public float getX(GameEntity entity) {
+        return x + entity.getX();
+    }
+
     public void setX(float x) {
         this.x = x;
     }
@@ -27,6 +39,17 @@ public class Point {
     public float getY() {
         return y;
     }
+
+    /**
+     * Возвращает координату Y точки,
+     * с учетом расположения на экране
+     * @param entity игровой объект
+     * @return координата Y точки с учетом расположения объекта
+     */
+    public float getY(GameEntity entity) {
+        return y + entity.getY();
+    }
+
 
     public void setY(float y) {
         this.y = y;

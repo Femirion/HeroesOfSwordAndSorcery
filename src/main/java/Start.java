@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+import static engine.Engine.HEIGHT;
 import static engine.Engine.beginSession;
 
 /**
@@ -27,7 +28,7 @@ public class Start {
     public Start() {
         try {
             beginSession();
-            visibleObjects = GeneratorStub.getRandomVisibleObjects();
+            visibleObjects = GeneratorStub.getStableVisibleObjects();
             Collections.sort(visibleObjects);
             while (!Display.isCloseRequested()) {
 
@@ -68,13 +69,54 @@ public class Start {
                 if (entity.isInteractive()) {
                     // да, мы нашил его!
                     if (entity.contains(Mouse.getX(), Mouse.getY())) {
-                        System.out.println("Кирпич " + entity.getId() + " " +
-                                entity.getId() + " " + entity.getY());
-                        // можем завершить поиск. тк. этот объект самый ближний,
-                        // и перекрывает части других объектов
-                        return;
+                        // мышь попала в праямоугольник, заданный координатами,
+                        // проверим, попали ли мы в саму фигуру
+                        List<Point> pointList = entity.getDrawImage().getPoints();
+                        // флаг, показывающий что прямая от указателя мыши до точки,
+                        // пересекает какое-нить из ребер.
+                        // учтем, что если пересечений четное количество,
+                        // поэтому используем оператор ^
+                        boolean isCrossed = false;
+                        // пройдемся по всем ребрам
+                        for (int i = 0; i < pointList.size(); i++) {
+                            // последняя и нулевая точка образуют последнее ребро
+                            // нужно взять последнюю и первую точку в качестве вершин
+                            if (i == pointList.size() - 1) {
+                                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                                        entity.getInteralPointX(),
+                                        entity.getInteralPointY(),
+                                        Mouse.getX(),
+                                        HEIGHT - Mouse.getY(),
+                                        pointList.get(i).getX(entity),
+                                        pointList.get(i).getY(entity),
+                                        pointList.get(0).getX(entity),
+                                        pointList.get(0).getY(entity));
+
+                            } else {
+                                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                                        entity.getInteralPointX(),
+                                        entity.getInteralPointY(),
+                                        Mouse.getX(),
+                                        HEIGHT - Mouse.getY(),
+                                        pointList.get(i).getX(entity),
+                                        pointList.get(i).getY(entity),
+                                        pointList.get(i + 1).getX(entity),
+                                        pointList.get(i + 1).getY(entity));
+                            }
+                        }
+                        if (!isCrossed) {
+                            System.out.println("Попали внутрь");
+                            return;
+                        } else {
+                            System.out.println("Не попали внутрь");
+                        }
+
+                    } else {
+                        entity.setDrawImage(entity.getImg().getBaseImage());
                     }
+                    return;
                 }
+
             }
         } else {
             // обрабатываем то, что мышь наведена на один из игровых объектов
@@ -98,32 +140,38 @@ public class Start {
                         // проверим, попали ли мы в саму фигуру
                         List<Point> pointList = entity.getDrawImage().getPoints();
                         // флаг, показывающий что прямая от указателя мыши до точки,
-                        // пересекает каждое из ребер
-                        boolean isNoCrossed = true;
+                        // пересекает какое-нить из ребер.
+                        // учтем, что если пересечений четное количество,
+                        // поэтому используем оператор ^
+                        boolean isCrossed = false;
+                        // пройдемся по всем ребрам
                         for (int i = 0; i < pointList.size(); i++) {
+                            // последняя и нулевая точка образуют последнее ребро
+                            // нужно взять последнюю и первую точку в качестве вершин
                             if (i == pointList.size() - 1) {
-                                // нужно взять последнюю и первую точку в качестве вершин
-                                isNoCrossed = isNoCrossed && !VectorUntils.isCrossed(entity.getDrawImage().getInternalPoint().getX()  + entity.getWidth(),
-                                        entity.getDrawImage().getInternalPoint().getY()  + entity.getHeight(),
+                                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                                        entity.getInteralPointX(),
+                                        entity.getInteralPointY(),
                                         Mouse.getX(),
-                                        Mouse.getY(),
-                                        pointList.get(i).getX() + entity.getWidth(),
-                                        pointList.get(i).getY() + entity.getHeight(),
-                                        pointList.get(0).getX() + entity.getWidth(),
-                                        pointList.get(0).getY() + entity.getHeight());
+                                        HEIGHT - Mouse.getY(),
+                                        pointList.get(i).getX(entity),
+                                        pointList.get(i).getY(entity),
+                                        pointList.get(0).getX(entity),
+                                        pointList.get(0).getY(entity));
 
                             } else {
-                                isNoCrossed = isNoCrossed && !VectorUntils.isCrossed(entity.getDrawImage().getInternalPoint().getX()  + entity.getWidth(),
-                                        entity.getDrawImage().getInternalPoint().getY()  + entity.getHeight(),
+                                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                                        entity.getInteralPointX(),
+                                        entity.getInteralPointY(),
                                         Mouse.getX(),
-                                        Mouse.getY(),
-                                        pointList.get(i).getX() + entity.getWidth(),
-                                        pointList.get(i).getY() + entity.getHeight(),
-                                        pointList.get(i + 1).getX() + entity.getWidth(),
-                                        pointList.get(i + 1).getY() + entity.getHeight());
+                                        HEIGHT - Mouse.getY(),
+                                        pointList.get(i).getX(entity),
+                                        pointList.get(i).getY(entity),
+                                        pointList.get(i + 1).getX(entity),
+                                        pointList.get(i + 1).getY(entity));
                             }
                         }
-                        if (!isNoCrossed) {
+                        if (isCrossed) {
                             entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
                             isFindContainsObject = true;
                         } else {
