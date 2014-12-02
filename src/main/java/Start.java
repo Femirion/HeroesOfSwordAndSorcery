@@ -61,40 +61,32 @@ public class Start {
 
         // список объектов отсортирован по удаленности от игрока
         // значит логичнее всего искать начиная с более ближних
-        ListIterator<GameEntity> iterator = visibleObjects.listIterator(visibleObjects.size() - 1);
+        ListIterator<GameEntity> iterator = visibleObjects.listIterator(visibleObjects.size());
 
         // обрабатываем нажание на левую кнопку мыши
         if (Mouse.isButtonDown(0)) {
             while (iterator.hasPrevious()) {
                 GameEntity entity = iterator.previous();
-                // нам интересны только интерактивные объекты
-                if (entity.isInteractive()) {
-                    // да, мы нашил его!
-                    if (entity.contains(Mouse.getX(), Mouse.getY())) {
+                // да, мы нашил его!
+                int mouseX = Mouse.getX();
+                int mouseY = Mouse.getY();
+                if (entity.contains(mouseX, mouseY)) {
+                    // нам интересны только интерактивные объекты
+                    if (entity.isInteractive()) {
                         // мышь попала в праямоугольник, заданный координатами,
                         // проверим, попали ли мы в саму фигуру
-/*                        if (!isCrossed(entity)) {
+                        if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
                             System.out.println("Попали внутрь");
                             return;
-                        } else {
-                            System.out.println("Не попали внутрь");
-                        }*/
-                        System.out.println("Mouse: " + Mouse.getX() + "   " +  (HEIGHT - Mouse.getY()));
-                        System.out.println("Point: " + entity.getInteralPointX() + "   " +  entity.getInteralPointY());
-                        for (Point point : entity.getDrawImage().getPoints()) {
-                            System.out.println(">> " + point.getX(entity) + "   " + point.getY(entity));
                         }
-                        System.out.println(isCrossed(entity));
-
                     } else {
-                        entity.setDrawImage(entity.getImg().getBaseImage());
+                        return;
                     }
-                    return;
                 }
 
             }
 
-        } /**else {
+        } else {
             // обрабатываем то, что мышь наведена на один из игровых объектов
             // тут процедура чуть хитрее, чем раньше
             // дело в том, что имейдж выделенного изображения
@@ -106,44 +98,49 @@ public class Start {
             boolean isFindContainsObject = false;
             while (iterator.hasPrevious()) {
                 GameEntity entity = iterator.previous();
-                if (entity.isInteractive()) {
                     // выделить нужно только первый объект, который попадает под мышь
                     // другие объекты тоже могут попасть в это же самое время под мышь (если объекты пересекаются)
                     // но так как объекты отсортированы по удаленности от игрока, то выбираем ближайший объект
                     // а остальные гасим
-                    if (entity.contains(Mouse.getX(), Mouse.getY()) && !isFindContainsObject) {
-                        // мышь попала в праямоугольник, заданный координатами,
+                    int mouseX = Mouse.getX();
+                    int mouseY = Mouse.getY();
+                    if (entity.contains(mouseX, mouseY) && !isFindContainsObject) {
+                        // мышь попала в прямоугольник, заданный координатами,
                         // проверим, попали ли мы в саму фигуру
-                        if (!isCrossed(entity)) {
-                            entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
-                            isFindContainsObject = true;
+                        if (entity.isInteractive()) {
+                            if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
+                                entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                                isFindContainsObject = true;
+                            } else {
+                                entity.setDrawImage(entity.getImg().getBaseImage());
+                            }
                         } else {
-                            entity.setDrawImage(entity.getImg().getBaseImage());
+                            // мы попали в объект. но он не интерактивный
+                            isFindContainsObject = true;
                         }
-
                     } else {
                         entity.setDrawImage(entity.getImg().getBaseImage());
                     }
                 }
-            }
-        }**/
+
+        }
 
     }
 
     /**
      * Метод определяющий попадания мыши в игровой объект
      * @param entity игровой объект
+     * @param x координата x мыши
+     * @param y координата y мыши
      * @return true - если попали внутрь
      */
-    private boolean isCrossed(GameEntity entity) {
+    private boolean isCrossed(GameEntity entity, int x, int y) {
         List<Point> pointList = entity.getDrawImage().getPoints();
         // флаг, показывающий что прямая от указателя мыши до точки,
         // пересекает какое-нить из ребер.
         // учтем, что если пересечений четное количество,
         // поэтому используем оператор ^
         boolean isCrossed = false;
-        int x = Mouse.getX();
-        int y = HEIGHT - Mouse.getY();
         for (int i = 0; i < pointList.size(); i++) {
             // последняя и нулевая точка образуют последнее ребро
             // нужно взять последнюю и первую точку в качестве вершин
@@ -157,7 +154,6 @@ public class Start {
                         pointList.get(i).getY(entity),
                         pointList.get(0).getX(entity),
                         pointList.get(0).getY(entity));
-                //System.out.println(isCrossed);
 
             } else {
                 isCrossed = isCrossed ^ VectorUntils.isCrossed(
@@ -169,7 +165,6 @@ public class Start {
                         pointList.get(i).getY(entity),
                         pointList.get(i + 1).getX(entity),
                         pointList.get(i + 1).getY(entity));
-                //System.out.println(isCrossed);
             }
         }
         return isCrossed;

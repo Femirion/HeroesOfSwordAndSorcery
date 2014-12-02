@@ -147,8 +147,8 @@ public class GeneratorStub {
         // 5
         GameEntity gameEntity5 = new GameEntity(
                 5,
-                10F,
-                200F,
+                30F,
+                240F,
                 10F,
                 10F,
                 new GameImg(TextureStorage.BRICK),

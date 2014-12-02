@@ -16,12 +16,12 @@ import java.util.List;
 public enum TextureStorage {
 
     // звезда активная
-    STAR("star", 100, 100,
+    STAR("star", 110, 100,
             Engine.loadTexture("star.png"),
             GeneratorStub.getStarPointList(),
             new Point(51F, 50F)),
     // звезда №1 неактивный
-    ACTIVE_STAR("active_star", 100, 100,
+    ACTIVE_STAR("active_star", 110, 100,
             Engine.loadTexture("active_star.png"),
             GeneratorStub.getStarPointList(),
             new Point(25F, 20F)),

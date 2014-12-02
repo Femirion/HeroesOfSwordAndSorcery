@@ -34,6 +34,7 @@ public class GameImg {
      */
     public GameImg(TextureStorage drawImage) {
         this.drawImage = drawImage;
+        this.baseImage = drawImage;
     }
 
     /**

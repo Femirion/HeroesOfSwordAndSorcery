@@ -57,17 +57,16 @@ public class Engine {
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
 
-
         glTexCoord2f(0, 0);
         glVertex2f(0, 0);
 
-        glTexCoord2f(1, 0);
+        glTexCoord2f(glFix(entity.getWidth()), 0);
         glVertex2f(entity.getWidth(), 0);
 
-        glTexCoord2f(1, 1);
+        glTexCoord2f(glFix(entity.getWidth()), glFix(entity.getHeight()));
         glVertex2f(entity.getWidth(), entity.getHeight());
 
-        glTexCoord2f(0, 1);
+        glTexCoord2f(0, glFix(entity.getHeight()));
         glVertex2f(0, entity.getHeight());
 
         glDisable(GL_BLEND);
@@ -75,6 +74,27 @@ public class Engine {
         glLoadIdentity();
 
     }
+
+    /**
+     * Метод, возвращающий отношение параметра (ширины или высоты)
+     * к ближайшей большей степени двойки. потому что иначе OPG
+     * работает со степенями двойки в качестве ширины и высоты.
+     * и тогда изображение будет выводится уменьшеным до
+     * ближайшей меньшей степени двойки. Например, если высота 100,
+     * то само изображение будет 64 пикселя, остальные 36 будет пустота
+     *
+     * @param value ширина или высота
+     * @return отношение параметра к степени 2
+     */
+    private static float glFix(float value) {
+        // TODO переделать потом на алгоритм со сдвигом старшего бита
+        int i = 2;
+        while (i < value) {
+            i *= 2;
+        }
+        return value / i;
+    }
+
 
     /**
      * Рисование произольного изображения
