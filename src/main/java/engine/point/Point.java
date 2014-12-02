@@ -10,17 +10,11 @@ public class Point {
     private float x;
     private float y;
 
-    public Point() {
-    }
-
     public Point(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public float getX() {
-        return x;
-    }
 
     /**
      * Возвращает координату X точки,
@@ -29,15 +23,8 @@ public class Point {
      * @return координата X точки с учетом расположения объекта
      */
     public float getX(GameEntity entity) {
-        return x + entity.getX();
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return y;
+        float pxInPercent = entity.getWidth() / 100F;
+        return (x * pxInPercent) + entity.getX();
     }
 
     /**
@@ -47,13 +34,10 @@ public class Point {
      * @return координата Y точки с учетом расположения объекта
      */
     public float getY(GameEntity entity) {
-        return y + entity.getY();
+        float pxInPercent = entity.getHeight() / 100F;
+        return (y * pxInPercent) + entity.getY();
     }
 
-
-    public void setY(float y) {
-        this.y = y;
-    }
 
     @Override
     public boolean equals(Object o) {

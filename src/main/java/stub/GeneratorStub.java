@@ -40,8 +40,8 @@ public class GeneratorStub {
                     random.nextInt(800),
                     random.nextInt(800),
                     random.nextBoolean() ?
-                    new GameImg(TextureStorage.BRICK, brickMap, new Point(16F,16F)) :
-                    new GameImg(TextureStorage.STAR, starMap, new Point(25F,25F)),
+                    new GameImg(TextureStorage.BRICK, brickMap) :
+                    new GameImg(TextureStorage.STAR, starMap),
                     (byte) 1,
                     random.nextBoolean(),
                     random.nextBoolean()
@@ -91,7 +91,7 @@ public class GeneratorStub {
                 200F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.STAR, starMap, new Point(16F,16F)),
+                new GameImg(TextureStorage.STAR, starMap),
                 (byte) 0,
                 true,
                 true
@@ -136,7 +136,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.STAR, starMap, new Point(25F,25F)),
+                new GameImg(TextureStorage.STAR, starMap),
                 (byte) 0,
                 false,
                 true
@@ -172,7 +172,6 @@ public class GeneratorStub {
 
     public static List<Point> generateBrickPoints() {
         List<Point> brickPointList = new ArrayList<>();
-        brickPointList = new ArrayList<>();
         brickPointList.add(new Point(0F, 0F));
         brickPointList.add(new Point(32F, 0F));
         brickPointList.add(new Point(32F, 32F));
@@ -183,16 +182,16 @@ public class GeneratorStub {
 
     public static List<Point> getStarPointList() {
         List<Point> starPoints = new ArrayList<>();
-        starPoints.add(new Point(24F, 4F));
-        starPoints.add(new Point(31F, 17F));
-        starPoints.add(new Point(45F, 17F));
-        starPoints.add(new Point(33F, 28F));
-        starPoints.add(new Point(37F, 43F));
-        starPoints.add(new Point(24F, 35F));
-        starPoints.add(new Point(11F, 43F));
-        starPoints.add(new Point(16F, 28F));
-        starPoints.add(new Point(3F, 17F));
-        starPoints.add(new Point(19F, 17F));
+        starPoints.add(new Point(51F, 0F));
+        starPoints.add(new Point(63F, 25F));
+        starPoints.add(new Point(100F, 25F));
+        starPoints.add(new Point(74F, 58F));
+        starPoints.add(new Point(78F, 100F));
+        starPoints.add(new Point(51F, 77F));
+        starPoints.add(new Point(19F, 100F));
+        starPoints.add(new Point(26F, 58F));
+        starPoints.add(new Point(0F, 25F));
+        starPoints.add(new Point(34F, 25F));
         return starPoints;
     }
 

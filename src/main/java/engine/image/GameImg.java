@@ -42,10 +42,9 @@ public class GameImg {
      *
      * @param drawImage изображение, которое будет отрисовываться
      * @param activeImages справочник: Название действия - изображение соответствующее действию
-     * @param internalPoint внутрення точка объекта. нужна для определения положения другой точки
      */
     public GameImg(TextureStorage drawImage,
-                   Map<String, TextureStorage> activeImages, Point internalPoint) {
+                   Map<String, TextureStorage> activeImages) {
         this.drawImage = drawImage;
         // изначально совпадает с отрисованным изображеним
         this.baseImage = drawImage;

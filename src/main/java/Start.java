@@ -73,12 +73,18 @@ public class Start {
                     if (entity.contains(Mouse.getX(), Mouse.getY())) {
                         // мышь попала в праямоугольник, заданный координатами,
                         // проверим, попали ли мы в саму фигуру
-                        if (!isCrossed(entity)) {
+/*                        if (!isCrossed(entity)) {
                             System.out.println("Попали внутрь");
                             return;
                         } else {
                             System.out.println("Не попали внутрь");
+                        }*/
+                        System.out.println("Mouse: " + Mouse.getX() + "   " +  (HEIGHT - Mouse.getY()));
+                        System.out.println("Point: " + entity.getInteralPointX() + "   " +  entity.getInteralPointY());
+                        for (Point point : entity.getDrawImage().getPoints()) {
+                            System.out.println(">> " + point.getX(entity) + "   " + point.getY(entity));
                         }
+                        System.out.println(isCrossed(entity));
 
                     } else {
                         entity.setDrawImage(entity.getImg().getBaseImage());
@@ -87,7 +93,8 @@ public class Start {
                 }
 
             }
-        } else {
+
+        } /**else {
             // обрабатываем то, что мышь наведена на один из игровых объектов
             // тут процедура чуть хитрее, чем раньше
             // дело в том, что имейдж выделенного изображения
@@ -119,7 +126,7 @@ public class Start {
                     }
                 }
             }
-        }
+        }**/
 
     }
 
@@ -135,6 +142,8 @@ public class Start {
         // учтем, что если пересечений четное количество,
         // поэтому используем оператор ^
         boolean isCrossed = false;
+        int x = Mouse.getX();
+        int y = HEIGHT - Mouse.getY();
         for (int i = 0; i < pointList.size(); i++) {
             // последняя и нулевая точка образуют последнее ребро
             // нужно взять последнюю и первую точку в качестве вершин
@@ -142,23 +151,25 @@ public class Start {
                 isCrossed = isCrossed ^ VectorUntils.isCrossed(
                         entity.getInteralPointX(),
                         entity.getInteralPointY(),
-                        Mouse.getX(),
-                        HEIGHT - Mouse.getY(),
+                        x,
+                        y,
                         pointList.get(i).getX(entity),
                         pointList.get(i).getY(entity),
                         pointList.get(0).getX(entity),
                         pointList.get(0).getY(entity));
+                //System.out.println(isCrossed);
 
             } else {
                 isCrossed = isCrossed ^ VectorUntils.isCrossed(
                         entity.getInteralPointX(),
                         entity.getInteralPointY(),
-                        Mouse.getX(),
-                        HEIGHT - Mouse.getY(),
+                        x,
+                        y,
                         pointList.get(i).getX(entity),
                         pointList.get(i).getY(entity),
                         pointList.get(i + 1).getX(entity),
                         pointList.get(i + 1).getY(entity));
+                //System.out.println(isCrossed);
             }
         }
         return isCrossed;

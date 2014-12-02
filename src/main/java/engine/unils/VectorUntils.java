@@ -48,8 +48,8 @@ public class VectorUntils {
      * @return >0 если поворот левый и <0 если правый
      */
     public static int isLeftRotate(float a1x, float a1y,
-                                       float a2x, float a2y,
-                                       float b1x, float b1y) {
+                                   float a2x, float a2y,
+                                   float b1x, float b1y) {
 
         return (int)((a2x - a1x) * (b1y - a2y) - (a2y - a1y) * (b1x - a2x));
 

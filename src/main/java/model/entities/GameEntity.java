@@ -179,7 +179,7 @@ public class GameEntity implements Comparable {
      * @return координата X внутреней точки
      */
     public float getInteralPointX() {
-        return img.getDrawImage().getInternalPoint().getX() + x;
+        return img.getDrawImage().getInternalPoint().getX(this);
     }
 
     /**
@@ -188,7 +188,7 @@ public class GameEntity implements Comparable {
      * @return координата Y внутреней точки
      */
     public float getInteralPointY() {
-        return img.getDrawImage().getInternalPoint().getY() + y;
+        return img.getDrawImage().getInternalPoint().getY(this);
     }
 
 }
