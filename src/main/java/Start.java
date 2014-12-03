@@ -2,20 +2,20 @@ import engine.point.Point;
 import engine.unils.VectorUntils;
 import model.entities.GameEntity;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.Sys;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import stub.GeneratorStub;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
 import static engine.Engine.HEIGHT;
 import static engine.Engine.beginSession;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * author Vostryakov Alexander
@@ -24,18 +24,27 @@ public class Start {
 
     private static Logger logger = LoggerFactory.getLogger(Start.class);
 
+    // активный объект
+    private GameEntity activeEntity;
+
     // отображаемые на экране объекты
     private List<GameEntity> visibleObjects;
 
     public Start() {
         try {
             beginSession();
-            visibleObjects = GeneratorStub.getStableVisibleObjects();
+            visibleObjects = GeneratorStub.getRandomVisibleObjects();
             Collections.sort(visibleObjects);
             while (!Display.isCloseRequested()) {
+                // очитстка экрана
+                glClear(GL_COLOR_BUFFER_BIT);
 
+                // мышь
                 mouseListener();
+                // клавиатура
+                keyListener();
 
+                // отрисуем все видимые объекты
                 for (GameEntity entity : visibleObjects) {
                     entity.draw();
                 }
@@ -53,6 +62,32 @@ public class Start {
         new Start();
     }
 
+    /**
+     * обработчик событий клавиатуры
+     */
+    public void keyListener() {
+        if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
+            if (activeEntity != null) {
+                activeEntity.setX(activeEntity.getX() - 1);
+            }
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_UP)) {
+            if (activeEntity != null) {
+                activeEntity.setY(activeEntity.getY() - 1);
+            }
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
+            if (activeEntity != null) {
+                activeEntity.setY(activeEntity.getY() + 1);
+            }
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
+            if (activeEntity != null) {
+                activeEntity.setX(activeEntity.getX() + 1);
+            }
+        }
+
+    }
 
     /**
      * Обработчик событий мыши
@@ -76,6 +111,7 @@ public class Start {
                         // мышь попала в праямоугольник, заданный координатами,
                         // проверим, попали ли мы в саму фигуру
                         if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
+                            activeEntity = entity;
                             System.out.println("Попали внутрь");
                             return;
                         }
