@@ -17,12 +17,55 @@ import static engine.Engine.HEIGHT;
  */
 public class GameMouse {
 
+    public void mouseContainsListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
+        // обрабатываем то, что мышь наведена на один из игровых объектов
+        // тут процедура чуть хитрее, чем раньше
+        // дело в том, что имейдж выделенного изображения
+        // заменяется на другой. таким образом, нам нужно не только поменять
+        // имейдж выделенного объекта, но и вернуть назад все предыдущие имейджи
+        // чтобы в один момент времени мог быть выделен только один имейдж.
+        // поэтому isFindContainsObject - флаг, показывающий, что объект уже выделен
+        // и остальные объекты нужно гасить.
+        ListIterator<GameEntity> iterator = visibleObjects.listIterator(visibleObjects.size());
+        boolean isFindContainsObject = false;
+        while (iterator.hasPrevious()) {
+            GameEntity entity = iterator.previous();
+            // выделить нужно только первый объект, который попадает под мышь
+            // другие объекты тоже могут попасть в это же самое время под мышь (если объекты пересекаются)
+            // но так как объекты отсортированы по удаленности от игрока, то выбираем ближайший объект
+            // а остальные гасим
+            int mouseX = Mouse.getX();
+            int mouseY = Mouse.getY();
+            if (entity.contains(mouseX, mouseY) && !isFindContainsObject) {
+                // мышь попала в прямоугольник, заданный координатами,
+                // проверим, попали ли мы в саму фигуру
+                if (entity.isInteractive()) {
+                    if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
+                        entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                        isFindContainsObject = true;
+                    } else {
+                        entity.setDrawImage(entity.getImg().getBaseImage());
+                    }
+                } else {
+                    // мы попали в объект. но он не интерактивный
+                    isFindContainsObject = true;
+                }
+            } else {
+                if (entity.equals(activeEntity)) {
+                    entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                } else {
+                    entity.setDrawImage(entity.getImg().getBaseImage());
+                }
+            }
+        }
+    }
+
+
     /**
      * Обработчик событий мыши
      */
-    public GameEntity mouseListener(List<GameEntity> visibleObjects) {
+    public GameEntity mouseClickListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
 
-        GameEntity activeEntity = null;
         // список объектов отсортирован по удаленности от игрока
         // значит логичнее всего искать начиная с более ближних
         ListIterator<GameEntity> iterator = visibleObjects.listIterator(visibleObjects.size());
@@ -49,46 +92,6 @@ public class GameMouse {
                 }
 
             }
-
-        } else {
-            // обрабатываем то, что мышь наведена на один из игровых объектов
-            // тут процедура чуть хитрее, чем раньше
-            // дело в том, что имейдж выделенного изображения
-            // заменяется на другой. таким образом, нам нужно не только поменять
-            // имейдж выделенного объекта, но и вернуть назад все предыдущие имейджи
-            // чтобы в один момент времени мог быть выделен только один имейдж.
-            // поэтому isFindContainsObject - флаг, показывающий, что объект уже выделен
-            // и остальные объекты нужно гасить.
-            boolean isFindContainsObject = false;
-            while (iterator.hasPrevious()) {
-                GameEntity entity = iterator.previous();
-                // выделить нужно только первый объект, который попадает под мышь
-                // другие объекты тоже могут попасть в это же самое время под мышь (если объекты пересекаются)
-                // но так как объекты отсортированы по удаленности от игрока, то выбираем ближайший объект
-                // а остальные гасим
-                int mouseX = Mouse.getX();
-                int mouseY = Mouse.getY();
-                if (entity.contains(mouseX, mouseY) && !isFindContainsObject) {
-                    // мышь попала в прямоугольник, заданный координатами,
-                    // проверим, попали ли мы в саму фигуру
-                    if (entity.isInteractive()) {
-                        if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
-                            entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
-                            isFindContainsObject = true;
-                            activeEntity = entity;
-                        } else {
-                            entity.setDrawImage(entity.getImg().getBaseImage());
-                        }
-                    } else {
-                        // мы попали в объект. но он не интерактивный
-                        isFindContainsObject = true;
-                    }
-                } else {
-                    entity.setDrawImage(entity.getImg().getBaseImage());
-                }
-            }
-            return activeEntity;
-
         }
         return activeEntity;
     }

@@ -3,6 +3,7 @@ package model.entities;
 import engine.Engine;
 import engine.image.GameImg;
 import engine.image.TextureStorage;
+import engine.input.GameMouse;
 
 import static engine.Engine.*;
 
@@ -61,6 +62,8 @@ public class GameEntity implements Comparable {
         this.isInteractive = isInteractive;
         this.isPassable = isPassable;
     }
+
+    public GameEntity() {}
 
     @Override
     public int compareTo(Object obj) {

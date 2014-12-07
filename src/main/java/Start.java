@@ -45,7 +45,8 @@ public class Start {
                 glClear(GL_COLOR_BUFFER_BIT);
 
                 // мышь
-                activeEntity = mouse.mouseListener(visibleObjects);
+                activeEntity = mouse.mouseClickListener(visibleObjects, activeEntity);
+                mouse.mouseContainsListener(visibleObjects, activeEntity);
                 // клавиатура
                 keyboard.keyListener(activeEntity);
 
