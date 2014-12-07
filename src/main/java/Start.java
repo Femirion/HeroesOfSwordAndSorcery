@@ -1,11 +1,7 @@
 import engine.input.GameKeyboard;
 import engine.input.GameMouse;
-import engine.point.Point;
-import engine.unils.VectorUntils;
 import model.entities.GameEntity;
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +9,10 @@ import stub.GeneratorStub;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 
-import static engine.Engine.HEIGHT;
 import static engine.Engine.beginSession;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.glClear;
 
 /**
  * author Vostryakov Alexander

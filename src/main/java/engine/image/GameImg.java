@@ -14,16 +14,16 @@ public class GameImg {
     /**
      * отображаемое изображение
      */
-    private TextureStorage drawImage;
+    private ImageStorage drawImage;
 
     // базовое изображение. изначально совпадает с drawImage
-    private TextureStorage baseImage;
+    private ImageStorage baseImage;
 
     /**
      * справочник, хранящий соответствие между
      * название действия - активное изоображение
      */
-    private Map<String, TextureStorage> activeImages;
+    private Map<String, ImageStorage> activeImages;
 
     /**
      * Конструктор для неактивного изображения,
@@ -32,7 +32,7 @@ public class GameImg {
      *
      * @param drawImage изображение, которое будет отрисовываться
      */
-    public GameImg(TextureStorage drawImage) {
+    public GameImg(ImageStorage drawImage) {
         this.drawImage = drawImage;
         this.baseImage = drawImage;
     }
@@ -44,8 +44,8 @@ public class GameImg {
      * @param drawImage изображение, которое будет отрисовываться
      * @param activeImages справочник: Название действия - изображение соответствующее действию
      */
-    public GameImg(TextureStorage drawImage,
-                   Map<String, TextureStorage> activeImages) {
+    public GameImg(ImageStorage drawImage,
+                   Map<String, ImageStorage> activeImages) {
         this.drawImage = drawImage;
         // изначально совпадает с отрисованным изображеним
         this.baseImage = drawImage;
@@ -61,27 +61,27 @@ public class GameImg {
     }
 
 
-    public TextureStorage getDrawImage() {
+    public ImageStorage getDrawImage() {
         return drawImage;
     }
 
-    public void setDrawImage(TextureStorage drawImage) {
+    public void setDrawImage(ImageStorage drawImage) {
         this.drawImage = drawImage;
     }
 
-    public TextureStorage getBaseImage() {
+    public ImageStorage getBaseImage() {
         return baseImage;
     }
 
-    public void setBaseImage(TextureStorage baseImage) {
+    public void setBaseImage(ImageStorage baseImage) {
         this.baseImage = baseImage;
     }
 
-    public Map<String, TextureStorage> getActiveImages() {
+    public Map<String, ImageStorage> getActiveImages() {
         return activeImages;
     }
 
-    public void setActiveImages(Map<String, TextureStorage> activeImages) {
+    public void setActiveImages(Map<String, ImageStorage> activeImages) {
         this.activeImages = activeImages;
     }
 

@@ -47,6 +47,7 @@ public class Engine {
 
     /**
      * Рисование игрового объекта
+     *
      * @param entity игровой объект
      */
     public static void draw(GameEntity entity) {
@@ -57,16 +58,29 @@ public class Engine {
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
 
-        glTexCoord2f(0, 0);
+        // TODO временный код
+        glTexCoord2f(entity.getDrawImage().getStartWidth() /
+                        entity.getDrawImage().getTextureStorage().getWidth(),
+                entity.getDrawImage().getStartHeight() /
+                        entity.getDrawImage().getTextureStorage().getHeight());
         glVertex2f(0, 0);
 
-        glTexCoord2f(glFix(entity.getWidth()), 0);
+        glTexCoord2f(entity.getDrawImage().getEndWidth() /
+                        entity.getDrawImage().getTextureStorage().getWidth(),
+                entity.getDrawImage().getStartHeight() /
+                        entity.getDrawImage().getTextureStorage().getHeight());
         glVertex2f(entity.getWidth(), 0);
 
-        glTexCoord2f(glFix(entity.getWidth()), glFix(entity.getHeight()));
+        glTexCoord2f(entity.getDrawImage().getEndWidth() /
+                        entity.getDrawImage().getTextureStorage().getWidth(),
+                entity.getDrawImage().getEndHeight() /
+                        entity.getDrawImage().getTextureStorage().getHeight());
         glVertex2f(entity.getWidth(), entity.getHeight());
 
-        glTexCoord2f(0, glFix(entity.getHeight()));
+        glTexCoord2f(entity.getDrawImage().getStartWidth() /
+                        entity.getDrawImage().getTextureStorage().getWidth(),
+                entity.getDrawImage().getEndHeight() /
+                        entity.getDrawImage().getTextureStorage().getHeight());
         glVertex2f(0, entity.getHeight());
 
         glDisable(GL_BLEND);
@@ -95,39 +109,9 @@ public class Engine {
         return value / i;
     }
 
-
-    /**
-     * Рисование произольного изображения
-     * @param texture текстура
-     * @param x координата X левого верхнего угла
-     * @param y координата Y правого вернехго угла
-     * @param width ширина
-     * @param height высота
-     */
-    public static void draw(Texture texture, float x, float y, float width, float height) {
-        texture.bind();
-        glTranslatef(x, y, 0);
-        glBegin(GL_QUADS);
-
-        glTexCoord2f(0, 0);
-        glVertex2f(0, 0);
-
-        glTexCoord2f(1, 0);
-        glVertex2f(width, 0);
-
-        glTexCoord2f(1, 1);
-        glVertex2f(width, height);
-
-        glTexCoord2f(0, 1);
-        glVertex2f(0, height);
-
-        glEnd();
-        glLoadIdentity();
-
-    }
-
     /**
      * Загрузка текструры
+     *
      * @param name имя файла в каталоге src/resource/image
      * @return загруженная текстура
      */

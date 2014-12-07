@@ -1,7 +1,7 @@
 package stub;
 
 import engine.image.GameImg;
-import engine.image.TextureStorage;
+import engine.image.ImageStorage;
 import engine.point.Point;
 import model.entities.GameEntity;
 
@@ -15,13 +15,13 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, TextureStorage> brickMap = new HashMap<>();
-    private static Map<String, TextureStorage> starMap = new HashMap<>();
+    private static Map<String, ImageStorage> brickMap = new HashMap<>();
+    private static Map<String, ImageStorage> starMap = new HashMap<>();
 
     static {
         // pointing - наведение курсора мыши
-        brickMap.put("pointing", TextureStorage.ACTIVE_BRICK);
-        starMap.put("pointing", TextureStorage.ACTIVE_STAR);
+        brickMap.put("pointing", ImageStorage.BRICK);
+        starMap.put("pointing", ImageStorage.STAR);
     }
 
     /**
@@ -40,8 +40,8 @@ public class GeneratorStub {
                     random.nextInt(800),
                     random.nextInt(800),
                     random.nextBoolean() ?
-                    new GameImg(TextureStorage.BRICK, brickMap) :
-                    new GameImg(TextureStorage.STAR, starMap),
+                    new GameImg(ImageStorage.BRICK, brickMap) :
+                    new GameImg(ImageStorage.STAR, starMap),
                     (byte) 1,
                     random.nextBoolean(),
                     random.nextBoolean()
@@ -91,7 +91,7 @@ public class GeneratorStub {
                 200F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.STAR, starMap),
+                new GameImg(ImageStorage.STAR, starMap),
                 (byte) 0,
                 true,
                 true
@@ -106,7 +106,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK),
+                new GameImg(ImageStorage.BRICK),
                 (byte) 0,
                 false,
                 false
@@ -121,7 +121,7 @@ public class GeneratorStub {
                 20F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK),
+                new GameImg(ImageStorage.BRICK),
                 (byte) 0,
                 false,
                 false
@@ -136,7 +136,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.STAR, starMap),
+                new GameImg(ImageStorage.STAR, starMap),
                 (byte) 0,
                 false,
                 true
@@ -151,7 +151,7 @@ public class GeneratorStub {
                 240F,
                 10F,
                 10F,
-                new GameImg(TextureStorage.BRICK),
+                new GameImg(ImageStorage.BRICK),
                 (byte) 0,
                 false,
                 false

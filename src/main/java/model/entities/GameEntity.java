@@ -2,10 +2,9 @@ package model.entities;
 
 import engine.Engine;
 import engine.image.GameImg;
-import engine.image.TextureStorage;
-import engine.input.GameMouse;
+import engine.image.ImageStorage;
 
-import static engine.Engine.*;
+import static engine.Engine.HEIGHT;
 
 /**
  * Класс, представляющий собой сущность игрового мира
@@ -88,11 +87,11 @@ public class GameEntity implements Comparable {
 
     }
 
-    public TextureStorage getDrawImage() {
+    public ImageStorage getDrawImage() {
         return img.getDrawImage();
     }
 
-    public void setDrawImage(TextureStorage storage) {
+    public void setDrawImage(ImageStorage storage) {
         img.setDrawImage(storage);
     }
 
@@ -181,7 +180,7 @@ public class GameEntity implements Comparable {
      * с учетом расположения изображения на экране
      * @return координата X внутреней точки
      */
-    public float getInteralPointX() {
+    public float getInternalPointX() {
         return img.getDrawImage().getInternalPoint().getX(this);
     }
 
@@ -190,7 +189,7 @@ public class GameEntity implements Comparable {
      * с учетом расположения изображения на экране
      * @return координата Y внутреней точки
      */
-    public float getInteralPointY() {
+    public float getInternalPointY() {
         return img.getDrawImage().getInternalPoint().getY(this);
     }
 

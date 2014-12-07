@@ -116,8 +116,8 @@ public class GameMouse {
             // нужно взять последнюю и первую точку в качестве вершин
             if (i == pointList.size() - 1) {
                 isCrossed = isCrossed ^ VectorUntils.isCrossed(
-                        entity.getInteralPointX(),
-                        entity.getInteralPointY(),
+                        entity.getInternalPointX(),
+                        entity.getInternalPointY(),
                         x,
                         y,
                         pointList.get(i).getX(entity),
@@ -127,8 +127,8 @@ public class GameMouse {
 
             } else {
                 isCrossed = isCrossed ^ VectorUntils.isCrossed(
-                        entity.getInteralPointX(),
-                        entity.getInteralPointY(),
+                        entity.getInternalPointX(),
+                        entity.getInternalPointY(),
                         x,
                         y,
                         pointList.get(i).getX(entity),
