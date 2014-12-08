@@ -147,7 +147,7 @@ public class GeneratorStub {
         // 5
         GameEntity gameEntity5 = new GameEntity(
                 5,
-                30F,
+                16F,
                 240F,
                 10F,
                 10F,

@@ -10,7 +10,8 @@ import org.newdawn.slick.opengl.Texture;
  */
 public enum TextureStorage {
 
-    BRICK(Engine.loadTexture("TEST.png"), 132F, 132F);
+    BRICK(Engine.loadTexture("brick_texture.png"), 132F, 132F),
+    STAR(Engine.loadTexture("star_texture.png"), 153F, 153F);
 
     // сама текстура
     private Texture texture;

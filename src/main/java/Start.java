@@ -33,7 +33,7 @@ public class Start {
             GameMouse mouse = new GameMouse();
 
             beginSession();
-            visibleObjects = GeneratorStub.getRandomVisibleObjects();
+            visibleObjects = GeneratorStub.getStableVisibleObjects();
             Collections.sort(visibleObjects);
             while (!Display.isCloseRequested()) {
                 // очитстка экрана

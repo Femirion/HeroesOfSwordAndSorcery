@@ -13,45 +13,35 @@ import java.util.List;
  */
 public enum ImageStorage {
 
-    /*    // звезда активная
-        STAR("star", 110, 100,
-                Engine.loadTexture("star.png"),
-                GeneratorStub.getStarPointList(),
-                new Point(51F, 50F)),
-        // звезда №1 неактивный
-        ACTIVE_STAR("active_star", 110, 100,
-                Engine.loadTexture("active_star.png"),
-                GeneratorStub.getStarPointList(),
-                new Point(25F, 20F)),*/
     // кирпич неактивный
     BRICK("brick",
-            0, 32,
-            0, 32,
+            1, 32,
+            1, 32,
             TextureStorage.BRICK,
             GeneratorStub.generateBrickPoints(),
             new Point(16F, 16F)),
 
     // кирпич активный
     ACTIVE_BRICK("active_brick",
-            0, 32,
+            1, 32,
             33, 65,
             TextureStorage.BRICK,
             GeneratorStub.generateBrickPoints(),
             new Point(16F, 16F)),
 
     STAR("star",
-            0, 32,
-            0, 32,
-            TextureStorage.BRICK,
+            0, 50,
+            0, 50,
+            TextureStorage.STAR,
             GeneratorStub.generateBrickPoints(),
-            new Point(16F, 16F)),
+            new Point(25F, 25F)),
 
     ACTIVE_STAR("star",
-            0, 32,
-            33, 65,
-            TextureStorage.BRICK,
+            51, 101,
+            0, 50,
+            TextureStorage.STAR,
             GeneratorStub.generateBrickPoints(),
-            new Point(16F, 16F));
+            new Point(25F, 25F));
 
     // имя. может быть произвольным
     private String name;

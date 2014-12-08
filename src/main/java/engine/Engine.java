@@ -59,28 +59,28 @@ public class Engine {
         glBegin(GL_QUADS);
 
         // TODO временный код
-        glTexCoord2f(entity.getDrawImage().getStartWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth(),
-                entity.getDrawImage().getStartHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight());
+        glTexCoord2f((entity.getDrawImage().getStartWidth() /
+                        entity.getDrawImage().getTextureStorage().getWidth()) ,
+                (entity.getDrawImage().getStartHeight() /
+                        entity.getDrawImage().getTextureStorage().getHeight()));
         glVertex2f(0, 0);
 
         glTexCoord2f(entity.getDrawImage().getEndWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth(),
+                        entity.getDrawImage().getTextureStorage().getWidth() ,
                 entity.getDrawImage().getStartHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight());
+                        entity.getDrawImage().getTextureStorage().getHeight() );
         glVertex2f(entity.getWidth(), 0);
 
         glTexCoord2f(entity.getDrawImage().getEndWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth(),
+                        entity.getDrawImage().getTextureStorage().getWidth() ,
                 entity.getDrawImage().getEndHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight());
+                        entity.getDrawImage().getTextureStorage().getHeight() );
         glVertex2f(entity.getWidth(), entity.getHeight());
 
         glTexCoord2f(entity.getDrawImage().getStartWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth(),
+                        entity.getDrawImage().getTextureStorage().getWidth() ,
                 entity.getDrawImage().getEndHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight());
+                        entity.getDrawImage().getTextureStorage().getHeight() );
         glVertex2f(0, entity.getHeight());
 
         glDisable(GL_BLEND);
