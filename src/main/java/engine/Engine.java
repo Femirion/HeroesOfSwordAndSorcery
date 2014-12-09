@@ -55,32 +55,56 @@ public class Engine {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         entity.getImg().getDrawImage().getTexture().bind();
 
+        // ширина всей текстуры
+        float width = entity.getDrawImage().getTextureStorage().getWidth();
+        // высота всей текстуры
+        float height = entity.getDrawImage().getTextureStorage().getHeight();
+        // начальное положение части (ширина)
+        float startWidth = entity.getDrawImage().getStartWidth();
+        // конечное положение части (ширина)
+        float endWidth = entity.getDrawImage().getEndWidth();
+        // начальное положение части (высота)
+        float startHeight = entity.getDrawImage().getStartHeight();
+        // конечное положение части (высота)
+        float endHeigth = entity.getDrawImage().getEndHeight();
+
+        // дело в том, что GL хорошо работает с текстурами,
+        // размер которых кратен степени двойки, и неочень с остальными
+        // в итоге он делает фигню.
+        // чтобы пофиксить это, я вычисляю соотношение изображения к
+        // ближайшей большей степени двоийки.
+        // например, для 50px это будет 50/32
+        float widthGLFix = glFix(width);
+        float heightGLFix = glFix(height);
+
         glTranslatef(entity.getX(), entity.getY(), 0);
         glBegin(GL_QUADS);
 
-        // TODO временный код
-        glTexCoord2f((entity.getDrawImage().getStartWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth()) ,
-                (entity.getDrawImage().getStartHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight()));
+        // Тут вообще магия OpenGL-я
+        // Мы хотим вевести не всю текстуру, а только небольшую часть
+        // поэтому startWidth/width * widthGLFix указывает
+        // на позицию (в относительном измерении) на текстуре
+        // с которой нужно выводить изображение
+        // widthGLFix, как уже писал выше, фиксит баг степеней двойки
+
+        glTexCoord2f(
+                startWidth/width * widthGLFix,
+                startHeight/height * heightGLFix);
         glVertex2f(0, 0);
 
-        glTexCoord2f(entity.getDrawImage().getEndWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth() ,
-                entity.getDrawImage().getStartHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight() );
+        glTexCoord2f(
+                endWidth/width * widthGLFix ,
+                startHeight/height * heightGLFix);
         glVertex2f(entity.getWidth(), 0);
 
-        glTexCoord2f(entity.getDrawImage().getEndWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth() ,
-                entity.getDrawImage().getEndHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight() );
+        glTexCoord2f(
+                endWidth/width * widthGLFix,
+                endHeigth/height * heightGLFix);
         glVertex2f(entity.getWidth(), entity.getHeight());
 
-        glTexCoord2f(entity.getDrawImage().getStartWidth() /
-                        entity.getDrawImage().getTextureStorage().getWidth() ,
-                entity.getDrawImage().getEndHeight() /
-                        entity.getDrawImage().getTextureStorage().getHeight() );
+        glTexCoord2f(
+                startWidth/width * widthGLFix,
+                endHeigth/height * heightGLFix );
         glVertex2f(0, entity.getHeight());
 
         glDisable(GL_BLEND);
@@ -101,12 +125,13 @@ public class Engine {
      * @return отношение параметра к степени 2
      */
     private static float glFix(float value) {
-        // TODO переделать потом на алгоритм со сдвигом старшего бита
-        int i = 2;
-        while (i < value) {
-            i *= 2;
-        }
-        return value / i;
+        int x = (int) value;
+        x |= x >> 1;
+        x |= x >> 2;
+        x |= x >> 4;
+        x |= x >> 8;
+        x |= x >> 16;
+        return value / x;
     }
 
     /**

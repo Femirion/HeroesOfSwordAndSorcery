@@ -15,16 +15,16 @@ public enum ImageStorage {
 
     // кирпич неактивный
     BRICK("brick",
-            1, 32,
-            1, 32,
+            0, 32,
+            0, 32,
             TextureStorage.BRICK,
             GeneratorStub.generateBrickPoints(),
             new Point(16F, 16F)),
 
     // кирпич активный
     ACTIVE_BRICK("active_brick",
-            1, 32,
-            33, 65,
+            0, 32,
+            34, 65,
             TextureStorage.BRICK,
             GeneratorStub.generateBrickPoints(),
             new Point(16F, 16F)),
