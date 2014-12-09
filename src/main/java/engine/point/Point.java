@@ -23,8 +23,7 @@ public class Point {
      * @return координата X точки с учетом расположения объекта
      */
     public float getX(GameEntity entity) {
-        float pxInPercent = entity.getWidth() / 100F;
-        return (x * pxInPercent) + entity.getX();
+        return x  + entity.getX();
     }
 
     /**
@@ -34,8 +33,7 @@ public class Point {
      * @return координата Y точки с учетом расположения объекта
      */
     public float getY(GameEntity entity) {
-        float pxInPercent = entity.getHeight() / 100F;
-        return (y * pxInPercent) + entity.getY();
+        return y + entity.getY();
     }
 
 

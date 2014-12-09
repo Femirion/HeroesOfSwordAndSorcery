@@ -154,7 +154,7 @@ public class GeneratorStub {
                 new GameImg(ImageStorage.BRICK),
                 (byte) 0,
                 false,
-                false
+                true
         );
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;
@@ -182,16 +182,16 @@ public class GeneratorStub {
 
     public static List<Point> getStarPointList() {
         List<Point> starPoints = new ArrayList<>();
-        starPoints.add(new Point(51F, 0F));
-        starPoints.add(new Point(63F, 25F));
-        starPoints.add(new Point(100F, 25F));
-        starPoints.add(new Point(74F, 58F));
-        starPoints.add(new Point(78F, 100F));
-        starPoints.add(new Point(51F, 77F));
-        starPoints.add(new Point(19F, 100F));
-        starPoints.add(new Point(26F, 58F));
-        starPoints.add(new Point(0F, 25F));
-        starPoints.add(new Point(34F, 25F));
+        starPoints.add(new Point(26F, 0F));
+        starPoints.add(new Point(32F, 18F));
+        starPoints.add(new Point(50F, 19F));
+        starPoints.add(new Point(37F, 33F));
+        starPoints.add(new Point(41F, 50F));
+        starPoints.add(new Point(26F, 41F));
+        starPoints.add(new Point(8F, 50F));
+        starPoints.add(new Point(13F, 33F));
+        starPoints.add(new Point(0F, 19F));
+        starPoints.add(new Point(19F, 18F));
         return starPoints;
     }
 

@@ -33,15 +33,15 @@ public enum ImageStorage {
             0, 50,
             0, 50,
             TextureStorage.STAR,
-            GeneratorStub.generateBrickPoints(),
-            new Point(25F, 25F)),
+            GeneratorStub.getStarPointList(),
+            new Point(26F, 26F)),
 
     ACTIVE_STAR("star",
             51, 101,
             0, 50,
             TextureStorage.STAR,
-            GeneratorStub.generateBrickPoints(),
-            new Point(25F, 25F));
+            GeneratorStub.getStarPointList(),
+            new Point(26F, 26F));
 
     // имя. может быть произвольным
     private String name;
