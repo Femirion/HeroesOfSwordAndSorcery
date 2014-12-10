@@ -14,7 +14,7 @@ import java.util.List;
 public enum ImageStorage {
 
     // кирпич неактивный
-    BRICK("brick",
+    BRICK_1("brick",
             0, 32,
             0, 32,
             TextureStorage.BRICK,
@@ -22,9 +22,25 @@ public enum ImageStorage {
             new Point(16F, 16F)),
 
     // кирпич активный
-    ACTIVE_BRICK("active_brick",
+    ACTIVE_BRICK_1("active_brick",
             0, 32,
-            34, 65,
+            33, 65,
+            TextureStorage.BRICK,
+            GeneratorStub.generateBrickPoints(),
+            new Point(16F, 16F)),
+
+    // кирпич неактивный
+    BRICK_2("brick",
+            33, 66,
+            0, 32,
+            TextureStorage.BRICK,
+            GeneratorStub.generateBrickPoints(),
+            new Point(16F, 16F)),
+
+    // кирпич активный
+    ACTIVE_BRICK_2("active_brick",
+            33, 66,
+            33, 65,
             TextureStorage.BRICK,
             GeneratorStub.generateBrickPoints(),
             new Point(16F, 16F)),
@@ -36,8 +52,8 @@ public enum ImageStorage {
             GeneratorStub.getStarPointList(),
             new Point(26F, 26F)),
 
-    ACTIVE_STAR("star",
-            51, 101,
+    ACTIVE_STAR("active_star",
+            52, 101,
             0, 50,
             TextureStorage.STAR,
             GeneratorStub.getStarPointList(),

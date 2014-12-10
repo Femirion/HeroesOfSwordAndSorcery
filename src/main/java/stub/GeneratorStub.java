@@ -15,20 +15,23 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, ImageStorage> brickMap = new HashMap<>();
+    private static Map<String, ImageStorage> brick_1_Map = new HashMap<>();
+    private static Map<String, ImageStorage> brick_2_Map = new HashMap<>();
     private static Map<String, ImageStorage> starMap = new HashMap<>();
+    private static Random random = new Random();
 
     static {
         // pointing - наведение курсора мыши
-        brickMap.put("pointing", ImageStorage.BRICK);
-        starMap.put("pointing", ImageStorage.STAR);
+        brick_1_Map.put("pointing", ImageStorage.ACTIVE_BRICK_1);
+        brick_2_Map.put("pointing", ImageStorage.ACTIVE_BRICK_2);
+        starMap.put("pointing", ImageStorage.ACTIVE_STAR);
     }
 
     /**
      * Возвращает случайный набор игровых объектов.
      */
     public static List<GameEntity> getRandomVisibleObjects() {
-        Random random = new Random();
+
         int count = random.nextInt(150) + 1;
 
         List<GameEntity> visibleObjectsList = new ArrayList<>();
@@ -39,9 +42,7 @@ public class GeneratorStub {
                     random.nextInt(600),
                     random.nextInt(800),
                     random.nextInt(800),
-                    random.nextBoolean() ?
-                    new GameImg(ImageStorage.BRICK, brickMap) :
-                    new GameImg(ImageStorage.STAR, starMap),
+                    randomGameImg(),
                     (byte) 1,
                     random.nextBoolean(),
                     random.nextBoolean()
@@ -50,6 +51,24 @@ public class GeneratorStub {
         }
 
         return visibleObjectsList;
+    }
+
+    /**
+     * Генерация случайных игровых объектов
+     * @return случайны объект:
+     * киприч_1
+     * киприч_2
+     * звезда
+     *
+     */
+    private static GameImg randomGameImg() {
+        int x = random.nextInt(3);
+        switch (x) {
+            case 0 : return new GameImg(ImageStorage.BRICK_1, brick_1_Map);
+            case 1 : return new GameImg(ImageStorage.BRICK_2, brick_2_Map);
+            case 2 : return new GameImg(ImageStorage.STAR, brick_1_Map);
+            default: return new GameImg(ImageStorage.BRICK_1, brick_1_Map);
+        }
     }
 
     /**
@@ -106,7 +125,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK),
+                new GameImg(ImageStorage.BRICK_1),
                 (byte) 0,
                 false,
                 false
@@ -121,7 +140,7 @@ public class GeneratorStub {
                 20F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK),
+                new GameImg(ImageStorage.BRICK_1),
                 (byte) 0,
                 false,
                 false
@@ -151,13 +170,14 @@ public class GeneratorStub {
                 240F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK),
+                new GameImg(ImageStorage.BRICK_1),
                 (byte) 0,
                 false,
                 true
         );
         visibleObjectsList.add(gameEntity5);
         return visibleObjectsList;
+
     }
 
     public static List<Point> generatePoints(int count) {
