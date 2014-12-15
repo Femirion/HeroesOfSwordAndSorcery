@@ -53,20 +53,20 @@ public class Engine {
     public static void draw(GameEntity entity) {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        entity.getImg().getDrawImage().getTexture().bind();
+        entity.getGameImg().getDrawImage().getImage().getTexture().bind();
 
         // ширина всей текстуры
-        float width = entity.getDrawImage().getTextureStorage().getWidth();
+        float width = entity.getDrawImage().getImage().getTextureStorage().getWidth();
         // высота всей текстуры
-        float height = entity.getDrawImage().getTextureStorage().getHeight();
+        float height = entity.getDrawImage().getImage().getTextureStorage().getHeight();
         // начальное положение части (ширина)
-        float startWidth = entity.getDrawImage().getStartWidth();
+        float startWidth = entity.getDrawImage().getImage().getStartWidth();
         // конечное положение части (ширина)
-        float endWidth = entity.getDrawImage().getEndWidth();
+        float endWidth = entity.getDrawImage().getImage().getEndWidth();
         // начальное положение части (высота)
-        float startHeight = entity.getDrawImage().getStartHeight();
+        float startHeight = entity.getDrawImage().getImage().getStartHeight();
         // конечное положение части (высота)
-        float endHeigth = entity.getDrawImage().getEndHeight();
+        float endHeigth = entity.getDrawImage().getImage().getEndHeight();
 
         // дело в том, что GL хорошо работает с текстурами,
         // размер которых кратен степени двойки, и неочень с остальными

@@ -1,6 +1,7 @@
 package model.entities;
 
 import engine.Engine;
+import engine.image.Animation;
 import engine.image.GameImg;
 import engine.image.ImageStorage;
 
@@ -87,11 +88,11 @@ public class GameEntity implements Comparable {
 
     }
 
-    public ImageStorage getDrawImage() {
+    public Animation getDrawImage() {
         return img.getDrawImage();
     }
 
-    public void setDrawImage(ImageStorage storage) {
+    public void setDrawImage(Animation storage) {
         img.setDrawImage(storage);
     }
 
@@ -143,7 +144,7 @@ public class GameEntity implements Comparable {
         this.wy = wy;
     }
 
-    public GameImg getImg() {
+    public GameImg getGameImg() {
         return img;
     }
 
@@ -181,7 +182,7 @@ public class GameEntity implements Comparable {
      * @return координата X внутреней точки
      */
     public float getInternalPointX() {
-        return img.getDrawImage().getInternalPoint().getX(this);
+        return img.getDrawImage().getImage().getInternalPoint().getX(this);
     }
 
     /**
@@ -190,7 +191,7 @@ public class GameEntity implements Comparable {
      * @return координата Y внутреней точки
      */
     public float getInternalPointY() {
-        return img.getDrawImage().getInternalPoint().getY(this);
+        return img.getDrawImage().getImage().getInternalPoint().getY(this);
     }
 
 }

@@ -41,10 +41,10 @@ public class GameMouse {
                 // проверим, попали ли мы в саму фигуру
                 if (entity.isInteractive()) {
                     if (!isCrossed(entity, mouseX, HEIGHT - mouseY)) {
-                        entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                        entity.setDrawImage(entity.getGameImg().getActiveImages().get("pointing"));
                         isFindContainsObject = true;
                     } else {
-                        entity.setDrawImage(entity.getImg().getBaseImage());
+                        entity.setDrawImage(entity.getGameImg().getBaseImage());
                     }
                 } else {
                     // мы попали в объект. но он не интерактивный
@@ -52,9 +52,9 @@ public class GameMouse {
                 }
             } else {
                 if (entity.equals(activeEntity)) {
-                    entity.setDrawImage(entity.getImg().getActiveImages().get("pointing"));
+                    entity.setDrawImage(entity.getGameImg().getActiveImages().get("pointing"));
                 } else {
-                    entity.setDrawImage(entity.getImg().getBaseImage());
+                    entity.setDrawImage(entity.getGameImg().getBaseImage());
                 }
             }
         }
@@ -105,7 +105,7 @@ public class GameMouse {
      * @return true - если попали внутрь
      */
     private boolean isCrossed(GameEntity entity, int x, int y) {
-        List<Point> pointList = entity.getDrawImage().getPoints();
+        List<Point> pointList = entity.getDrawImage().getImage().getPoints();
         // флаг, показывающий что прямая от указателя мыши до точки,
         // пересекает какое-нить из ребер.
         // учтем, что если пересечений четное количество,

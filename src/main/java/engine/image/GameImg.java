@@ -14,16 +14,16 @@ public class GameImg {
     /**
      * отображаемое изображение
      */
-    private ImageStorage drawImage;
+    private Animation drawImage;
 
     // базовое изображение. изначально совпадает с drawImage
-    private ImageStorage baseImage;
+    private Animation baseImage;
 
     /**
      * справочник, хранящий соответствие между
      * название действия - активное изоображение
      */
-    private Map<String, ImageStorage> activeImages;
+    private Map<String, Animation> activeImages;
 
     /**
      * Конструктор для неактивного изображения,
@@ -32,7 +32,7 @@ public class GameImg {
      *
      * @param drawImage изображение, которое будет отрисовываться
      */
-    public GameImg(ImageStorage drawImage) {
+    public GameImg(Animation drawImage) {
         this.drawImage = drawImage;
         this.baseImage = drawImage;
     }
@@ -44,8 +44,8 @@ public class GameImg {
      * @param drawImage изображение, которое будет отрисовываться
      * @param activeImages справочник: Название действия - изображение соответствующее действию
      */
-    public GameImg(ImageStorage drawImage,
-                   Map<String, ImageStorage> activeImages) {
+    public GameImg(Animation drawImage,
+                   Map<String, Animation> activeImages) {
         this.drawImage = drawImage;
         // изначально совпадает с отрисованным изображеним
         this.baseImage = drawImage;
@@ -53,35 +53,35 @@ public class GameImg {
     }
 
     public int getWidth() {
-        return drawImage.getWidth();
+        return drawImage.getImage().getWidth();
     }
 
     public int getHeight() {
-        return drawImage.getHeight();
+        return drawImage.getImage().getHeight();
     }
 
 
-    public ImageStorage getDrawImage() {
+    public Animation getDrawImage() {
         return drawImage;
     }
 
-    public void setDrawImage(ImageStorage drawImage) {
+    public void setDrawImage(Animation drawImage) {
         this.drawImage = drawImage;
     }
 
-    public ImageStorage getBaseImage() {
+    public Animation getBaseImage() {
         return baseImage;
     }
 
-    public void setBaseImage(ImageStorage baseImage) {
+    public void setBaseImage(Animation baseImage) {
         this.baseImage = baseImage;
     }
 
-    public Map<String, ImageStorage> getActiveImages() {
+    public Map<String, Animation> getActiveImages() {
         return activeImages;
     }
 
-    public void setActiveImages(Map<String, ImageStorage> activeImages) {
+    public void setActiveImages(Map<String, Animation> activeImages) {
         this.activeImages = activeImages;
     }
 

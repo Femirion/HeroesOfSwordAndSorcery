@@ -1,5 +1,6 @@
 package stub;
 
+import engine.image.Animation;
 import engine.image.GameImg;
 import engine.image.ImageStorage;
 import engine.point.Point;
@@ -15,16 +16,16 @@ import java.util.*;
  */
 public class GeneratorStub {
 
-    private static Map<String, ImageStorage> brick_1_Map = new HashMap<>();
-    private static Map<String, ImageStorage> brick_2_Map = new HashMap<>();
-    private static Map<String, ImageStorage> starMap = new HashMap<>();
+    private static Map<String, Animation> brick_1_Map = new HashMap<>();
+    private static Map<String, Animation> brick_2_Map = new HashMap<>();
+    private static Map<String, Animation> starMap = new HashMap<>();
     private static Random random = new Random();
 
     static {
         // pointing - наведение курсора мыши
-        brick_1_Map.put("pointing", ImageStorage.ACTIVE_BRICK_1);
-        brick_2_Map.put("pointing", ImageStorage.ACTIVE_BRICK_2);
-        starMap.put("pointing", ImageStorage.ACTIVE_STAR);
+        brick_1_Map.put("pointing", new Animation(ImageStorage.ACTIVE_BRICK_1));
+        brick_2_Map.put("pointing", new Animation(ImageStorage.ACTIVE_BRICK_2));
+        starMap.put("pointing", new Animation(ImageStorage.ACTIVE_STAR));
     }
 
     /**
@@ -64,10 +65,10 @@ public class GeneratorStub {
     private static GameImg randomGameImg() {
         int x = random.nextInt(3);
         switch (x) {
-            case 0 : return new GameImg(ImageStorage.BRICK_1, brick_1_Map);
-            case 1 : return new GameImg(ImageStorage.BRICK_2, brick_2_Map);
-            case 2 : return new GameImg(ImageStorage.STAR, brick_1_Map);
-            default: return new GameImg(ImageStorage.BRICK_1, brick_1_Map);
+            case 0 : return new GameImg(new Animation(ImageStorage.BRICK_1), brick_1_Map);
+            case 1 : return new GameImg(new Animation(ImageStorage.BRICK_2), brick_2_Map);
+            case 2 : return new GameImg(new Animation(ImageStorage.STAR), brick_1_Map);
+            default: return new GameImg(new Animation(ImageStorage.BRICK_1), brick_1_Map);
         }
     }
 
@@ -110,7 +111,7 @@ public class GeneratorStub {
                 200F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.STAR, starMap),
+                new GameImg(new Animation(ImageStorage.STAR), starMap),
                 (byte) 0,
                 true,
                 true
@@ -125,7 +126,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK_1),
+                new GameImg(new Animation(ImageStorage.BRICK_1)),
                 (byte) 0,
                 false,
                 false
@@ -140,7 +141,7 @@ public class GeneratorStub {
                 20F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK_1),
+                new GameImg(new Animation(ImageStorage.BRICK_1)),
                 (byte) 0,
                 false,
                 false
@@ -155,7 +156,7 @@ public class GeneratorStub {
                 10F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.STAR, starMap),
+                new GameImg(new Animation(ImageStorage.STAR), starMap),
                 (byte) 0,
                 false,
                 true
@@ -170,7 +171,7 @@ public class GeneratorStub {
                 240F,
                 10F,
                 10F,
-                new GameImg(ImageStorage.BRICK_1),
+                new GameImg(new Animation(ImageStorage.BRICK_1)),
                 (byte) 0,
                 false,
                 true
