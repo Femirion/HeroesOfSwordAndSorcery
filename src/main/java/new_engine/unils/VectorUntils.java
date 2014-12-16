@@ -1,8 +1,8 @@
-package engine.unils;
+package new_engine.unils;
 
 /**
  * author Vostryakov Alexander
- * <p/>
+ *
  * вспомогательный класс, для работы с векторами, точками,
  * прямыми, их пересечением и тд.
  */

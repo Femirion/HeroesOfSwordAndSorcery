@@ -1,6 +1,7 @@
 package engine.image;
 
 import engine.point.Point;
+import new_engine.texture.TextureStorage;
 import org.newdawn.slick.opengl.Texture;
 import stub.GeneratorStub;
 

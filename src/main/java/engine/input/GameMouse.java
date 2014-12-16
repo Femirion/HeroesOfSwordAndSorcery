@@ -1,7 +1,7 @@
 package engine.input;
 
 import engine.point.Point;
-import engine.unils.VectorUntils;
+import new_engine.unils.VectorUntils;
 import model.entities.GameEntity;
 import org.lwjgl.input.Mouse;
 
