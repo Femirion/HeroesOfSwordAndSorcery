@@ -14,11 +14,7 @@ public class ActiveSimpleGameObject extends SimpleGameObject implements Active {
     private Map<String, Image> action = new HashMap<>();
 
     public ActiveSimpleGameObject(long id, float x, float y, int level, Image drawImg) {
-        this.setId(id);
-        this.setX(x);
-        this.setY(y);
-        this.setLevel(level);
-        this.setDrawImg(drawImg);
+        super(id, x, y, level, drawImg);
     }
 
     @Override

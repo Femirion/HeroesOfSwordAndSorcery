@@ -1,7 +1,4 @@
-package engine.input;
-
-import model.entities.GameEntity;
-import org.lwjgl.input.Keyboard;
+package new_engine.input;
 
 /**
  * Обработка событий клавиатуры
@@ -10,9 +7,9 @@ import org.lwjgl.input.Keyboard;
  */
 public class GameKeyboard {
 
-    /**
+/*    *//**
      * обработчик событий клавиатуры
-     */
+     *//*
     public void keyListener(GameEntity activeEntity) {
         if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
             if (activeEntity != null) {
@@ -35,5 +32,5 @@ public class GameKeyboard {
             }
         }
 
-    }
+    }*/
 }

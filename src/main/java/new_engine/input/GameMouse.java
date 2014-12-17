@@ -1,14 +1,6 @@
-package engine.input;
+package new_engine.input;
 
-import engine.point.Point;
-import new_engine.unils.VectorUntils;
-import model.entities.GameEntity;
-import org.lwjgl.input.Mouse;
-
-import java.util.List;
-import java.util.ListIterator;
-
-import static engine.Engine.HEIGHT;
+//import static engine.Engine.HEIGHT;
 
 /**
  * Обработка событий мыши
@@ -17,7 +9,7 @@ import static engine.Engine.HEIGHT;
  */
 public class GameMouse {
 
-    public void mouseContainsListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
+    /*public void mouseContainsListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
         // обрабатываем то, что мышь наведена на один из игровых объектов
         // тут процедура чуть хитрее, чем раньше
         // дело в том, что имейдж выделенного изображения
@@ -61,9 +53,9 @@ public class GameMouse {
     }
 
 
-    /**
+    *//**
      * Обработчик событий мыши
-     */
+     *//*
     public GameEntity mouseClickListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
 
         // список объектов отсортирован по удаленности от игрока
@@ -97,13 +89,13 @@ public class GameMouse {
     }
 
 
-    /**
+    *//**
      * Метод определяющий попадания мыши в игровой объект
      * @param entity игровой объект
      * @param x координата x мыши
      * @param y координата y мыши
      * @return true - если попали внутрь
-     */
+     *//*
     private boolean isCrossed(GameEntity entity, int x, int y) {
         List<Point> pointList = entity.getDrawImage().getImage().getPoints();
         // флаг, показывающий что прямая от указателя мыши до точки,
@@ -139,5 +131,5 @@ public class GameMouse {
         }
         return isCrossed;
     }
-
+*/
 }

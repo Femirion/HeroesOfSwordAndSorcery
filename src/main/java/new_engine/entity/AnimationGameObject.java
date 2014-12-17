@@ -1,6 +1,7 @@
 package new_engine.entity;
 
 import new_engine.image.Image;
+import org.lwjgl.Sys;
 
 /**
  * Анимированный объект игрового мира
@@ -26,25 +27,19 @@ public class AnimationGameObject extends AbstractGameObject {
     // число, которое будет добавляться в высоте для получения нового кадра
     private int addHeight;
 
-    public AnimationGameObject(
-            long id,
-            float x,
-            float y,
-            int level,
-            Image drawImg,
-            int frame,
-            int frameCount,
-            long period,
-            long time,
-            int addWidth,
-            int addHeight)
+    public AnimationGameObject(long id,
+                               float x,
+                               float y,
+                               int level,
+                               Image drawImg,
+                               int frame,
+                               int frameCount,
+                               long period,
+                               long time,
+                               int addWidth,
+                               int addHeight) {
 
-    {
-        this.setId(id);
-        this.setX(x);
-        this.setY(y);
-        this.setLevel(level);
-        this.setDrawImg(drawImg);
+        super(id, x, y, level, drawImg);
         this.frame = frame;
         this.frameCount = frameCount;
         this.period = period;
@@ -87,16 +82,30 @@ public class AnimationGameObject extends AbstractGameObject {
 
     @Override
     public void draw() {
-        time -= System.currentTimeMillis();
+        time = System.currentTimeMillis() - time;
         if (time > period) {
-            time -= period;
-            Image img = getDrawImg();
-            img.setStartWidth(img.getStartWidth() + addWidth);
-            img.setStartHeight(img.getStartHeight() + addHeight);
-            img.setEndWidth(img.getEndWidth() + addWidth);
-            img.setEndHeight(img.getEndHeight() + addHeight);
-            img.setTextureStorage(img.getTextureStorage());
-            this.setDrawImg(img);
+            if (frame > frameCount) {
+                frame = 0;
+                time -= period;
+                Image img = getDrawImg();
+                img.setStartWidth(img.getBeginWidth() + addWidth * frame);
+                img.setStartHeight(img.getStartHeight() + addHeight * frame);
+                img.setEndWidth(img.getBeginWidth() + addWidth * frame);
+                img.setEndHeight(img.getStartHeight() + addHeight * frame);
+                img.setTextureStorage(img.getTextureStorage());
+                this.setDrawImg(img);
+
+            } else {
+                time -= period;
+                Image img = getDrawImg();
+                img.setStartWidth(img.getStartWidth() + addWidth * frame);
+                img.setStartHeight(img.getStartHeight() + addHeight * frame);
+                img.setEndWidth(img.getEndWidth() + addWidth * frame);
+                img.setEndHeight(img.getEndHeight() + addHeight * frame);
+                img.setTextureStorage(img.getTextureStorage());
+                frame++;
+                this.setDrawImg(img);
+            }
         }
         super.draw();
     }

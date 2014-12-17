@@ -1,12 +1,12 @@
-package engine.point;
+package new_engine.point;
 
-import model.entities.GameEntity;
+
 
 /**
  * author Vostryakov Alexander
  */
 public class Point {
-
+/*
     private float x;
     private float y;
 
@@ -16,22 +16,22 @@ public class Point {
     }
 
 
-    /**
+    *//**
      * Возвращает координату X точки,
      * с учетом расположения на экране
      * @param entity игровой объект
      * @return координата X точки с учетом расположения объекта
-     */
+     *//*
     public float getX(GameEntity entity) {
         return x  + entity.getX();
     }
 
-    /**
+    *//**
      * Возвращает координату Y точки,
      * с учетом расположения на экране
      * @param entity игровой объект
      * @return координата Y точки с учетом расположения объекта
-     */
+     *//*
     public float getY(GameEntity entity) {
         return y + entity.getY();
     }
@@ -55,5 +55,5 @@ public class Point {
         int result = (x != +0.0f ? Float.floatToIntBits(x) : 0);
         result = 31 * result + (y != +0.0f ? Float.floatToIntBits(y) : 0);
         return result;
-    }
+    }*/
 }

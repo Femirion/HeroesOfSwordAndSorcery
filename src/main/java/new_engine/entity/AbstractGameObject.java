@@ -22,9 +22,16 @@ public abstract class AbstractGameObject implements GameObject, Comparable {
     // отрисовываемое изображение
     private Image drawImg;
 
+    public AbstractGameObject(long id, float x, float y, int level, Image drawImg) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.level = level;
+        this.drawImg = drawImg;
+    }
+
     public void draw() {
         Engine.draw(this);
-        System.out.println("Отрисовка объекта");
     }
 
     @Override

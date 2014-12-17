@@ -1,6 +1,5 @@
 package new_engine.entity;
 
-import engine.image.ImageStorage;
 import new_engine.image.Image;
 
 /**

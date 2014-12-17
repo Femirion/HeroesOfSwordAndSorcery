@@ -1,6 +1,6 @@
 package new_engine.texture;
 
-import engine.Engine;
+import new_engine.core.Engine;
 import org.newdawn.slick.opengl.Texture;
 
 /**
