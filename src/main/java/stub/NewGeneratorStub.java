@@ -44,8 +44,8 @@ public class NewGeneratorStub {
         List<AbstractGameObject> list = new ArrayList<>();
         AbstractGameObject brick1 = new AnimationGameObject(
                 1, 250, 250, 1,
-                new Image(1, 31, 1,30, 1, 1, TextureStorage.BRICK),
-                0, 1, 1000, 0, 30, 0);
+                new Image(1, 31, 1,30, TextureStorage.BRICK),
+                0, 1, 1000, 0, 30, 0, 1, 1);
         list.add(brick1);
 
         return list;

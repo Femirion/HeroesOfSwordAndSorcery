@@ -21,6 +21,12 @@ public class AnimationGameObject extends AbstractGameObject {
     // время, прошедшее с момента последней отрисовки
     private long time;
 
+    // начальное положение кадра на текстуре (ширина)
+    private float startWidth;
+
+    // начальное положение кадра на текстуре (высота)
+    private float startHeight;
+
     // число, которое будет добавляться к ширине, для получения нового кадра
     private int addWidth;
 
@@ -37,7 +43,9 @@ public class AnimationGameObject extends AbstractGameObject {
                                long period,
                                long time,
                                int addWidth,
-                               int addHeight) {
+                               int addHeight,
+                               float startWidth,
+                               float startHeight) {
 
         super(id, x, y, level, drawImg);
         this.frame = frame;
@@ -46,6 +54,8 @@ public class AnimationGameObject extends AbstractGameObject {
         this.time = time;
         this.addWidth = addWidth;
         this.addHeight = addHeight;
+        this.startWidth = startWidth;
+        this.startHeight = startHeight;
     }
 
     public int getFrame() {
@@ -88,10 +98,10 @@ public class AnimationGameObject extends AbstractGameObject {
                 frame = 0;
                 time -= period;
                 Image img = getDrawImg();
-                img.setStartWidth(img.getBeginWidth() + addWidth * frame);
-                img.setStartHeight(img.getStartHeight() + addHeight * frame);
-                img.setEndWidth(img.getBeginWidth() + addWidth * frame);
-                img.setEndHeight(img.getStartHeight() + addHeight * frame);
+                img.setStartWidth(startWidth);
+                img.setStartHeight(startHeight);
+                img.setEndWidth(startWidth + addWidth * frame);
+                img.setEndHeight(startHeight + addHeight * frame);
                 img.setTextureStorage(img.getTextureStorage());
                 this.setDrawImg(img);
 

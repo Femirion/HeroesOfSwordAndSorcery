@@ -8,12 +8,10 @@ import org.newdawn.slick.opengl.Texture;
  */
 public class Image {
 
-    private int startWidth;
-    private int endWidth;
-    private int startHeight;
-    private int endHeight;
-    private int beginWidth;
-    private int beginHeigth;
+    private float startWidth;
+    private float endWidth;
+    private float startHeight;
+    private float endHeight;
     private TextureStorage texture;
 
     public Image(int startWidth, int endWidth,
@@ -24,54 +22,38 @@ public class Image {
         this.endWidth = endWidth;
         this.startHeight = startHeight;
         this.endHeight = endHeight;
-        this.beginWidth = startWidth;
-        this.beginHeigth = startHeight;
         this.texture = texture;
     }
 
-    public Image(int startWidth, int endWidth,
-                 int startHeight, int endHeight,
-                 int beginWidth, int beginHeigth,
-                 TextureStorage texture) {
-
-        this.startWidth = startWidth;
-        this.endWidth = endWidth;
-        this.startHeight = startHeight;
-        this.endHeight = endHeight;
-        this.beginWidth = beginWidth;
-        this.beginHeigth = beginHeigth;
-        this.texture = texture;
-    }
-
-    public int getStartWidth() {
+    public float getStartWidth() {
         return startWidth;
     }
 
-    public void setStartWidth(int startWidth) {
+    public void setStartWidth(float startWidth) {
         this.startWidth = startWidth;
     }
 
-    public int getEndWidth() {
+    public float getEndWidth() {
         return endWidth;
     }
 
-    public void setEndWidth(int endWidth) {
+    public void setEndWidth(float endWidth) {
         this.endWidth = endWidth;
     }
 
-    public int getStartHeight() {
+    public float getStartHeight() {
         return startHeight;
     }
 
-    public void setStartHeight(int startHeight) {
+    public void setStartHeight(float startHeight) {
         this.startHeight = startHeight;
     }
 
-    public int getEndHeight() {
+    public float getEndHeight() {
         return endHeight;
     }
 
-    public void setEndHeight(int endHeight) {
+    public void setEndHeight(float endHeight) {
         this.endHeight = endHeight;
     }
 
@@ -81,22 +63,6 @@ public class Image {
 
     public void setTextureStorage(TextureStorage texture) {
         this.texture = texture;
-    }
-
-    public int getBeginWidth() {
-        return beginWidth;
-    }
-
-    public void setBeginWidth(int beginWidth) {
-        this.beginWidth = beginWidth;
-    }
-
-    public int getBeginHeigth() {
-        return beginHeigth;
-    }
-
-    public void setBeginHeigth(int beginHeigth) {
-        this.beginHeigth = beginHeigth;
     }
 
     public TextureStorage getTextureStorage() {
