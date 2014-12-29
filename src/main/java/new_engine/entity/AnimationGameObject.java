@@ -1,5 +1,6 @@
 package new_engine.entity;
 
+import new_engine.image.AnimateImage;
 import new_engine.image.Image;
 import org.lwjgl.Sys;
 
@@ -21,41 +22,21 @@ public class AnimationGameObject extends AbstractGameObject {
     // время, прошедшее с момента последней отрисовки
     private long time;
 
-    // начальное положение кадра на текстуре (ширина)
-    private float startWidth;
-
-    // начальное положение кадра на текстуре (высота)
-    private float startHeight;
-
-    // число, которое будет добавляться к ширине, для получения нового кадра
-    private int addWidth;
-
-    // число, которое будет добавляться в высоте для получения нового кадра
-    private int addHeight;
-
     public AnimationGameObject(long id,
                                float x,
                                float y,
                                int level,
-                               Image drawImg,
+                               AnimateImage drawImg,
                                int frame,
                                int frameCount,
                                long period,
-                               long time,
-                               int addWidth,
-                               int addHeight,
-                               float startWidth,
-                               float startHeight) {
-
+                               long time
+    ) {
         super(id, x, y, level, drawImg);
         this.frame = frame;
         this.frameCount = frameCount;
         this.period = period;
         this.time = time;
-        this.addWidth = addWidth;
-        this.addHeight = addHeight;
-        this.startWidth = startWidth;
-        this.startHeight = startHeight;
     }
 
     public int getFrame() {
@@ -95,28 +76,32 @@ public class AnimationGameObject extends AbstractGameObject {
         time = System.currentTimeMillis() - time;
         if (time > period) {
             if (frame > frameCount) {
-                frame = 0;
+                frame = 1;
                 time -= period;
-                Image img = getDrawImg();
-                img.setStartWidth(startWidth);
-                img.setStartHeight(startHeight);
-                img.setEndWidth(startWidth + addWidth * frame);
-                img.setEndHeight(startHeight + addHeight * frame);
-                img.setTextureStorage(img.getTextureStorage());
+                AnimateImage img = (AnimateImage) getDrawImg();
+                img.setStartWidth(img.getBeginWidth());
+                img.setStartHeight(img.getBeginHeight());
+                img.setEndWidth(img.getBeginWidth() + img.getAddWidth());
+                img.setEndHeight(img.getEndHeight());
                 this.setDrawImg(img);
-
+                super.draw();
             } else {
                 time -= period;
-                Image img = getDrawImg();
-                img.setStartWidth(img.getStartWidth() + addWidth * frame);
-                img.setStartHeight(img.getStartHeight() + addHeight * frame);
-                img.setEndWidth(img.getEndWidth() + addWidth * frame);
-                img.setEndHeight(img.getEndHeight() + addHeight * frame);
-                img.setTextureStorage(img.getTextureStorage());
+                AnimateImage img = (AnimateImage) getDrawImg();
+                img.setStartWidth(img.getStartWidth() + img.getAddWidth());
+                img.setStartHeight(img.getStartHeight());
+                img.setEndWidth(img.getEndWidth() + img.getAddWidth());
+                img.setEndHeight(img.getEndHeight());
                 frame++;
                 this.setDrawImg(img);
+                super.draw();
             }
+/*            try {
+                    Thread.sleep(1000);
+            } catch (Exception ex) {
+
+            }*/
         }
-        super.draw();
+
     }
 }

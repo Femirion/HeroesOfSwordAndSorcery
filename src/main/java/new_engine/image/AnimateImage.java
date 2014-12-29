@@ -1,0 +1,56 @@
+package new_engine.image;
+
+import new_engine.texture.TextureStorage;
+
+/**
+ * Created by fem on 29.12.14.
+ */
+public class AnimateImage extends Image {
+
+    // число, которое будет добавляться к ширине, для получения нового кадра
+    private int addWidth;
+
+    private float beginWidth;
+
+    private float beginHeight;
+
+    public AnimateImage(
+            int startWidth,
+            int endWidth,
+            int startHeight,
+            int endHeight,
+            int addWidth,
+            float beginWidth,
+            float beginHeight,
+            TextureStorage texture) {
+
+        super(startWidth, endWidth, startHeight, endHeight, texture);
+        this.addWidth = addWidth;
+        this.beginWidth = beginWidth;
+        this.beginHeight = beginHeight;
+    }
+
+    public int getAddWidth() {
+        return addWidth;
+    }
+
+    public void setAddWidth(int addWidth) {
+        this.addWidth = addWidth;
+    }
+
+    public float getBeginWidth() {
+        return beginWidth;
+    }
+
+    public void setBeginWidth(float beginWidth) {
+        this.beginWidth = beginWidth;
+    }
+
+    public float getBeginHeight() {
+        return beginHeight;
+    }
+
+    public void setBeginHeight(float beginHeight) {
+        this.beginHeight = beginHeight;
+    }
+}
