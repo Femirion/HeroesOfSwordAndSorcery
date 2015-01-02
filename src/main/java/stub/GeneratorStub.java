@@ -58,13 +58,13 @@ public class GeneratorStub {
         List<AbstractGameObject> list = new ArrayList<>();
         AbstractGameObject star1 = new AnimationGameObject(
                 1, 250, 250, 1,
-                new AnimateImage(1, 50, 1, 49, 49, 1, 1, TextureStorage.ROLLING_STAR),
+                new AnimateImage(1, 50, 1, 49, 49, TextureStorage.ROLLING_STAR),
                 1, 6, 35L, System.currentTimeMillis());
         list.add(star1);
 
         AbstractGameObject star2 = new AnimationGameObject(
                 1, 250, 180, 1,
-                new AnimateImage(1, 50, 1, 49, 49, 1, 1, TextureStorage.ROLLING_STAR),
+                new AnimateImage(1, 50, 1, 49, 49, TextureStorage.ROLLING_STAR),
                 1, 6, 85L, System.currentTimeMillis());
         list.add(star2);
 

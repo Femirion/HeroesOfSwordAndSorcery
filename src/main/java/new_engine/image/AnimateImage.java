@@ -20,14 +20,12 @@ public class AnimateImage extends Image {
             int startHeight,
             int endHeight,
             int addWidth,
-            float beginWidth,
-            float beginHeight,
             TextureStorage texture) {
 
         super(startWidth, endWidth, startHeight, endHeight, texture);
         this.addWidth = addWidth;
-        this.beginWidth = beginWidth;
-        this.beginHeight = beginHeight;
+        this.beginWidth = startWidth;
+        this.beginHeight = startHeight;
     }
 
     public int getAddWidth() {
