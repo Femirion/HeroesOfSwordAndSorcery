@@ -4,6 +4,7 @@ import new_engine.texture.TextureStorage;
 import org.newdawn.slick.opengl.Texture;
 
 /**
+ * игровое изображение
  * author Vostryakov Alexander
  */
 public class Image {

@@ -87,20 +87,26 @@ public class AnimationGameObject extends AbstractGameObject {
                 AnimateImage img = (AnimateImage) getDrawImg();
                 img.setStartWidth(img.getBeginWidth());
                 img.setStartHeight(img.getBeginHeight());
-                img.setEndWidth(img.getBeginWidth() + img.getAddWidth() - 1);
+                img.setEndWidth(img.getBeginWidth() + img.getAddWidth());
                 img.setEndHeight(img.getEndHeight());
                 this.setDrawImg(img);
                 super.draw();
             } else {
                 time = System.currentTimeMillis();
                 AnimateImage img = (AnimateImage) getDrawImg();
-                img.setStartWidth(img.getStartWidth() + img.getAddWidth() + 2);
+                img.setStartWidth(img.getStartWidth() + img.getAddWidth() + 1);
                 img.setStartHeight(img.getStartHeight());
-                img.setEndWidth(img.getEndWidth() + img.getAddWidth() + 2);
+                img.setEndWidth(img.getStartWidth() + img.getAddWidth());
                 img.setEndHeight(img.getEndHeight());
                 frame++;
                 this.setDrawImg(img);
                 super.draw();
+            }
+
+            try {
+                Thread.sleep(1000);                 //1000 milliseconds is one second.
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
             }
 
         // img.getEndWidth()время отрисовать анимацию не пришло,

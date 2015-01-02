@@ -3,7 +3,8 @@ package new_engine.image;
 import new_engine.texture.TextureStorage;
 
 /**
- * Created by fem on 29.12.14.
+ * Анимированное игровое изображение
+ * 29.12.14.
  */
 public class AnimateImage extends Image {
 
@@ -22,7 +23,7 @@ public class AnimateImage extends Image {
             int addWidth,
             TextureStorage texture) {
 
-        super(startWidth, endWidth, startHeight, endHeight, texture);
+        super(startWidth, endWidth, startHeight, endHeight - 2, texture);
         this.addWidth = addWidth;
         this.beginWidth = startWidth;
         this.beginHeight = startHeight;
