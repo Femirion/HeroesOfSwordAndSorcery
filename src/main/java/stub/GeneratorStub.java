@@ -12,11 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Генератор различных игровых объектов
+ *
  * author Vostryakov Alexander
  */
-public class NewGeneratorStub {
+public class GeneratorStub {
 
-    public static List<AbstractGameObject> getStendedObjectList() {
+    /**
+     * Метод для генерации нескольких кирпичей
+     *
+     * @return список из кирпичей
+     */
+    public static List<AbstractGameObject> getSevereBrick() {
         List<AbstractGameObject> list = new ArrayList<>();
         AbstractGameObject brick1 = new SimpleGameObject(
                 1, 250, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
@@ -42,13 +49,24 @@ public class NewGeneratorStub {
         return list;
     }
 
-    public static List<AbstractGameObject> getAnimationObjectList() {
+    /**
+     * Метод для генерации списка анимированных объектов
+     *
+     * @return список из 2х катящихся звезд
+     */
+    public static List<AbstractGameObject> getTwoRollingStars() {
         List<AbstractGameObject> list = new ArrayList<>();
-        AbstractGameObject brick1 = new AnimationGameObject(
+        AbstractGameObject star1 = new AnimationGameObject(
                 1, 250, 250, 1,
-                new AnimateImage(2, 50, 2, 50, 50, 2, 2, TextureStorage.ROLLING_STAR),
-                1, 3, 1000, System.currentTimeMillis());
-        list.add(brick1);
+                new AnimateImage(1, 50, 1, 49, 49, 1, 1, TextureStorage.ROLLING_STAR),
+                1, 6, 35L, System.currentTimeMillis());
+        list.add(star1);
+
+        AbstractGameObject star2 = new AnimationGameObject(
+                1, 250, 180, 1,
+                new AnimateImage(1, 50, 1, 49, 49, 1, 1, TextureStorage.ROLLING_STAR),
+                1, 6, 85L, System.currentTimeMillis());
+        list.add(star2);
 
         return list;
     }
@@ -56,6 +74,6 @@ public class NewGeneratorStub {
 
 
     // запретим инстанцирование
-    NewGeneratorStub() {}
+    GeneratorStub() {}
 
 }

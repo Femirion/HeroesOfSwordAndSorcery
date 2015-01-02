@@ -6,6 +6,7 @@ import org.lwjgl.Sys;
 
 /**
  * Анимированный объект игрового мира
+ *
  * author Vostryakov Alexander
  */
 public class AnimationGameObject extends AbstractGameObject {
@@ -73,34 +74,39 @@ public class AnimationGameObject extends AbstractGameObject {
 
     @Override
     public void draw() {
-        time = System.currentTimeMillis() - time;
-        if (time > period) {
-            if (frame > frameCount) {
+        // получаем текущее время
+        long currenctTime = System.currentTimeMillis() - time;
+        // если текущее время больше чем период отрисовки анимации
+        // тогда нужно отрисовать новый кадр
+        if (currenctTime > period) {
+            // если текущий кадр >= чем кол-во кадров
+            // тогда нужно отрисовать первый кадр
+            if (frame >= frameCount) {
                 frame = 1;
-                time -= period;
+                time = System.currentTimeMillis();
                 AnimateImage img = (AnimateImage) getDrawImg();
                 img.setStartWidth(img.getBeginWidth());
                 img.setStartHeight(img.getBeginHeight());
-                img.setEndWidth(img.getBeginWidth() + img.getAddWidth());
+                img.setEndWidth(img.getBeginWidth() + img.getAddWidth() - 1);
                 img.setEndHeight(img.getEndHeight());
                 this.setDrawImg(img);
                 super.draw();
             } else {
-                time -= period;
+                time = System.currentTimeMillis();
                 AnimateImage img = (AnimateImage) getDrawImg();
-                img.setStartWidth(img.getStartWidth() + img.getAddWidth());
+                img.setStartWidth(img.getStartWidth() + img.getAddWidth() + 2);
                 img.setStartHeight(img.getStartHeight());
-                img.setEndWidth(img.getEndWidth() + img.getAddWidth());
+                img.setEndWidth(img.getEndWidth() + img.getAddWidth() + 2);
                 img.setEndHeight(img.getEndHeight());
                 frame++;
                 this.setDrawImg(img);
                 super.draw();
             }
-/*            try {
-                    Thread.sleep(1000);
-            } catch (Exception ex) {
 
-            }*/
+        // img.getEndWidth()время отрисовать анимацию не пришло,
+        // просто отрисуем текущий кадр еще раз
+        } else {
+            super.draw();
         }
 
     }

@@ -3,7 +3,7 @@ import new_engine.entity.GameObject;
 import new_engine.input.GameKeyboard;
 import new_engine.input.GameMouse;
 import org.lwjgl.opengl.Display;
-import stub.NewGeneratorStub;
+import stub.GeneratorStub;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Start {
         GameMouse mouse = new GameMouse();
 
         beginSession();
-        visibleObjects = NewGeneratorStub.getAnimationObjectList();
+        visibleObjects = GeneratorStub.getTwoRollingStars();
         Collections.sort(visibleObjects);
         while (!Display.isCloseRequested()) {
             // очитстка экрана

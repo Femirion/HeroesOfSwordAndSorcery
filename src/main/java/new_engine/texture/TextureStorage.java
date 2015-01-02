@@ -12,7 +12,7 @@ public enum TextureStorage {
 
     BRICK(Engine.loadTexture("brick_texture.png"), 132F, 132F),
     STAR(Engine.loadTexture("star_texture.png"), 153F, 153F),
-    ROLLING_STAR(Engine.loadTexture("rolling_star.png"), 154F, 103F);
+    ROLLING_STAR(Engine.loadTexture("rolling_star.png"), 310F, 103F);
 
     // сама текстура
     private Texture texture;
