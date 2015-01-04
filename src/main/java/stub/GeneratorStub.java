@@ -57,11 +57,24 @@ public class GeneratorStub {
     public static List<AbstractGameObject> getTwoRollingStars() {
         List<AbstractGameObject> list = new ArrayList<>();
 
-        AbstractGameObject capitan = new AnimationGameObject(
+        /*AbstractGameObject star1 = new AnimationGameObject(
+                1, 250, 250, 1,
+                new AnimateImage(1, 101, 1, 101, TextureStorage.ROLLING_STAR),
+                1, 9, 35L, System.currentTimeMillis());
+        list.add(star1);*/
+
+        AbstractGameObject star2 = new AnimationGameObject(
+                1, 250, 180, 1,
+                new AnimateImage(0, 27, 0, 27, TextureStorage.SMAL_ROLLING_STAR),
+                1, 4, 85L, System.currentTimeMillis());
+        list.add(star2);
+
+
+/*        AbstractGameObject capitan = new AnimationGameObject(
                 1, 100, 100, 1,
-                new AnimateImage(1, 100, 1, 110, 98, TextureStorage.CAPITAN),
+                new AnimateImage(0, 99, 0, 109, TextureStorage.CAPITAN),
                 1, 9, 65L, System.currentTimeMillis());
-        list.add(capitan);
+        list.add(capitan);*/
 
         return list;
     }

@@ -104,7 +104,7 @@ public class AnimationGameObject extends AbstractGameObject {
             }
 
             try {
-                Thread.sleep(1000);                 //1000 milliseconds is one second.
+                Thread.sleep(250);
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }

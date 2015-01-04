@@ -20,11 +20,10 @@ public class AnimateImage extends Image {
             int endWidth,
             int startHeight,
             int endHeight,
-            int addWidth,
             TextureStorage texture) {
 
-        super(startWidth, endWidth, startHeight, endHeight - 2, texture);
-        this.addWidth = addWidth;
+        super(startWidth, endWidth - 1, startHeight, endHeight - 1, texture);
+        this.addWidth = endWidth - startWidth;
         this.beginWidth = startWidth;
         this.beginHeight = startHeight;
     }
@@ -33,23 +32,12 @@ public class AnimateImage extends Image {
         return addWidth;
     }
 
-    public void setAddWidth(int addWidth) {
-        this.addWidth = addWidth;
-    }
-
     public float getBeginWidth() {
         return beginWidth;
-    }
-
-    public void setBeginWidth(float beginWidth) {
-        this.beginWidth = beginWidth;
     }
 
     public float getBeginHeight() {
         return beginHeight;
     }
 
-    public void setBeginHeight(float beginHeight) {
-        this.beginHeight = beginHeight;
-    }
 }
