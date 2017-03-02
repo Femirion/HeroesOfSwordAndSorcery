@@ -14,10 +14,16 @@ import java.io.InputStream;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 
+import org.apache.log4j.Logger;
+
 /**
+ * Главный класс приложения
+ *
  * author Vostryakov Alexander
  */
 public class Engine {
+
+    private final static Logger log = Logger.getLogger(Engine.class);
 
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
@@ -27,6 +33,8 @@ public class Engine {
      */
     public static void beginSession() {
         try {
+            log.info("Start");
+
             Display.setTitle("Heroes of Sword and Sorcery");
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
@@ -38,9 +46,8 @@ public class Engine {
             glEnable(GL_TEXTURE_2D);
 
         } catch (LWJGLException ex) {
-            System.out.println("Ошибка инициализации движка");
+            log.error("Ошибка инициализации движка");
         }
-
     }
 
 
@@ -128,7 +135,7 @@ public class Engine {
         try {
             texture = TextureLoader.getTexture("PNG", in);
         } catch (IOException ex) {
-            System.out.println("Ошибка при загрузке текстуры " + name);
+            log.error("Ошибка при загрузке текстуры " + name);
         }
         return texture;
     }
