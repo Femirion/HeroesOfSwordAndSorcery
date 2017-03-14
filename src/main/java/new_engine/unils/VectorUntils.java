@@ -1,5 +1,8 @@
 package new_engine.unils;
 
+import new_engine.figure.Point;
+import new_engine.figure.Straight;
+
 /**
  * author Vostryakov Alexander
  *
@@ -36,6 +39,13 @@ public class VectorUntils {
                 isLeftRotate(b1x, b1y, b2x, b2y, a2x, a2y)) < 0;
     }
 
+    public static boolean isCrossed(Straight a, Straight b) {
+        return (isLeftRotate(a.getStart(), a.getEnd(), b.getStart()) *
+                isLeftRotate(a.getStart(), a.getEnd(), b.getEnd())) <= 0 &&
+                (isLeftRotate(b.getStart(), b.getEnd(), a.getStart()) *
+                        isLeftRotate(b.getStart(), b.getEnd(), a.getStart())) < 0;
+    }
+
     /**
      * Определяет направление поворота точки B1, относительно A1 и А2
      *
@@ -52,6 +62,13 @@ public class VectorUntils {
                                    float b1x, float b1y) {
 
         return (int)((a2x - a1x) * (b1y - a2y) - (a2y - a1y) * (b1x - a2x));
+
+    }
+
+    public static int isLeftRotate(Point a1, Point a2, Point b) {
+
+        return (int)((a2.getX() - a1.getX()) * (b.getY() - a2.getY())
+                - (a2.getY() - a1.getY()) * (b.getX() - a2.getX()));
 
     }
 

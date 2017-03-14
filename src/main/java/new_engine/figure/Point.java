@@ -1,12 +1,14 @@
-package new_engine.point;
+package new_engine.figure;
 
 
 
 /**
+ * Класс точки
+ *
  * author Vostryakov Alexander
  */
 public class Point {
-/*
+
     private float x;
     private float y;
 
@@ -15,6 +17,23 @@ public class Point {
         this.y = y;
     }
 
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    /*
 
     *//**
      * Возвращает координату X точки,
