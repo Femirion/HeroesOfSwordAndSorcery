@@ -107,7 +107,7 @@ public class GameMouse {
             // последняя и нулевая точка образуют последнее ребро
             // нужно взять последнюю и первую точку в качестве вершин
             if (i == pointList.size() - 1) {
-                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                isCrossed = isCrossed ^ StraightUtils.isCrossed(
                         entity.getInternalPointX(),
                         entity.getInternalPointY(),
                         x,
@@ -118,7 +118,7 @@ public class GameMouse {
                         pointList.get(0).getY(entity));
 
             } else {
-                isCrossed = isCrossed ^ VectorUntils.isCrossed(
+                isCrossed = isCrossed ^ StraightUtils.isCrossed(
                         entity.getInternalPointX(),
                         entity.getInternalPointY(),
                         x,
