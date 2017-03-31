@@ -3,10 +3,12 @@ package stub;
 import new_engine.entity.AbstractGameObject;
 import new_engine.entity.AnimationGameObject;
 import new_engine.entity.SimpleGameObject;
+import new_engine.figure.Point;
 import new_engine.image.AnimateImage;
 import new_engine.image.Image;
 import new_engine.texture.TextureStorage;
-import org.lwjgl.Sys;
+import ru.infernia.entity.AnimateEntity;
+import ru.infernia.entity.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,21 @@ import java.util.List;
  * author Vostryakov Alexander
  */
 public class GeneratorStub {
+
+    public static List<GameObject> createAnimateStub() {
+        List<GameObject> animateEntities = new ArrayList<>();
+        animateEntities.add(
+                new AnimateEntity(
+                        new Point(100, 200),
+                        99,
+                        109,
+                        100,
+                        "Captain",
+                        TextureStorage.CAPITAN2.getUrl()
+                )
+        );
+        return animateEntities;
+    }
 
     /**
      * Метод для генерации нескольких кирпичей

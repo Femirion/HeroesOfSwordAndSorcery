@@ -1,6 +1,7 @@
 package new_engine.core;
 
 import new_engine.entity.GameObject;
+import org.apache.log4j.Logger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -12,9 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-
-import org.apache.log4j.Logger;
 
 /**
  * Главный класс приложения
@@ -23,8 +21,10 @@ import org.apache.log4j.Logger;
  */
 public class Engine {
 
-    private final static Logger log = Logger.getLogger(Engine.class);
+    private static final Logger log = Logger.getLogger(Engine.class);
+    private static final String RESOURCE_TYPE = "PNG";
 
+    public static final String RESOURCES_PATH = "/src/main/resources/image/%s";
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
 
@@ -130,10 +130,9 @@ public class Engine {
      */
     public static Texture loadTexture(String name) {
         Texture texture = null;
-        InputStream in = ResourceLoader.getResourceAsStream(
-                "/src/main/resources/image/" + name);
+        InputStream in = ResourceLoader.getResourceAsStream(String.format(RESOURCES_PATH, name));
         try {
-            texture = TextureLoader.getTexture("PNG", in);
+            texture = TextureLoader.getTexture(RESOURCE_TYPE, in);
         } catch (IOException ex) {
             log.error("Ошибка при загрузке текстуры " + name);
         }

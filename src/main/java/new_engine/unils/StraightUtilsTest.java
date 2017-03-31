@@ -23,10 +23,10 @@ public class StraightUtilsTest {
      */
     @Test
     public void notCrossStraight() throws Exception {
-        Point a1 = new Point(0f, 0f);
-        Point a2 = new Point(10f, 10f);
-        Point b1 = new Point(20f, 20f);
-        Point b2 = new Point(40f, 40f);
+        Point a1 = new Point(0, 0);
+        Point a2 = new Point(10, 10);
+        Point b1 = new Point(20, 20);
+        Point b2 = new Point(40, 40);
 
         Optional<Point> crossedPoint = StraightUtils.getCrossedPoint(
                 new Straight(a1, a2),
@@ -42,18 +42,18 @@ public class StraightUtilsTest {
      */
     @Test
     public void startInOnePoint() throws Exception {
-        Point a1 = new Point(0f, 0f);
-        Point a2 = new Point(10f, 10f);
-        Point b1 = new Point(0f, 0f);
-        Point b2 = new Point(10f, 0f);
+        Point a1 = new Point(0, 0);
+        Point a2 = new Point(10, 10);
+        Point b1 = new Point(0, 0);
+        Point b2 = new Point(10, 0);
 
         Optional<Point> crossedPoint = StraightUtils.getCrossedPoint(
                 new Straight(a1, a2),
                 new Straight(b1, b2)
         );
         assertThat(crossedPoint.isPresent(), is(true));
-        assertThat(crossedPoint.get().getX(), is(0f));
-        assertThat(crossedPoint.get().getY(), is(0f));
+        assertThat(crossedPoint.get().getX(), is(0));
+        assertThat(crossedPoint.get().getY(), is(0));
     }
 
     /**
@@ -63,18 +63,18 @@ public class StraightUtilsTest {
      */
     @Test
     public void crossStraight() throws Exception {
-        Point a1 = new Point(0f, 0f);
-        Point a2 = new Point(10f, 10f);
-        Point b1 = new Point(0f, 10f);
-        Point b2 = new Point(10f, 0f);
+        Point a1 = new Point(0, 0);
+        Point a2 = new Point(10, 10);
+        Point b1 = new Point(0, 10);
+        Point b2 = new Point(10, 0);
 
         Optional<Point> crossedPoint = StraightUtils.getCrossedPoint(
                 new Straight(a1, a2),
                 new Straight(b1, b2)
         );
         assertThat(crossedPoint.isPresent(), is(true));
-        assertThat(crossedPoint.get().getX(), is(5f));
-        assertThat(crossedPoint.get().getY(), is(5f));
+        assertThat(crossedPoint.get().getX(), is(5));
+        assertThat(crossedPoint.get().getY(), is(5));
     }
 
 }

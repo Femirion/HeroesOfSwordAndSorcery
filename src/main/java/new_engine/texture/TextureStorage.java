@@ -3,6 +3,8 @@ package new_engine.texture;
 import new_engine.core.Engine;
 import org.newdawn.slick.opengl.Texture;
 
+import static new_engine.core.Engine.RESOURCES_PATH;
+
 /**
  * Хранилище текстур
  *
@@ -10,22 +12,29 @@ import org.newdawn.slick.opengl.Texture;
  */
 public enum TextureStorage {
 
-    BRICK(Engine.loadTexture("brick_texture.png"), 132F, 132F),
-    STAR(Engine.loadTexture("star_texture.png"), 153F, 153F),
-    ROLLING_STAR(Engine.loadTexture("rolling_star.png"), 920F, 102F),
-    SMAL_ROLLING_STAR(Engine.loadTexture("rolling_star.png"), 113F, 27F),
-    CAPITAN(Engine.loadTexture("capitan.png"), 900F, 300F);
+    BRICK("brick_texture.png", 132F, 132F),
+    STAR("star_texture.png", 153F, 153F),
+    ROLLING_STAR("rolling_star.png", 920F, 102F),
+    SMAL_ROLLING_STAR("rolling_star.png", 113F, 27F),
+    CAPITAN("capitan.png", 900F, 300F),
+    CAPITAN2("capitan2.png", 900F, 110F);
 
     // сама текстура
-    private Texture texture;
-    private float width;
-    private float height;
+    private final Texture texture;
+    private final String url;
+    private final float width;
+    private final float height;
 
 
-    TextureStorage(Texture texture, float width, float height) {
-        this.texture = texture;
+    TextureStorage(String url, float width, float height) {
+        this.texture = Engine.loadTexture(url);
         this.width = width;
         this.height = height;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return String.format(RESOURCES_PATH, url);
     }
 
     public Texture getTexture() {
