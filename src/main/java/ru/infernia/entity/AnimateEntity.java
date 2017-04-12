@@ -1,10 +1,10 @@
 package ru.infernia.entity;
 
-import new_engine.figure.Point;
 import org.apache.log4j.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import ru.infernia.figure.Point;
 
 /**
  * Анимированная сущность

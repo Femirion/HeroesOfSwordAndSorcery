@@ -1,9 +1,10 @@
-package new_engine.texture;
+package ru.infernia.texture;
 
-import new_engine.core.Engine;
 import org.newdawn.slick.opengl.Texture;
+import ru.infernia.core.Engine;
 
-import static new_engine.core.Engine.RESOURCES_PATH;
+import static ru.infernia.core.Engine.RESOURCES_PATH;
+
 
 /**
  * Хранилище текстур
@@ -17,6 +18,7 @@ public enum TextureStorage {
     ROLLING_STAR("rolling_star.png", 920F, 102F),
     SMAL_ROLLING_STAR("rolling_star.png", 113F, 27F),
     CAPITAN("capitan.png", 900F, 300F),
+    BRICK_1("brick-1.png", 200F, 200F),
     CAPITAN2("capitan2.png", 900F, 110F);
 
     // сама текстура

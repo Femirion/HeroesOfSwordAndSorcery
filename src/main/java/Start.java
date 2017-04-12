@@ -1,16 +1,16 @@
-import new_engine.input.GameKeyboard;
-import new_engine.input.GameMouse;
 import org.apache.log4j.Logger;
 import org.lwjgl.opengl.Display;
+import ru.infernia.core.input.GameKeyboard;
+import ru.infernia.core.input.GameMouse;
 import ru.infernia.entity.GameObject;
 import stub.GeneratorStub;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static new_engine.core.Engine.beginSession;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.glClear;
+import static ru.infernia.core.Engine.beginSession;
 
 /**
  * author Vostryakov Alexander

@@ -1,14 +1,12 @@
 package stub;
 
-import new_engine.entity.AbstractGameObject;
-import new_engine.entity.AnimationGameObject;
-import new_engine.entity.SimpleGameObject;
-import new_engine.figure.Point;
-import new_engine.image.AnimateImage;
-import new_engine.image.Image;
-import new_engine.texture.TextureStorage;
+import org.newdawn.slick.Image;
+import ru.infernia.core.map.WorldMap;
 import ru.infernia.entity.AnimateEntity;
 import ru.infernia.entity.GameObject;
+import ru.infernia.entity.StaticEntity;
+import ru.infernia.figure.Point;
+import ru.infernia.texture.TextureStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,77 +23,63 @@ public class GeneratorStub {
         animateEntities.add(
                 new AnimateEntity(
                         new Point(100, 200),
-                        99,
-                        109,
+                        100,
+                        110,
                         100,
                         "Captain",
                         TextureStorage.CAPITAN2.getUrl()
                 )
         );
+
+
+        animateEntities.add(
+                new StaticEntity(
+                        new Point(0, 0),
+                        110, 130,
+                        "Test",
+                        new Image(TextureStorage.BRICK_1.getTexture())
+                )
+        );
+
+        animateEntities.add(
+                new StaticEntity(
+                        new Point(115, 0),
+                        90, 90,
+                        "Test",
+                        new Image(TextureStorage.BRICK.getTexture())
+                )
+        );
+
+        animateEntities.add(
+                new StaticEntity(
+                        new Point(70, 0),
+                        90, 65,
+                        "Test",
+                        new Image(TextureStorage.BRICK_1.getTexture())
+                )
+        );
+
+
         return animateEntities;
     }
 
-    /**
-     * Метод для генерации нескольких кирпичей
-     *
-     * @return список из кирпичей
-     */
-    public static List<AbstractGameObject> getSevereBrick() {
-        List<AbstractGameObject> list = new ArrayList<>();
-        AbstractGameObject brick1 = new SimpleGameObject(
-                1, 250, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
-        list.add(brick1);
+    public static WorldMap createWorld() {
 
-        AbstractGameObject brick2 = new SimpleGameObject(
-                1, 279, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
-        list.add(brick2);
+        WorldMap map = new WorldMap();
 
-        AbstractGameObject brick3 = new SimpleGameObject(
-                1, 308, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
-        list.add(brick3);
-
-        AbstractGameObject brick4 = new SimpleGameObject(
-                1, 337, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
-        list.add(brick4);
-
-        AbstractGameObject brick5 = new SimpleGameObject(
-                1, 366, 250, 1, new Image(1, 31, 1,30, TextureStorage.BRICK));
-        list.add(brick5);
+        List<GameObject> entities = new ArrayList<>();
 
 
-        return list;
+
+/*
+        entities.add(new ())
+
+        map.setEntities();
+
+
+*/
+        return map;
     }
-
-    /**
-     * Метод для генерации списка анимированных объектов
-     *
-     * @return список из 2х катящихся звезд
-     */
-    public static List<AbstractGameObject> getTwoRollingStars() {
-        List<AbstractGameObject> list = new ArrayList<>();
-
-        /*AbstractGameObject star1 = new AnimationGameObject(
-                1, 250, 250, 1,
-                new AnimateImage(1, 101, 1, 101, TextureStorage.ROLLING_STAR),
-                1, 9, 35L, System.currentTimeMillis());
-        list.add(star1);*/
-
-        AbstractGameObject star2 = new AnimationGameObject(
-                1, 250, 180, 1,
-                new AnimateImage(0, 27, 0, 27, TextureStorage.SMAL_ROLLING_STAR),
-                1, 4, 85L, System.currentTimeMillis());
-        list.add(star2);
-
-
-/*        AbstractGameObject capitan = new AnimationGameObject(
-                1, 100, 100, 1,
-                new AnimateImage(0, 99, 0, 109, TextureStorage.CAPITAN),
-                1, 9, 65L, System.currentTimeMillis());
-        list.add(capitan);*/
-
-        return list;
-    }
-
 
 
     // запретим инстанцирование

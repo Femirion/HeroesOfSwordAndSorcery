@@ -1,19 +1,19 @@
 package ru.infernia.entity;
 
-import new_engine.figure.Point;
+import ru.infernia.figure.Point;
 
 /**
  * Простая сущность
- * <p>
+ *
  * Created by steam on 31.03.17.
  */
 public abstract class Entity implements GameObject {
 
-    private Point point;
-    private int width;
-    private int height;
-    private String name;
-    private int layer = 0;
+    protected Point point;
+    protected int width;
+    protected int height;
+    protected String name;
+    protected int layer = 0;
 
     public Entity(Point point, int width, int height, String name) {
         this.point = point;

@@ -1,4 +1,4 @@
-package new_engine.figure;
+package ru.infernia.figure;
 
 /**
  * Класс прямой линии

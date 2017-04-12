@@ -1,4 +1,4 @@
-package new_engine.input;
+package ru.infernia.core.input;
 
 //import static engine.Engine.HEIGHT;
 

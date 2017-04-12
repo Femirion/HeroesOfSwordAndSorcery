@@ -1,7 +1,7 @@
-package new_engine.unils;
+package ru.infernia.utils;
 
-import new_engine.figure.Point;
-import new_engine.figure.Straight;
+import ru.infernia.figure.Point;
+import ru.infernia.figure.Straight;
 
 import java.util.Optional;
 
