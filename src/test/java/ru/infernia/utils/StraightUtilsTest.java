@@ -1,6 +1,6 @@
 package ru.infernia.utils;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import ru.infernia.figure.Point;
 import ru.infernia.figure.Straight;
 
@@ -9,13 +9,7 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Тесты для StraightUtils
- * <p>
- * Created by steam on 14.03.17.
- */
-public class StraightUtilsTest {
-
+class StraightUtilsTest {
     /**
      * Прямые НЕ пересекаются
      *
@@ -76,5 +70,4 @@ public class StraightUtilsTest {
         assertThat(crossedPoint.get().getX(), is(5));
         assertThat(crossedPoint.get().getY(), is(5));
     }
-
 }

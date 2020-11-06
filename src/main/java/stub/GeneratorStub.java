@@ -1,6 +1,6 @@
 package stub;
 
-import org.newdawn.slick.Image;
+import lombok.experimental.UtilityClass;
 import ru.infernia.core.map.WorldMap;
 import ru.infernia.entity.AnimateEntity;
 import ru.infernia.entity.GameObject;
@@ -16,48 +16,49 @@ import java.util.List;
  *
  * author Vostryakov Alexander
  */
+@UtilityClass
 public class GeneratorStub {
 
     public static List<GameObject> createAnimateStub() {
         List<GameObject> animateEntities = new ArrayList<>();
-        animateEntities.add(
-                new AnimateEntity(
-                        new Point(100, 200),
-                        100,
-                        110,
-                        100,
-                        "Captain",
-                        TextureStorage.CAPITAN2.getUrl()
-                )
-        );
-
-
-        animateEntities.add(
-                new StaticEntity(
-                        new Point(0, 0),
-                        110, 130,
-                        "Test",
-                        new Image(TextureStorage.BRICK_1.getTexture())
-                )
-        );
-
-        animateEntities.add(
-                new StaticEntity(
-                        new Point(115, 0),
-                        90, 90,
-                        "Test",
-                        new Image(TextureStorage.BRICK.getTexture())
-                )
-        );
-
-        animateEntities.add(
-                new StaticEntity(
-                        new Point(70, 0),
-                        90, 65,
-                        "Test",
-                        new Image(TextureStorage.BRICK_1.getTexture())
-                )
-        );
+//        animateEntities.add(
+//                new AnimateEntity(
+//                        new Point(100, 200),
+//                        100,
+//                        110,
+//                        100,
+//                        "Captain",
+//                        TextureStorage.CAPITAN2.getUrl()
+//                )
+//        );
+//
+//
+//        animateEntities.add(
+//                new StaticEntity(
+//                        new Point(0, 0),
+//                        110, 130,
+//                        "Test"
+//                        new Image(TextureStorage.BRICK_1.getTexture())
+//                )
+//        );
+//
+//        animateEntities.add(
+//                new StaticEntity(
+//                        new Point(115, 0),
+//                        90, 90,
+//                        "Test",
+//                        new Image(TextureStorage.BRICK.getTexture())
+//                )
+//        );
+//
+//        animateEntities.add(
+//                new StaticEntity(
+//                        new Point(70, 0),
+//                        90, 65,
+//                        "Test",
+//                        new Image(TextureStorage.BRICK_1.getTexture())
+//                )
+//        );
 
 
         return animateEntities;
@@ -70,19 +71,6 @@ public class GeneratorStub {
         List<GameObject> entities = new ArrayList<>();
 
 
-
-/*
-        entities.add(new ())
-
-        map.setEntities();
-
-
-*/
         return map;
     }
-
-
-    // запретим инстанцирование
-    GeneratorStub() {}
-
 }

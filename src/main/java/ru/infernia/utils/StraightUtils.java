@@ -1,20 +1,16 @@
 package ru.infernia.utils;
 
+import lombok.experimental.UtilityClass;
 import ru.infernia.figure.Point;
 import ru.infernia.figure.Straight;
 
 import java.util.Optional;
 
 /**
- * author Vostryakov Alexander
- *
- * вспомогательный класс, для работы с векторами, точками,
- * прямыми, их пересечением и тд.
+ * Util methods for Straight, Vectors, Dots etc
  */
+@UtilityClass
 public class StraightUtils {
-
-    private StraightUtils() {
-    }
 
     /**
      * Получить точку пересечения прямой А и Б

@@ -1,70 +1,126 @@
 package ru.infernia.core;
 
-import org.apache.log4j.Logger;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.newdawn.slick.util.ResourceLoader;
+import lombok.extern.log4j.Log4j;
+import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.system.MemoryStack;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.nio.IntBuffer;
 
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryStack.stackPush;
+import static org.lwjgl.system.MemoryUtil.NULL;
+
 
 /**
- * Главный класс приложения
- * <p>
- * author Vostryakov Alexander
+ * The main class of the Game Engine
  */
+@Log4j
 public class Engine {
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 400;
 
-    private static final Logger log = Logger.getLogger(Engine.class);
-    private static final String RESOURCE_TYPE = "PNG";
+    // The window handle
+    private long window;
 
-    public static final String RESOURCES_PATH = "/src/main/resources/image/%s";
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 400;
+    public void run() {
+        System.out.println("Hello LWJGL " + Version.getVersion() + "!");
 
-    /**
-     * Подготовка к рисованию
-     */
-    public static void beginSession() {
-        try {
-            log.info("Start");
+        init();
+        loop();
 
-            Display.setTitle("Heroes of Sword and Sorcery");
-            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-            Display.create();
+        // Free the window callbacks and destroy the window
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
 
-            glMatrixMode(GL_PROJECTION);
-            glLoadIdentity();
-            glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
-            glMatrixMode(GL_MODELVIEW);
-            glEnable(GL_TEXTURE_2D);
+        // Terminate GLFW and free the error callback
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
+    }
 
-        } catch (LWJGLException ex) {
-            log.error("Ошибка инициализации движка");
+    private void init() {
+        // Setup an error callback. The default implementation
+        // will print the error message in System.err.
+        GLFWErrorCallback.createPrint(System.err).set();
+
+        // Initialize GLFW. Most GLFW functions will not work before doing this.
+        if ( !glfwInit() )
+            throw new IllegalStateException("Unable to initialize GLFW");
+
+        // Configure GLFW
+        glfwDefaultWindowHints(); // optional, the current window hints are already the default
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
+
+        // Create the window
+        window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World!", NULL, NULL);
+        if ( window == NULL )
+            throw new RuntimeException("Failed to create the GLFW window");
+
+        // Setup a key callback. It will be called every time a key is pressed, repeated or released.
+        glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
+        });
+
+        // Get the thread stack and push a new frame
+        try ( MemoryStack stack = stackPush() ) {
+            IntBuffer pWidth = stack.mallocInt(1); // int*
+            IntBuffer pHeight = stack.mallocInt(1); // int*
+
+            // Get the window size passed to glfwCreateWindow
+            glfwGetWindowSize(window, pWidth, pHeight);
+
+            // Get the resolution of the primary monitor
+            GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+            // Center the window
+            glfwSetWindowPos(
+                    window,
+                    (vidmode.width() - pWidth.get(0)) / 2,
+                    (vidmode.height() - pHeight.get(0)) / 2
+            );
+        } // the stack frame is popped automatically
+
+        // Make the OpenGL context current
+        glfwMakeContextCurrent(window);
+        // Enable v-sync
+        glfwSwapInterval(1);
+
+        // Make the window visible
+        glfwShowWindow(window);
+    }
+
+    private void loop() {
+        // This line is critical for LWJGL's interoperation with GLFW's
+        // OpenGL context, or any context that is managed externally.
+        // LWJGL detects the context that is current in the current thread,
+        // creates the GLCapabilities instance and makes the OpenGL
+        // bindings available for use.
+        GL.createCapabilities();
+
+        // Set the clear color
+        glClearColor(0.0f, 1.0f, 0.0f, 0.0f);
+
+        // Run the rendering loop until the user has attempted to close
+        // the window or has pressed the ESCAPE key.
+        while ( !glfwWindowShouldClose(window) ) {
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+
+            glfwSwapBuffers(window); // swap the color buffers
+
+            // Poll for window events. The key callback above will only be
+            // invoked during this call.
+            glfwPollEvents();
         }
     }
 
-
-    /**
-     * Загрузка текструры
-     *
-     * @param name имя файла в каталоге src/resource/image
-     * @return загруженная текстура
-     */
-    public static Texture loadTexture(String name) {
-        Texture texture = null;
-        InputStream in = ResourceLoader.getResourceAsStream(String.format(RESOURCES_PATH, name));
-        try {
-            texture = TextureLoader.getTexture(RESOURCE_TYPE, in);
-        } catch (IOException ex) {
-            log.error("Ошибка при загрузке текстуры " + name);
-        }
-        return texture;
+    public static void main(String[] args) {
+        new Engine().run();
     }
 
 }

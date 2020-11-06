@@ -1,13 +1,6 @@
 package ru.infernia.core.input;
 
-//import static engine.Engine.HEIGHT;
-
-/**
- * Обработка событий мыши
- *
- * author Vostryakov Alexander
- */
-public class GameMouse {
+public class Mouse {
 
     /*public void mouseContainsListener(List<GameEntity> visibleObjects, GameEntity activeEntity) {
         // обрабатываем то, что мышь наведена на один из игровых объектов

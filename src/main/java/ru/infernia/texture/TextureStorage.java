@@ -1,11 +1,5 @@
 package ru.infernia.texture;
 
-import org.newdawn.slick.opengl.Texture;
-import ru.infernia.core.Engine;
-
-import static ru.infernia.core.Engine.RESOURCES_PATH;
-
-
 /**
  * Хранилище текстур
  *
@@ -22,21 +16,22 @@ public enum TextureStorage {
     CAPITAN2("capitan2.png", 900F, 110F);
 
     // сама текстура
-    private final Texture texture;
-    private final String url;
-    private final float width;
-    private final float height;
+    private final Texture texture = new Texture();
+    private final String url = "";
+    private final float width = 200;
+    private final float height = 200;
 
 
     TextureStorage(String url, float width, float height) {
-        this.texture = Engine.loadTexture(url);
-        this.width = width;
-        this.height = height;
-        this.url = url;
+//        this.texture = Engine.loadTexture(url);
+//        this.width = width;
+//        this.height = height;
+//        this.url = url;
     }
 
     public String getUrl() {
-        return String.format(RESOURCES_PATH, url);
+//        return String.format(RESOURCES_PATH, url);
+        return "";
     }
 
     public Texture getTexture() {
