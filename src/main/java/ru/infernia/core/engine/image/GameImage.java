@@ -1,7 +1,9 @@
 package ru.infernia.core.engine.image;
 
+import lombok.RequiredArgsConstructor;
 import org.newdawn.slick.Image;
 
+@RequiredArgsConstructor
 public class GameImage {
     private final Image image;
 

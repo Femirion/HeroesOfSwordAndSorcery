@@ -1,0 +1,14 @@
+[
+  {
+    "name": "BRICK",
+    "img": "brick_texture.png",
+    "width": 132,
+    "height": 132
+  },
+  {
+    "name": "CAPITAN2",
+    "img": "capitan2.png",
+    "width": 900,
+    "height": 110
+  }
+]

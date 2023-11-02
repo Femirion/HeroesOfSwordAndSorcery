@@ -3,11 +3,6 @@ package ru.infernia.entity;
 import ru.infernia.figure.Point;
 import ru.infernia.core.engine.image.GameImage;
 
-/**
- * StaticEntity
- * <p>
- * Created by steam on 12.04.17.
- */
 public class StaticEntity extends Entity {
     private final GameImage image;
 

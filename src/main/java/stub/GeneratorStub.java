@@ -1,14 +1,13 @@
 package stub;
 
 import lombok.experimental.UtilityClass;
-import org.newdawn.slick.Image;
 import ru.infernia.core.engine.TextureLoader;
+import ru.infernia.core.engine.TextureStorages;
 import ru.infernia.core.engine.image.GameImage;
 import ru.infernia.entity.AnimateEntity;
 import ru.infernia.entity.GameObject;
 import ru.infernia.entity.StaticEntity;
 import ru.infernia.figure.Point;
-import ru.infernia.texture.TextureStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
 @UtilityClass
 public class GeneratorStub {
 
-    private final TextureLoader textureLoader = new TextureLoader();
+    private final TextureStorages storage = new TextureStorages(new TextureLoader());
 
     public static List<GameObject> createAnimations() {
         List<GameObject> animateEntities = new ArrayList<>();
@@ -27,7 +26,7 @@ public class GeneratorStub {
                         110,
                         100,
                         "Captain",
-                        TextureStorage.CAPITAN2.getUrl()
+                        storage.getByName("CAPITAN2").getUrl()
                 )
         );
 
@@ -36,8 +35,8 @@ public class GeneratorStub {
                 new StaticEntity(
                         new Point(0, 0),
                         110, 130,
-                        "Test",
-                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
+                        "Test1",
+                        new GameImage(storage.getByName("BRICK"))
                 )
         );
 
@@ -45,8 +44,8 @@ public class GeneratorStub {
                 new StaticEntity(
                         new Point(115, 0),
                         90, 90,
-                        "Test",
-                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
+                        "Test2",
+                        new GameImage(storage.getByName("BRICK"))
                 )
         );
 
@@ -54,8 +53,8 @@ public class GeneratorStub {
                 new StaticEntity(
                         new Point(70, 0),
                         90, 65,
-                        "Test",
-                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
+                        "Test3",
+                        new GameImage(storage.getByName("BRICK"))
                 )
         );
 
