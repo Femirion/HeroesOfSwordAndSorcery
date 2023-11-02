@@ -1,16 +1,8 @@
 package ru.infernia.texture;
 
-import org.newdawn.slick.opengl.Texture;
-import ru.infernia.core.Engine;
-
-import static ru.infernia.core.Engine.RESOURCES_PATH;
+import static ru.infernia.core.engine.TextureLoader.RESOURCES_PATH;
 
 
-/**
- * Хранилище текстур
- *
- * author Vostryakov Alexander
- */
 public enum TextureStorage {
 
     BRICK("brick_texture.png", 132F, 132F),
@@ -21,15 +13,12 @@ public enum TextureStorage {
 //    BRICK_1("brick-1.png", 200F, 200F),
     CAPITAN2("capitan2.png", 900F, 110F);
 
-    // сама текстура
-    private final Texture texture;
     private final String url;
     private final float width;
     private final float height;
 
 
     TextureStorage(String url, float width, float height) {
-        this.texture = Engine.loadTexture(url);
         this.width = width;
         this.height = height;
         this.url = url;
@@ -37,10 +26,6 @@ public enum TextureStorage {
 
     public String getUrl() {
         return String.format(RESOURCES_PATH, url);
-    }
-
-    public Texture getTexture() {
-        return texture;
     }
 
     public float getWidth() {

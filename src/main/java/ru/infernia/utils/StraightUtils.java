@@ -5,25 +5,11 @@ import ru.infernia.figure.Straight;
 
 import java.util.Optional;
 
-/**
- * author Vostryakov Alexander
- *
- * вспомогательный класс, для работы с векторами, точками,
- * прямыми, их пересечением и тд.
- */
 public class StraightUtils {
 
     private StraightUtils() {
     }
 
-    /**
-     * Получить точку пересечения прямой А и Б
-     *
-     * @param a прямая А
-     * @param b прямая Б
-     *
-     * @return Optional, содержащая точку перечения или Null
-     */
     public static Optional<Point> getCrossedPoint(Straight a, Straight b) {
         final int ax1 = a.getStart().getX();
         final int ay1 = a.getStart().getY();
@@ -55,13 +41,6 @@ public class StraightUtils {
         return Optional.empty();
     }
 
-    /**
-     * Установить нормальное значение.
-     * Ненормальное знаение это -0.0f, его нужно заменить на 0.0f
-     *
-     * @param value значение
-     * @return нормальное значение
-     */
     private static int setNormalValue(int value) {
         if (value == -0) {
             return 0;

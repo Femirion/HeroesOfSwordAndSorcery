@@ -1,7 +1,9 @@
 package stub;
 
+import lombok.experimental.UtilityClass;
 import org.newdawn.slick.Image;
-import ru.infernia.core.map.WorldMap;
+import ru.infernia.core.engine.TextureLoader;
+import ru.infernia.core.engine.image.GameImage;
 import ru.infernia.entity.AnimateEntity;
 import ru.infernia.entity.GameObject;
 import ru.infernia.entity.StaticEntity;
@@ -11,14 +13,12 @@ import ru.infernia.texture.TextureStorage;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Генератор различных игровых объектов
- *
- * author Vostryakov Alexander
- */
+@UtilityClass
 public class GeneratorStub {
 
-    public static List<GameObject> createAnimateStub() {
+    private final TextureLoader textureLoader = new TextureLoader();
+
+    public static List<GameObject> createAnimations() {
         List<GameObject> animateEntities = new ArrayList<>();
         animateEntities.add(
                 new AnimateEntity(
@@ -37,7 +37,7 @@ public class GeneratorStub {
                         new Point(0, 0),
                         110, 130,
                         "Test",
-                        new Image(TextureStorage.BRICK.getTexture())
+                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
                 )
         );
 
@@ -46,7 +46,7 @@ public class GeneratorStub {
                         new Point(115, 0),
                         90, 90,
                         "Test",
-                        new Image(TextureStorage.BRICK.getTexture())
+                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
                 )
         );
 
@@ -55,34 +55,11 @@ public class GeneratorStub {
                         new Point(70, 0),
                         90, 65,
                         "Test",
-                        new Image(TextureStorage.BRICK.getTexture())
+                        new GameImage(textureLoader.loadTexture(TextureStorage.BRICK))
                 )
         );
 
 
         return animateEntities;
     }
-
-    public static WorldMap createWorld() {
-
-        WorldMap map = new WorldMap();
-
-        List<GameObject> entities = new ArrayList<>();
-
-
-
-/*
-        entities.add(new ())
-
-        map.setEntities();
-
-
-*/
-        return map;
-    }
-
-
-    // запретим инстанцирование
-    GeneratorStub() {}
-
 }

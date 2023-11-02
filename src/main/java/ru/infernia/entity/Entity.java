@@ -1,14 +1,12 @@
 package ru.infernia.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.infernia.figure.Point;
 
-/**
- * Простая сущность
- *
- * Created by steam on 31.03.17.
- */
+@Getter
+@Setter
 public abstract class Entity implements GameObject {
-
     protected Point point;
     protected int width;
     protected int height;
@@ -22,45 +20,11 @@ public abstract class Entity implements GameObject {
         this.name = name;
     }
 
-    public Point getPoint() {
-        return point;
-    }
-
-    public void setPoint(Point point) {
+    public Entity(Point point, int width, int height, String name, int layer) {
         this.point = point;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
         this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
         this.height = height;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public int getLayer() {
-        return layer;
-    }
-
-    public void setLayer(int layer) {
         this.layer = layer;
     }
 }

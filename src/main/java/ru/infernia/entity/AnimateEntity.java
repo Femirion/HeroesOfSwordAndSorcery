@@ -1,29 +1,13 @@
 package ru.infernia.entity;
 
-import org.newdawn.slick.Animation;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
+import ru.infernia.core.engine.image.GameAnimation;
 import ru.infernia.figure.Point;
 
-/**
- * Анимированная сущность
- * <p>
- * Created by steam on 31.03.17.
- */
 public class AnimateEntity extends Entity {
-
-
-    private SpriteSheet sprites;
-    private Animation animation;
-
+    private final GameAnimation animation;
     public AnimateEntity(Point point, int width, int height, int interval, String name, String url) {
         super(point, width, height, name);
-        try {
-            this.sprites = new SpriteSheet(url, width, height);
-
-        } catch (SlickException e) {
-        }
-        this.animation = new Animation(sprites, interval);
+        this.animation = new GameAnimation(url, width, height, interval);
     }
 
     @Override

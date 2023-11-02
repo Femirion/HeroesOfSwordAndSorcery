@@ -1,7 +1,7 @@
 package ru.infernia.entity;
 
-import org.newdawn.slick.Image;
 import ru.infernia.figure.Point;
+import ru.infernia.core.engine.image.GameImage;
 
 /**
  * StaticEntity
@@ -9,10 +9,9 @@ import ru.infernia.figure.Point;
  * Created by steam on 12.04.17.
  */
 public class StaticEntity extends Entity {
+    private final GameImage image;
 
-    private Image image;
-
-    public StaticEntity(Point point, int width, int height, String name, Image image) {
+    public StaticEntity(Point point, int width, int height, String name, GameImage image) {
         super(point, width, height, name);
         this.image = image;
     }
