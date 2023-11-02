@@ -37,7 +37,7 @@ public class GeneratorStub {
                         new Point(0, 0),
                         110, 130,
                         "Test",
-                        new Image(TextureStorage.BRICK_1.getTexture())
+                        new Image(TextureStorage.BRICK.getTexture())
                 )
         );
 
@@ -55,7 +55,7 @@ public class GeneratorStub {
                         new Point(70, 0),
                         90, 65,
                         "Test",
-                        new Image(TextureStorage.BRICK_1.getTexture())
+                        new Image(TextureStorage.BRICK.getTexture())
                 )
         );
 

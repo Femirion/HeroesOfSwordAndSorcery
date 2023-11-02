@@ -1,6 +1,5 @@
 package ru.infernia.core;
 
-import org.apache.log4j.Logger;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -20,7 +19,6 @@ import static org.lwjgl.opengl.GL11.*;
  */
 public class Engine {
 
-    private static final Logger log = Logger.getLogger(Engine.class);
     private static final String RESOURCE_TYPE = "PNG";
 
     public static final String RESOURCES_PATH = "/src/main/resources/image/%s";
@@ -32,7 +30,6 @@ public class Engine {
      */
     public static void beginSession() {
         try {
-            log.info("Start");
 
             Display.setTitle("Heroes of Sword and Sorcery");
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
@@ -45,7 +42,6 @@ public class Engine {
             glEnable(GL_TEXTURE_2D);
 
         } catch (LWJGLException ex) {
-            log.error("Ошибка инициализации движка");
         }
     }
 
@@ -62,7 +58,6 @@ public class Engine {
         try {
             texture = TextureLoader.getTexture(RESOURCE_TYPE, in);
         } catch (IOException ex) {
-            log.error("Ошибка при загрузке текстуры " + name);
         }
         return texture;
     }

@@ -1,6 +1,5 @@
 package ru.infernia.entity;
 
-import org.apache.log4j.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -13,7 +12,6 @@ import ru.infernia.figure.Point;
  */
 public class AnimateEntity extends Entity {
 
-    private static final Logger log = Logger.getLogger(AnimateEntity.class);
 
     private SpriteSheet sprites;
     private Animation animation;
@@ -24,7 +22,6 @@ public class AnimateEntity extends Entity {
             this.sprites = new SpriteSheet(url, width, height);
 
         } catch (SlickException e) {
-            log.error(String.format("Ошибка при инициализации сущности %s", name));
         }
         this.animation = new Animation(sprites, interval);
     }
