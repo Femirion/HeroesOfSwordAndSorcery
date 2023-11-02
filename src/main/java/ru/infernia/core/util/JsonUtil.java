@@ -6,7 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.experimental.UtilityClass;
-import ru.infernia.core.engine.image.LoadedTexture;
+import ru.infernia.core.engine.image.TextureInfo;
 
 import java.io.File;
 import java.time.ZonedDateTime;
@@ -28,10 +28,10 @@ public class JsonUtil {
         return mapper;
     }
 
-    public static List<LoadedTexture> loadTexture(String path) {
+    public static List<TextureInfo> loadTexture(String path) {
         try {
             // TODO fix me!
-            return objectMapper.readValue(new File(TEXTURE_PATH),  new TypeReference<List<LoadedTexture>>() {});
+            return objectMapper.readValue(new File(TEXTURE_PATH),  new TypeReference<List<TextureInfo>>() {});
         } catch (Exception ex) {
             throw new RuntimeException("can not read 'players.json', cause=" + ex.getMessage());
         }

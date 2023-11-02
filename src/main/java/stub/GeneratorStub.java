@@ -26,7 +26,7 @@ public class GeneratorStub {
                         110,
                         100,
                         "Captain",
-                        storage.getByName("CAPITAN2").getUrl()
+                        storage.getInfo("CAPITAN2").getUrl()
                 )
         );
 
