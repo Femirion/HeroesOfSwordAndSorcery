@@ -6,11 +6,10 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import ru.infernia.core.input.GameKeyboard;
 import ru.infernia.core.input.GameMouse;
-import ru.infernia.entity.GameObject;
+import ru.infernia.entity.object.GameObject;
 import ru.infernia.exception.GameException;
 import stub.GeneratorStub;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;

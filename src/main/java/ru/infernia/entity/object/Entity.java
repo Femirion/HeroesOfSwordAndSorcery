@@ -1,4 +1,4 @@
-package ru.infernia.entity;
+package ru.infernia.entity.object;
 
 import lombok.Getter;
 import lombok.Setter;

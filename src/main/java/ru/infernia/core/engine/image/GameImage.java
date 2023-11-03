@@ -1,17 +1,26 @@
 package ru.infernia.core.engine.image;
 
-import lombok.RequiredArgsConstructor;
 import org.newdawn.slick.Image;
 
-@RequiredArgsConstructor
 public class GameImage {
+    private final ImageInfo info;
     private final Image image;
 
-    public GameImage(GameTexture texture) {
-        this.image = new Image(texture.getTexture());
+    public GameImage(ImageInfo info, GameTexture texture) {
+        this.info = info;
+        Image tmp = new Image(texture.getTexture());
+        if (info.getStartX() != 0 || info.getStartY() != 0) {
+            tmp = tmp.getSubImage(info.getStartX(), info.getStartY(),
+                    info.getStartX() + info.getWidth(), info.getStartY() + info.getHeight());
+        }
+        this.image = tmp;
     }
 
-    public void draw(float x, float y, float width, float height) {
-        image.draw(x, y, width, height);
+    public ImageInfo getInfo() {
+        return info;
+    }
+
+    public void draw(float x, float y) {
+        image.draw(x, y, info.getWidth(), info.getHeight());
     }
 }

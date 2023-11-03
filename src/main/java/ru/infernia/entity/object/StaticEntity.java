@@ -1,4 +1,4 @@
-package ru.infernia.entity;
+package ru.infernia.entity.object;
 
 import ru.infernia.figure.Point;
 import ru.infernia.core.engine.image.GameImage;
@@ -13,6 +13,6 @@ public class StaticEntity extends Entity {
 
     @Override
     public void draw() {
-        image.draw(point.getX(), point.getY(), width, height);
+        image.draw(point.getX(), point.getY());
     }
 }

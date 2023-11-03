@@ -1,12 +1,14 @@
 package stub;
 
 import lombok.experimental.UtilityClass;
-import ru.infernia.core.engine.TextureLoader;
-import ru.infernia.core.engine.TextureStorages;
+import ru.infernia.core.engine.loader.ImageLoader;
+import ru.infernia.core.engine.loader.TextureLoader;
+import ru.infernia.core.engine.storage.ImagesStorage;
+import ru.infernia.core.engine.storage.TexturesStorage;
 import ru.infernia.core.engine.image.GameImage;
-import ru.infernia.entity.AnimateEntity;
-import ru.infernia.entity.GameObject;
-import ru.infernia.entity.StaticEntity;
+import ru.infernia.entity.object.AnimateEntity;
+import ru.infernia.entity.object.GameObject;
+import ru.infernia.entity.object.StaticEntity;
 import ru.infernia.figure.Point;
 
 import java.util.ArrayList;
@@ -15,7 +17,9 @@ import java.util.List;
 @UtilityClass
 public class GeneratorStub {
 
-    private final TextureStorages storage = new TextureStorages(new TextureLoader());
+    private final TextureLoader textureLoader = new TextureLoader();
+    private final TexturesStorage storage = new TexturesStorage(textureLoader);
+    private final ImagesStorage imagesStorage = new ImagesStorage(new ImageLoader(storage));
 
     public static List<GameObject> createAnimations() {
         List<GameObject> animateEntities = new ArrayList<>();
@@ -33,10 +37,28 @@ public class GeneratorStub {
 
         animateEntities.add(
                 new StaticEntity(
+                        new Point(500, 500),
+                        150, 150,
+                        "Grass1",
+                        new GameImage(imagesStorage.getInfo("GRASS1"), storage.getByName("GRASS"))
+                )
+        );
+
+        animateEntities.add(
+                new StaticEntity(
+                        new Point(600, 600),
+                        150, 150,
+                        "Grass1",
+                        new GameImage(imagesStorage.getInfo("GRASS2"), storage.getByName("GRASS"))
+                )
+        );
+
+        animateEntities.add(
+                new StaticEntity(
                         new Point(0, 0),
                         110, 130,
                         "Test1",
-                        new GameImage(storage.getByName("BRICK"))
+                        new GameImage(imagesStorage.getInfo("BRICK1"), storage.getByName("BRICK"))
                 )
         );
 
@@ -45,7 +67,7 @@ public class GeneratorStub {
                         new Point(115, 0),
                         90, 90,
                         "Test2",
-                        new GameImage(storage.getByName("BRICK"))
+                        new GameImage(imagesStorage.getInfo("BRICK1"), storage.getByName("BRICK"))
                 )
         );
 
@@ -54,7 +76,7 @@ public class GeneratorStub {
                         new Point(70, 0),
                         90, 65,
                         "Test3",
-                        new GameImage(storage.getByName("BRICK"))
+                        new GameImage(imagesStorage.getInfo("BRICK2"), storage.getByName("BRICK"))
                 )
         );
 

@@ -1,4 +1,4 @@
-package ru.infernia.entity;
+package ru.infernia.entity.object;
 
 import ru.infernia.core.engine.image.GameAnimation;
 import ru.infernia.figure.Point;
