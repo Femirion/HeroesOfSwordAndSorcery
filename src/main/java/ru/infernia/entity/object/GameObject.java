@@ -7,7 +7,8 @@ public interface GameObject {
     long getId();
     int getLayer();
     String getName();
-    Point getPoint();
+    int getX();
+    int getY();
     int getWidth();
     int getHeight();
 }

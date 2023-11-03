@@ -8,23 +8,26 @@ import ru.infernia.figure.Point;
 @Setter
 public abstract class Entity implements GameObject {
     protected long id;
-    protected Point point;
+    protected int x;
+    protected int y;
     protected int width;
     protected int height;
     protected String name;
     protected int layer = 0;
 
-    public Entity(long id, Point point, int width, int height, String name) {
+    public Entity(long id, int x, int y, int width, int height, String name) {
         this.id = id;
-        this.point = point;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.name = name;
     }
 
-    public Entity(long id, Point point, int width, int height, String name, int layer) {
+    public Entity(long id, int x, int y, int width, int height, String name, int layer) {
         this.id = id;
-        this.point = point;
+        this.x = x;
+        this.y = y;
         this.width = width;
         this.height = height;
         this.name = name;

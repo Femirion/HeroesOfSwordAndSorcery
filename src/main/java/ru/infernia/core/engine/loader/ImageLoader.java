@@ -1,8 +1,8 @@
 package ru.infernia.core.engine.loader;
 
 import lombok.RequiredArgsConstructor;
-import ru.infernia.core.engine.image.GameImage;
-import ru.infernia.core.engine.image.ImageInfo;
+import ru.infernia.core.engine.wrapper.GameImage;
+import ru.infernia.core.engine.wrapper.ImageInfo;
 import ru.infernia.core.engine.storage.TexturesStorage;
 import ru.infernia.utils.JsonUtil;
 

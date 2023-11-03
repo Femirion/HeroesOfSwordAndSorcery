@@ -1,7 +1,7 @@
 package ru.infernia.core.engine.storage;
 
-import ru.infernia.core.engine.image.GameTexture;
-import ru.infernia.core.engine.image.TextureInfo;
+import ru.infernia.core.engine.wrapper.GameTexture;
+import ru.infernia.core.engine.wrapper.TextureInfo;
 import ru.infernia.core.engine.loader.TextureLoader;
 import ru.infernia.utils.JsonUtil;
 import ru.infernia.exception.GameException;

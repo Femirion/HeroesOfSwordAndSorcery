@@ -1,0 +1,20 @@
+[
+  {
+    "name": "CAPITAN1",
+    "texture": "CAPITAN",
+    "width": 900,
+    "height": 90,
+    "frameWidth": 100,
+    "frameHeight": 90,
+    "interval": 100
+  },
+  {
+    "name": "CAPITAN2",
+    "texture": "CAPITAN",
+    "width": 900,
+    "height": 110,
+    "frameWidth": 100,
+    "frameHeight": 110,
+    "interval": 70
+  }
+]

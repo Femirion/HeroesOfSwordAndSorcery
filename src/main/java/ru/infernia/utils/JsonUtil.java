@@ -6,8 +6,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.ZonedDateTimeSerializer;
 import lombok.experimental.UtilityClass;
-import ru.infernia.core.engine.image.ImageInfo;
-import ru.infernia.core.engine.image.TextureInfo;
+import ru.infernia.core.engine.wrapper.AnimationInfo;
+import ru.infernia.core.engine.wrapper.ImageInfo;
+import ru.infernia.core.engine.wrapper.TextureInfo;
 import ru.infernia.entity.map.MapInfo;
 import ru.infernia.entity.map.RegionInfo;
 
@@ -20,6 +21,7 @@ import java.util.List;
 public class JsonUtil {
     private static final String TEXTURES_PATH = "/home/aleksandr/project/HeroesOfSwordAndSorcery/src/main/resources/json/textures/textures.json";
     private static final String IMAGES_PATH = "/home/aleksandr/project/HeroesOfSwordAndSorcery/src/main/resources/json/textures/images.json";
+    private static final String ANIMATION_PATH = "/home/aleksandr/project/HeroesOfSwordAndSorcery/src/main/resources/json/textures/animations.json";
     private static final String MAP_PATH = "/home/aleksandr/project/HeroesOfSwordAndSorcery/src/main/resources/json/map.json";
     private static final String REGION_PATH = "/home/aleksandr/project/HeroesOfSwordAndSorcery/src/main/resources/json/region/%s.json";
     private static final ObjectMapper objectMapper = createMapper();
@@ -50,12 +52,21 @@ public class JsonUtil {
         }
     }
 
+    public static List<AnimationInfo> loadAnimation() {
+        try {
+            // TODO fix me!
+            return objectMapper.readValue(new File(ANIMATION_PATH),  new TypeReference<List<AnimationInfo>>() {});
+        } catch (Exception ex) {
+            throw new RuntimeException("can not read 'animations.json'", ex);
+        }
+    }
+
     public static List<ImageInfo> loadImages() {
         try {
             // TODO fix me!
             return objectMapper.readValue(new File(IMAGES_PATH),  new TypeReference<List<ImageInfo>>() {});
         } catch (Exception ex) {
-            throw new RuntimeException("can not read 'textures.json'", ex);
+            throw new RuntimeException("can not read 'images.json'", ex);
         }
     }
 

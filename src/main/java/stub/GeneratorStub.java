@@ -1,37 +1,43 @@
 package stub;
 
 import lombok.experimental.UtilityClass;
+import ru.infernia.core.engine.loader.AnimationLoader;
+import ru.infernia.core.engine.loader.SpriteSheetLoader;
+import ru.infernia.core.engine.storage.AnimationStorage;
+import ru.infernia.core.engine.wrapper.AnimationInfo;
 import ru.infernia.core.engine.loader.ImageLoader;
 import ru.infernia.core.engine.loader.TextureLoader;
 import ru.infernia.core.engine.storage.ImagesStorage;
 import ru.infernia.core.engine.storage.TexturesStorage;
-import ru.infernia.core.engine.image.GameImage;
 import ru.infernia.entity.object.AnimateEntity;
 import ru.infernia.entity.object.GameObject;
 import ru.infernia.entity.object.StaticEntity;
-import ru.infernia.figure.Point;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @UtilityClass
 public class GeneratorStub {
-
     private final TextureLoader textureLoader = new TextureLoader();
     private final TexturesStorage storage = new TexturesStorage(textureLoader);
     private final ImagesStorage imagesStorage = new ImagesStorage(new ImageLoader(storage));
+    private final AnimationStorage animationsStorage = new AnimationStorage(new AnimationLoader(new SpriteSheetLoader(storage)));
 
     public static List<GameObject> createAnimations() {
         List<GameObject> animateEntities = new ArrayList<>();
         animateEntities.add(
                 new AnimateEntity(
                         0,
-                        new Point(100, 200),
-                        100,
-                        110,
-                        100,
-                        "Captain",
-                        storage.getInfo("CAPITAN2").getUrl()
+                        100, 200,
+                        animationsStorage.getByName("CAPITAN1")
+                )
+        );
+
+        animateEntities.add(
+                new AnimateEntity(
+                        0,
+                        500, 500,
+                        animationsStorage.getByName("CAPITAN2")
                 )
         );
 
@@ -39,8 +45,7 @@ public class GeneratorStub {
         animateEntities.add(
                 new StaticEntity(
                         1,
-                        new Point(500, 500),
-                        150, 150,
+                        400, 400,
                         "Grass1",
                         imagesStorage.getByName("GRASS1")
                 )
@@ -49,8 +54,7 @@ public class GeneratorStub {
         animateEntities.add(
                 new StaticEntity(
                         2,
-                        new Point(600, 600),
-                        150, 150,
+                        350, 350,
                         "Grass2",
                         imagesStorage.getByName("GRASS2")
                 )
@@ -59,8 +63,8 @@ public class GeneratorStub {
         animateEntities.add(
                 new StaticEntity(
                         3,
-                        new Point(0, 0),
-                        110, 130,
+                        0, 0,
+                        200, 200,
                         "Test1",
                         imagesStorage.getByName("BRICK1")
                 )
@@ -69,8 +73,7 @@ public class GeneratorStub {
         animateEntities.add(
                 new StaticEntity(
                         4,
-                        new Point(115, 0),
-                        90, 90,
+                       115, 0,
                         "Test2",
                         imagesStorage.getByName("BRICK1")
                 )
@@ -79,8 +82,7 @@ public class GeneratorStub {
         animateEntities.add(
                 new StaticEntity(
                         5,
-                        new Point(70, 0),
-                        90, 65,
+                        70, 0,
                         "Test3",
                         imagesStorage.getByName("BRICK2")
                 )

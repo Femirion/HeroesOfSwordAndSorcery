@@ -1,4 +1,4 @@
-package ru.infernia.core.engine.image;
+package ru.infernia.core.engine.wrapper;
 
 import lombok.Data;
 
