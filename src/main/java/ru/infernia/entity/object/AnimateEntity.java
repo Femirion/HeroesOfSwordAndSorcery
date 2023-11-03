@@ -5,8 +5,8 @@ import ru.infernia.figure.Point;
 
 public class AnimateEntity extends Entity {
     private final GameAnimation animation;
-    public AnimateEntity(Point point, int width, int height, int interval, String name, String url) {
-        super(point, width, height, name);
+    public AnimateEntity(long id, Point point, int width, int height, int interval, String name, String url) {
+        super(id, point, width, height, name);
         this.animation = new GameAnimation(url, width, height, interval);
     }
 

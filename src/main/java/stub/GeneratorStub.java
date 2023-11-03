@@ -25,6 +25,7 @@ public class GeneratorStub {
         List<GameObject> animateEntities = new ArrayList<>();
         animateEntities.add(
                 new AnimateEntity(
+                        0,
                         new Point(100, 200),
                         100,
                         110,
@@ -37,46 +38,51 @@ public class GeneratorStub {
 
         animateEntities.add(
                 new StaticEntity(
+                        1,
                         new Point(500, 500),
                         150, 150,
                         "Grass1",
-                        new GameImage(imagesStorage.getInfo("GRASS1"), storage.getByName("GRASS"))
+                        imagesStorage.getByName("GRASS1")
                 )
         );
 
         animateEntities.add(
                 new StaticEntity(
+                        2,
                         new Point(600, 600),
                         150, 150,
-                        "Grass1",
-                        new GameImage(imagesStorage.getInfo("GRASS2"), storage.getByName("GRASS"))
+                        "Grass2",
+                        imagesStorage.getByName("GRASS2")
                 )
         );
 
         animateEntities.add(
                 new StaticEntity(
+                        3,
                         new Point(0, 0),
                         110, 130,
                         "Test1",
-                        new GameImage(imagesStorage.getInfo("BRICK1"), storage.getByName("BRICK"))
+                        imagesStorage.getByName("BRICK1")
                 )
         );
 
         animateEntities.add(
                 new StaticEntity(
+                        4,
                         new Point(115, 0),
                         90, 90,
                         "Test2",
-                        new GameImage(imagesStorage.getInfo("BRICK1"), storage.getByName("BRICK"))
+                        imagesStorage.getByName("BRICK1")
                 )
         );
 
         animateEntities.add(
                 new StaticEntity(
+                        5,
                         new Point(70, 0),
                         90, 65,
                         "Test3",
-                        new GameImage(imagesStorage.getInfo("BRICK2"), storage.getByName("BRICK"))
+                        imagesStorage.getByName("BRICK2")
                 )
         );
 
