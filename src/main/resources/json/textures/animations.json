@@ -4,7 +4,7 @@
     "texture": "CAPITAN",
     "width": 900,
     "height": 90,
-    "frameWidth": 100,
+    "frameWidth": 99,
     "frameHeight": 110,
     "interval": 100
   },
@@ -13,7 +13,7 @@
     "texture": "CAPITAN",
     "width": 900,
     "height": 110,
-    "frameWidth": 100,
+    "frameWidth": 99,
     "frameHeight": 110,
     "interval": 70
   }
