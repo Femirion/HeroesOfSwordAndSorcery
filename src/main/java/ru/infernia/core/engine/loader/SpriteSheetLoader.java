@@ -16,7 +16,7 @@ public class SpriteSheetLoader {
     public GameSpriteSheet loadGameSpriteSheet(AnimationInfo info) {
         TextureInfo textureInfo = texturesStorage.getInfo(info.getTexture());
         try {
-            SpriteSheet sprites = new SpriteSheet(textureInfo.getUrl(), info.getFrameHeight(), info.getFrameWidth());
+            SpriteSheet sprites = new SpriteSheet(textureInfo.getUrl(), info.getFrameWidth(), info.getFrameHeight());
             return new GameSpriteSheet(sprites);
         } catch (SlickException e) {
             throw new GameException("can not create animation for " + info.getTexture());
